@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarbonWatch Kenya | Community Tracker Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle fill='%232d5016' cx='50' cy='50' r='50'/><path fill='%23ffffff' d='M50 25l10 15h-20z M40 45h20v20h-20z'/></svg>">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+        }
+        body {
+            background: #f8f9fa;
+            color: #212529;
+        }
+        header {
+            background: linear-gradient(135deg, #1a3a0f 0%, #2d5016 100%);
+            color: #ffffff;
+            padding: 16px 32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #2d5016;
+            font-size: 16px;
+        }
+        h1 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .tagline {
+            font-size: 11px;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .btn-export {
+            padding: 8px 16px;
+            background: #ffffff;
+            color: #2d5016;
+            border: none;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+        }
+        .btn-export:hover {
+            background: #f0f4ed;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: #dee2e6;
+            transition: all 0.2s;
+        }
+        .stat-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+        .stat-card:hover::before {
+            width: 4px;
+            background: #2d5016;
+        }
+        .stat-card.primary {
+            background: linear-gradient(135deg, #2d5016 0%, #3d6a1f 100%);
+            color: #ffffff;
+            border: none;
+        }
+        .stat-card.primary::before {
+            background: #4ade80;
+        }
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .stat-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+            opacity: 0.8;
+        }
+        .stat-icon {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .stat-unit {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+        .map-section {
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            margin-bottom: 24px;
+        }
+        .map-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e9ecef;
+            background: #fafafa;
+        }
+        .map-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #212529;
+        }
+        .map-subtitle {
+            font-size: 11px;
+            color: #6c757d;
+            margin-top: 3px;
+        }
+        #map {
+            width: 100%;
+            height: 500px;
+        }
+        .legend {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255,255,255,0.95);
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            z-index: 1000;
+        }
+        .legend-title {
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+            font-size: 11px;
+        }
+        .legend-color {
+            width: 14px;
+            height: 14px;
+            border: 1px solid #ccc;
+        }
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+        .data-card {
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            padding: 20px;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f1f3f5;
+            margin-bottom: 16px;
+        }
+        .card-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+        .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #212529;
+        }
+        .card-subtitle {
+            font-size: 10px;
+            color: #6c757d;
+            margin-top: 2px;
+        }
+        .metric-box {
+            padding: 12px;
+            border: 1px solid #e9ecef;
+            margin-bottom: 10px;
+            background: #fafbfc;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .metric-box:hover {
+            background: #f1f3f5;
+            border-color: #dee2e6;
+        }
+        .metric-label {
+            font-size: 9px;
+            color: #6c757d;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-bottom: 4px;
+        }
+        .metric-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #212529;
+        }
+        .progress-bar {
+            height: 4px;
+            background: #e9ecef;
+            margin-top: 8px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #2d5016;
+        }
+        .feedback-item {
+            padding: 12px;
+            border: 1px solid #e9ecef;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            background: #fafbfc;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .feedback-item:hover {
+            background: #f1f3f5;
+        }
+        .feedback-text {
+            font-size: 12px;
+            font-weight: 600;
+            color: #212529;
+        }
+        .feedback-date {
+            font-size: 9px;
+            color: #6c757d;
+            margin-top: 3px;
+        }
+        .status-tag {
+            padding: 3px 8px;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        .status-resolved {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-review {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .status-open {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        .projects-section {
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        .project-card {
+            padding: 20px;
+            border: 1px solid #e9ecef;
+            background: #fafbfc;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .project-card:hover {
+            background: #f1f3f5;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .project-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 10px;
+        }
+        .project-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2d5016;
+            margin-bottom: 6px;
+        }
+        .project-detail {
+            font-size: 11px;
+            color: #6c757d;
+        }
+        footer {
+            background: #ffffff;
+            border-top: 1px solid #e9ecef;
+            padding: 16px 32px;
+            text-align: center;
+        }
+        .footer-text {
+            font-size: 11px;
+            color: #6c757d;
+        }
+        @media (max-width: 768px) {
+            .stats-grid, .data-grid, .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            #map {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-icon">CW</div>
+                <div>
+                    <h1>CarbonWatch Kenya</h1>
+                    <div class="tagline">Community Tracker Dashboard</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="live-indicator">
+                    <div class="live-dot"></div>
+                    LIVE
+                </div>
+                <button class="btn-export">EXPORT</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card primary" onclick="alert('Total Credits: 30.8M tCO2e verified and issued')">
+                <div class="stat-header">
+                    <div class="stat-label">Credits Issued</div>
+                    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                </div>
+                <div class="stat-value">30.8M</div>
+                <div class="stat-unit">tCO2e verified</div>
+            </div>
+            <div class="stat-card" onclick="alert('Credits Retired: 13.2M tCO2e permanently retired')">
+                <div class="stat-header">
+                    <div class="stat-label">Credits Retired</div>
+                    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                </div>
+                <div class="stat-value">13.2M</div>
+                <div class="stat-unit">tCO2e retired</div>
+            </div>
+            <div class="stat-card" onclick="alert('Community Benefit: 40% of carbon revenue goes directly to local communities')">
+                <div class="stat-header">
+                    <div class="stat-label">Community Share</div>
+                    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <div class="stat-value">40%</div>
+                <div class="stat-unit">Direct payments</div>
+            </div>
+            <div class="stat-card" onclick="alert('Active Projects: 22 conservancies participating in carbon programs')">
+                <div class="stat-header">
+                    <div class="stat-label">Active Projects</div>
+                    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    </svg>
+                </div>
+                <div class="stat-value">22</div>
+                <div class="stat-unit">Conservancies</div>
+            </div>
+        </div>
+
+        <div class="map-section">
+            <div class="map-header">
+                <div class="map-title">Northern Kenya Rangelands - Live Monitoring</div>
+                <div class="map-subtitle">Real-time grazing zone status and carbon sequestration tracking</div>
+            </div>
+            <div style="position: relative;">
+                <div id="map"></div>
+                <div class="legend">
+                    <div class="legend-title">ZONES</div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #4a7c2c;"></div>
+                        <span>Recovery</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #d97706;"></div>
+                        <span>Rotational</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #b91c1c;"></div>
+                        <span>Active</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: transparent; border: 2px solid #1e40af;"></div>
+                        <span>Boundary</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-grid">
+            <div class="data-card">
+                <div class="card-header">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#2d5016" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                    <div>
+                        <div class="card-title">Carbon Credit Tracker</div>
+                    </div>
+                </div>
+                <div class="metric-box" onclick="alert('Proposed: 5.2M tCO2e credits under development')">
+                    <div class="metric-label">Proposed</div>
+                    <div class="metric-value">5.2M tCO2e</div>
+                </div>
+                <div class="metric-box" onclick="alert('Verified: 30.8M tCO2e credits verified by third-party auditors')">
+                    <div class="metric-label">Verified</div>
+                    <div class="metric-value">30.8M tCO2e</div>
+                </div>
+                <div class="metric-box" onclick="alert('Sold: 13.2M tCO2e credits sold to corporate buyers')">
+                    <div class="metric-label">Sold</div>
+                    <div class="metric-value">13.2M tCO2e</div>
+                </div>
+                <div class="metric-box" onclick="alert('Buyers: Microsoft, Delta Airlines, Shell Energy')">
+                    <div class="metric-label">Primary Buyers</div>
+                    <div style="font-size: 11px; font-weight: 600; color: #495057; margin-top: 4px;">Microsoft, Delta, Shell</div>
+                </div>
+            </div>
+
+            <div class="data-card">
+                <div class="card-header">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#2d5016" stroke-width="2">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                    </svg>
+                    <div>
+                        <div class="card-title">SCOUT Social Metrics</div>
+                        <div class="card-subtitle">Social Conservancy Oversight Tool</div>
+                    </div>
+                </div>
+                <div class="metric-box" onclick="alert('WELI: 35% - Women empowerment in livestock index. Target: 50%')">
+                    <div class="metric-label">Women's Empowerment (WELI)</div>
+                    <div class="metric-value">35%</div>
+                    <div style="font-size: 9px; color: #6c757d; margin-top: 3px;">Target: 50%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 35%;"></div>
+                    </div>
+                </div>
+                <div class="metric-box" onclick="alert('Trust Index: 4.2/5.0 - High community confidence in project')">
+                    <div class="metric-label">Community Trust</div>
+                    <div class="metric-value">4.2 / 5.0</div>
+                </div>
+                <div class="metric-box" onclick="alert('Participation: 89% of households actively engaged')">
+                    <div class="metric-label">Household Participation</div>
+                    <div class="metric-value">89%</div>
+                </div>
+            </div>
+
+            <div class="data-card">
+                <div class="card-header">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#2d5016" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <div>
+                        <div class="card-title">Feedback & Complaints</div>
+                    </div>
+                </div>
+                <div class="feedback-item" onclick="alert('Water pan access issue in Kalama - Resolved Jan 10, 2026')">
+                    <div>
+                        <div class="feedback-text">Water pan access - Kalama</div>
+                        <div class="feedback-date">Resolved: Jan 10, 2026</div>
+                    </div>
+                    <div class="status-tag status-resolved">RESOLVED</div>
+                </div>
+                <div class="feedback-item" onclick="alert('Grazing boundary dispute - Under review by management')">
+                    <div>
+                        <div class="feedback-text">Grazing boundary dispute</div>
+                        <div class="feedback-date">Submitted: Jan 14, 2026</div>
+                    </div>
+                    <div class="status-tag status-review">REVIEW</div>
+                </div>
+                <div class="feedback-item" onclick="alert('Payment delay inquiry - Case opened Jan 15, 2026')">
+                    <div>
+                        <div class="feedback-text">Payment delay inquiry</div>
+                        <div class="feedback-date">Submitted: Jan 15, 2026</div>
+                    </div>
+                    <div class="status-tag status-open">OPEN</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="projects-section">
+            <div class="card-header">
+                <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#2d5016" stroke-width="2">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+                <div>
+                    <div class="card-title">Community Investment Database</div>
+                </div>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card" onclick="alert('Education: $2.4M invested in 12 school upgrades')">
+                    <div class="project-title">Education Infrastructure</div>
+                    <div class="project-amount">$2.4M</div>
+                    <div class="project-detail">12 schools upgraded</div>
+                </div>
+                <div class="project-card" onclick="alert('Water: $1.8M invested in 24 water pan construction projects')">
+                    <div class="project-title">Water Access Projects</div>
+                    <div class="project-amount">$1.8M</div>
+                    <div class="project-detail">24 water pans constructed</div>
+                </div>
+                <div class="project-card" onclick="alert('Healthcare: $1.2M invested in 8 new clinic facilities')">
+                    <div class="project-title">Healthcare Facilities</div>
+                    <div class="project-amount">$1.2M</div>
+                    <div class="project-detail">8 clinics established</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-text">© 2026 SMART Project Team at Cornell | CarbonWatch Community Tracker Dashboard</div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        window.onload = function() {
+            var map = L.map('map').setView([0.8, 37.2], 9);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap'
+            }).addTo(map);
+
+            var boundary = [[0.565, 36.895], [0.560, 36.938], [0.552, 37.000], [0.530, 37.189], [0.520, 37.182], [0.508, 37.174], [0.495, 37.166], [0.483, 37.148], [0.470, 37.150], [0.456, 37.151], [0.443, 37.164], [0.435, 37.167], [0.420, 37.154], [0.402, 37.152], [0.393, 37.150], [0.380, 37.144], [0.372, 37.136], [0.358, 37.125], [0.350, 37.121], [0.337, 37.124], [0.347, 37.095], [0.364, 37.057], [0.399, 37.048], [0.407, 37.046], [0.418, 37.043], [0.429, 37.037], [0.459, 37.020], [0.461, 37.006], [0.463, 36.995], [0.466, 36.978], [0.467, 36.969], [0.472, 36.966], [0.449, 36.932], [0.444, 36.925], [0.437, 36.900], [0.438, 36.898], [0.442, 36.899], [0.446, 36.898], [0.452, 36.901], [0.456, 36.898], [0.461, 36.895], [0.464, 36.894], [0.468, 36.894], [0.473, 36.893], [0.478, 36.891], [0.482, 36.889], [0.486, 36.888], [0.492, 36.885], [0.504, 36.878], [0.509, 36.876], [0.512, 36.867], [0.516, 36.867], [0.520, 36.869], [0.524, 36.869], [0.530, 36.868], [0.537, 36.863], [0.542, 36.861], [0.548, 36.858], [0.553, 36.858], [0.556, 36.865], [0.561, 36.865], [0.565, 36.865], [0.568, 36.865], [0.565, 36.895]];
+            
+            L.polygon(boundary, {color: '#1e40af', weight: 2, fillColor: '#3b82f6', fillOpacity: 0.1}).addTo(map).bindPopup('<b>Naibunga Conservancy</b><br>471 km²');
+
+            L.polygon([[0.52, 36.95], [0.50, 37.00], [0.48, 37.02], [0.46, 37.00], [0.47, 36.96], [0.52, 36.95]], {color: '#2d5016', fillColor: '#4a7c2c', fillOpacity: 0.4, weight: 2}).addTo(map).bindPopup('<b>Ewaso Zone</b><br>Recovery<br>+2.1% carbon');
+
+            L.polygon([[0.45, 37.05], [0.43, 37.10], [0.40, 37.08], [0.41, 37.03], [0.45, 37.05]], {color: '#b45309', fillColor: '#d97706', fillOpacity: 0.4, weight: 2}).addTo(map).bindPopup('<b>Tura Zone</b><br>Rotational<br>320 cattle');
+
+            L.polygon([[0.48, 37.12], [0.46, 37.16], [0.43, 37.14], [0.44, 37.10], [0.48, 37.12]], {color: '#991b1b', fillColor: '#b91c1c', fillOpacity: 0.4, weight: 2}).addTo(map).bindPopup('<b>Seek Zone</b><br>Active<br>450 cattle');
+
+            L.polygon([[0.40, 37.00], [0.38, 37.05], [0.35, 37.02], [0.37, 36.98], [0.40, 37.00]], {color: '#2d5016', fillColor: '#4a7c2c', fillOpacity: 0.4, weight: 2}).addTo(map).bindPopup('<b>Ilpolei Zone</b><br>Recovery<br>+18% vegetation');
+
+            L.polygon([[0.50, 37.08], [0.48, 37.12], [0.45, 37.10], [0.47, 37.06], [0.50, 37.08]], {color: '#b45309', fillColor: '#d97706', fillOpacity: 0.4, weight: 2}).addTo(map).bindPopup('<b>Mumonyot Zone</b><br>Rotational<br>280 cattle');
+
+            L.polygon([[0.53, 37.10], [0.51, 37.15], [0.48, 37.13], [0.50, 37.08], [0.53, 37.10]], {color: '#2d5016', fillColor: '#4a7c2c', fillOpacity: 0.4, weight: 2}).addTo(map).bindPopup('<b>Lmotiok Zone</b><br>Recovery<br>High sequestration');
+
+            L.marker([1.5, 37.0]).addTo(map).bindPopup('<b>Sera Conservancy</b><br>875 km²');
+            L.marker([0.8, 37.8]).addTo(map).bindPopup('<b>Lewa Conservancy</b><br>250 km²');
+            L.marker([1.2, 36.8]).addTo(map).bindPopup('<b>Kalama Conservancy</b><br>384 km²');
+        };
+    </script>
+</body>
+</html>
