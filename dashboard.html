@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Dashboard | CarbonWatch Kenya</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle fill='%232d5016' cx='50' cy='50' r='50'/><path fill='%23ffffff' d='M50 25l10 15h-20z M40 45h20v20h-20z'/></svg>">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <a href="index.html">
+                    <div class="logo-icon">CW</div>
+                    <div>
+                        <h1>CarbonWatch Kenya</h1>
+                        <div class="tagline">Community Tracker Dashboard</div>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-wrap">
+                <button class="hamburger" id="hamburger" type="button" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <nav class="layer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="community-interface.html">Community Interface</a>
+                    <a href="scout-engine.html">SCOUT Engine</a>
+                    <a href="dashboard.html" class="active">Public Dashboard</a>
+                    <a href="sources.html">Sources</a>
+                </nav>
+            </div>
+            <div class="header-actions">
+                <div class="live-indicator">
+                    <div class="live-dot"></div>
+                    LIVE
+                </div>
+                <button class="btn-export">EXPORT</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="layer-section layer-3-intro">
+            <div class="layer-badge">Public Dashboard</div>
+            <h3>Public Dashboard</h3>
+            <p class="layer-lead">For regulators, buyers, NGOs, journalists, funders. Every metric comes from the community layer first.</p>
+        </section>
+
+        <div class="dashboard-content">
+            <div class="stats-grid">
+                <div class="stat-card primary" onclick="alert('Total Credits: 30.8M tCO2e verified and issued')">
+                    <div class="stat-header">
+                        <div class="stat-label">Credits Issued</div>
+                        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <div class="stat-value">30.8M</div>
+                    <div class="stat-unit">tCO2e verified</div>
+                </div>
+                <div class="stat-card" onclick="alert('Credits Retired: 13.2M tCO2e permanently retired')">
+                    <div class="stat-header">
+                        <div class="stat-label">Credits Retired</div>
+                        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <div class="stat-value">13.2M</div>
+                    <div class="stat-unit">tCO2e retired</div>
+                </div>
+                <div class="stat-card" onclick="alert('Community Benefit: 40% of carbon revenue goes directly to local communities')">
+                    <div class="stat-header">
+                        <div class="stat-label">Community Share</div>
+                        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <div class="stat-value">40%</div>
+                    <div class="stat-unit">Direct payments</div>
+                </div>
+                <div class="stat-card" onclick="alert('Active Projects: 22 conservancies participating in carbon programs')">
+                    <div class="stat-header">
+                        <div class="stat-label">Active Projects</div>
+                        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                        </svg>
+                    </div>
+                    <div class="stat-value">22</div>
+                    <div class="stat-unit">Conservancies</div>
+                </div>
+            </div>
+
+            <div class="map-section">
+                <div class="map-header">
+                    <div class="map-title">NRT Conservancies – Northern Kenya</div>
+                    <div class="map-subtitle">Click a conservancy on the map to see details: land, communities, carbon credits sold, revenue received and how it was spent.</div>
+                </div>
+                <div class="map-and-panel">
+                    <div class="map-wrapper">
+                        <div id="map"></div>
+                        <div class="legend">
+                            <div class="legend-title">MAP LEGEND</div>
+                            <div class="legend-item">
+                                <div class="legend-color legend-boundary"></div>
+                                <span>NRT boundary</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color legend-conservancy"></div>
+                                <span>Conservancy (click)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="conservancy-detail-panel" class="conservancy-detail-panel" aria-hidden="true">
+                        <div class="conservancy-detail-header">
+                            <h4 class="conservancy-detail-name" id="conservancy-detail-name">Select a conservancy</h4>
+                            <button type="button" class="conservancy-detail-close" id="conservancy-detail-close" aria-label="Close panel">×</button>
+                        </div>
+                        <div class="conservancy-detail-body" id="conservancy-detail-body">
+                            <p class="conservancy-detail-placeholder">Click any marker on the map to view name, land size, communities, population, carbon credits sold, amount received and spending breakdown.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-grid">
+                <div class="data-card">
+                    <div class="card-header">
+                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#2d5016" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                        <div>
+                            <div class="card-title">Carbon Credit Tracker</div>
+                        </div>
+                    </div>
+                    <div class="metric-box" onclick="alert('Proposed: 5.2M tCO2e credits under development')">
+                        <div class="metric-label">Proposed</div>
+                        <div class="metric-value">5.2M tCO2e</div>
+                    </div>
+                    <div class="metric-box" onclick="alert('Verified: 30.8M tCO2e credits verified by third-party auditors')">
+                        <div class="metric-label">Verified</div>
+                        <div class="metric-value">30.8M tCO2e</div>
+                    </div>
+                    <div class="metric-box" onclick="alert('Sold: 13.2M tCO2e credits sold to corporate buyers')">
+                        <div class="metric-label">Sold</div>
+                        <div class="metric-value">13.2M tCO2e</div>
+                    </div>
+                    <div class="metric-box" onclick="alert('Buyers: Microsoft, Delta Airlines, Shell Energy')">
+                        <div class="metric-label">Primary Buyers</div>
+                        <div style="font-size: 11px; font-weight: 600; color: #495057; margin-top: 4px;">Microsoft, Delta, Shell</div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="card-header">
+                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#2d5016" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                        </svg>
+                        <div>
+                            <div class="card-title">SCOUT Social Metrics</div>
+                            <div class="card-subtitle">Social Conservancy Oversight Tool</div>
+                        </div>
+                    </div>
+                    <div class="metric-box" onclick="alert('WELI: 35% - Women empowerment in livestock index. Target: 50%')">
+                        <div class="metric-label">Women's Empowerment (WELI)</div>
+                        <div class="metric-value">35%</div>
+                        <div style="font-size: 9px; color: #6c757d; margin-top: 3px;">Target: 50%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 35%;"></div>
+                        </div>
+                    </div>
+                    <div class="metric-box" onclick="alert('Trust Index: 4.2/5.0 - High community confidence in project')">
+                        <div class="metric-label">Community Trust</div>
+                        <div class="metric-value">4.2 / 5.0</div>
+                    </div>
+                    <div class="metric-box" onclick="alert('Participation: 89% of households actively engaged')">
+                        <div class="metric-label">Household Participation</div>
+                        <div class="metric-value">89%</div>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <div class="card-header">
+                        <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#2d5016" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        <div>
+                            <div class="card-title">Feedback & Complaints</div>
+                        </div>
+                    </div>
+                    <div class="feedback-item" onclick="alert('Water pan access issue in Kalama - Resolved Jan 10, 2026')">
+                        <div>
+                            <div class="feedback-text">Water pan access - Kalama</div>
+                            <div class="feedback-date">Resolved: Jan 10, 2026</div>
+                        </div>
+                        <div class="status-tag status-resolved">RESOLVED</div>
+                    </div>
+                    <div class="feedback-item" onclick="alert('Grazing boundary dispute - Under review by management')">
+                        <div>
+                            <div class="feedback-text">Grazing boundary dispute</div>
+                            <div class="feedback-date">Submitted: Jan 14, 2026</div>
+                        </div>
+                        <div class="status-tag status-review">REVIEW</div>
+                    </div>
+                    <div class="feedback-item" onclick="alert('Payment delay inquiry - Case opened Jan 15, 2026')">
+                        <div>
+                            <div class="feedback-text">Payment delay inquiry</div>
+                            <div class="feedback-date">Submitted: Jan 15, 2026</div>
+                        </div>
+                        <div class="status-tag status-open">OPEN</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="projects-section">
+                <div class="card-header">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="#2d5016" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
+                    <div>
+                        <div class="card-title">Community Investment Database</div>
+                    </div>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card" onclick="alert('Education: $2.4M invested in 12 school upgrades')">
+                        <div class="project-title">Education Infrastructure</div>
+                        <div class="project-amount">$2.4M</div>
+                        <div class="project-detail">12 schools upgraded</div>
+                    </div>
+                    <div class="project-card" onclick="alert('Water: $1.8M invested in 24 water pan construction projects')">
+                        <div class="project-title">Water Access Projects</div>
+                        <div class="project-amount">$1.8M</div>
+                        <div class="project-detail">24 water pans constructed</div>
+                    </div>
+                    <div class="project-card" onclick="alert('Healthcare: $1.2M invested in 8 new clinic facilities')">
+                        <div class="project-title">Healthcare Facilities</div>
+                        <div class="project-amount">$1.2M</div>
+                        <div class="project-detail">8 clinics established</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-text">© 2026 SMART Project Team at Cornell | CarbonWatch Community Tracker Dashboard</div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="./conservancies.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>

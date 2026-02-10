@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Interface | CarbonWatch Kenya</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle fill='%232d5016' cx='50' cy='50' r='50'/><path fill='%23ffffff' d='M50 25l10 15h-20z M40 45h20v20h-20z'/></svg>">
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <a href="index.html">
+                    <div class="logo-icon">CW</div>
+                    <div>
+                        <h1>CarbonWatch Kenya</h1>
+                        <div class="tagline">Community Tracker Dashboard</div>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-wrap">
+                <button class="hamburger" id="hamburger" type="button" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <nav class="layer-nav">
+                    <a href="index.html">Home</a>
+                    <a href="community-interface.html" class="active">Community Interface</a>
+                    <a href="scout-engine.html">SCOUT Engine</a>
+                    <a href="dashboard.html">Public Dashboard</a>
+                    <a href="sources.html">Sources</a>
+                </nav>
+            </div>
+            <div class="header-actions">
+                <div class="live-indicator">
+                    <div class="live-dot"></div>
+                    LIVE
+                </div>
+                <button class="btn-export">EXPORT</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="layer-section layer-1">
+            <div class="layer-badge">Community Interface</div>
+            <h3>Bidirectional Communication Channels</h3>
+            <p class="layer-lead">SMS + IVR: the primary interface. Community members have inputs upstream—voicing perspectives and needs to governance.</p>
+
+            <div class="tool-card tool-card-phone">
+                <div class="tool-header">
+                    <h2 class="tool-title">SMS tool</h2>
+                    <div class="lang-buttons" role="group" aria-label="Language">
+                        <button type="button" class="lang-btn active" data-lang="en">English</button>
+                        <button type="button" class="lang-btn" data-lang="sw">Kiswahili</button>
+                    </div>
+                </div>
+                <p class="tool-intro" id="phone-intro">Use the phone below like a community member: read alerts, send a complaint or feedback, then check status by typing <strong>STATUS</strong> followed by your reference number.</p>
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="phone-statusbar">
+                                <span class="phone-time">10:42</span>
+                                <span class="phone-signal">●●●●</span>
+                                <span class="phone-battery">78%</span>
+                            </div>
+                            <div class="phone-header">
+                                <span class="phone-back">←</span>
+                                <span class="phone-contact">CarbonWatch</span>
+                            </div>
+                            <div class="phone-thread" id="phone-thread">
+                                <div class="msg msg-in" data-initial="1">
+                                    <span class="msg-sender">CarbonWatch</span>
+                                    <span class="msg-body">Grazing update – Zone B3 in heavy use. Move animals to Zone C1 in next 3–5 days if possible. Reply HELP for info.</span>
+                                    <span class="msg-time">Today 9:15</span>
+                                </div>
+                                <div class="msg msg-in" data-initial="2">
+                                    <span class="msg-sender">CarbonWatch</span>
+                                    <span class="msg-body">Carbon credit payment for January received. Your conservancy share has been sent. Check with your board for details.</span>
+                                    <span class="msg-time">Today 10:02</span>
+                                </div>
+                            </div>
+                            <div class="phone-input-wrap">
+                                <input type="text" id="phone-input" class="phone-input" placeholder="Type message..." maxlength="160" autocomplete="off" />
+                                <button type="button" id="phone-send" class="phone-send" aria-label="Send">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tools-channels">
+                <h4>Communication channels</h4>
+                <div class="channel-list">
+                    <div class="channel-item">
+                        <strong>1. Call-based IVRS – Low-cost surveys</strong>
+                        <p>Automated calls with interactive voice response service for surveys &amp; feedback to get weekly, monthly updates and engage all members.</p>
+                    </div>
+                    <div class="channel-item">
+                        <strong>2. Message SMS</strong>
+                        <p>Text-based alerts for grazing plans compliance, weather updates, news &amp; simple “Yes or No” surveys.</p>
+                    </div>
+                    <div class="channel-item">
+                        <strong>3. Complaint or feedback status</strong>
+                        <p>Transparent tracking of community complaints and grievances via text updates (Filed → Reviewing → Resolved).</p>
+                    </div>
+                    <div class="channel-item">
+                        <strong>4. Benefit-sharing and carbon credit updates</strong>
+                        <p>Updates on carbon credit approval, carbon fund spending and projects’ status.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layer-grid">
+                <div class="layer-card">
+                    <h4>Receives</h4>
+                    <ul>
+                        <li>Carbon credit status (approved / sold / delayed)</li>
+                        <li>Benefit-sharing updates</li>
+                        <li>Grazing rules &amp; alerts</li>
+                        <li>Project spending summaries (plain language)</li>
+                    </ul>
+                </div>
+                <div class="layer-card">
+                    <h4>Sends upstream</h4>
+                    <ul>
+                        <li>Weekly / monthly SCOUT questions</li>
+                        <li>Complaints &amp; grievances</li>
+                        <li>Yes/No confirmations</li>
+                        <li>Priority ranking (“Which issue matters most?”)</li>
+                    </ul>
+                </div>
+                <div class="layer-card close-loop">
+                    <h4>Closes the loop</h4>
+                    <p>Every submission gets a reference ID. Community checks by SMS:</p>
+                    <div class="sms-demo">
+                        <code>STATUS 48291</code>
+                        <div class="sms-reply">→ Reviewing (County Office)<br>→ Expected response: 7 days</div>
+                    </div>
+                    <p class="loop-warning">If you don’t close the loop, you’re extracting data, not empowering people.</p>
+                </div>
+            </div>
+
+            <div class="community-indicators">
+                <h4>Community indicators</h4>
+                <div class="indicators-grid">
+                    <div class="indicators-block">
+                        <strong>Weekly</strong>
+                        <ul>
+                            <li>Wellbeing–Contentment</li>
+                            <li>Grazing rules</li>
+                            <li>Water / forage access</li>
+                        </ul>
+                    </div>
+                    <div class="indicators-block">
+                        <strong>Monthly</strong>
+                        <ul>
+                            <li>Inclusivity</li>
+                            <li>Meeting voice</li>
+                            <li>Resource control</li>
+                            <li><strong>Carbon credit knowledge</strong>
+                                <ul>
+                                    <li>Credit status</li>
+                                    <li>Fund visibility</li>
+                                    <li>Human effort</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-text">© 2026 SMART Project Team at Cornell | CarbonWatch Community Tracker Dashboard</div>
+    </footer>
+
+    <script src="./script.js"></script>
+    <script>
+    (function() {
+      var STORAGE_KEY = 'carbon_feedback_refs';
+      function getStored() { try { return JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) { return {}; } }
+      function setStored(obj) { try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(obj)); } catch (e) {} }
+
+      var LANG = {
+        en: {
+          intro: 'Use the phone below like a community member: read alerts, send a complaint or feedback, then check status by typing <strong>STATUS</strong> followed by your reference number.',
+          msg1: 'Grazing update – Zone B3 in heavy use. Move animals to Zone C1 in next 3–5 days if possible. Reply HELP for info.',
+          msg2: 'Carbon credit payment for January received. Your conservancy share has been sent. Check with your board for details.',
+          time1: 'Today 9:15',
+          time2: 'Today 10:02',
+          placeholder: 'Type message...',
+          send: 'Send',
+          statusReply: 'Ref {id}: {status} ({location}). Expected response: {days} days.',
+          statusNotFound: 'Ref {id} not found. Send a message to report an issue and you will get a reference number.',
+          received: 'Received. Your reference: {ref}. To check status later, send: STATUS {ref}',
+          statusLabel: 'Reviewing',
+          locationLabel: 'County Office'
+        },
+        sw: {
+          intro: 'Tumia simu hapa chini kama mwananchi: soma arifa, tuma malalamiko au maoni. Ili kuangalia hali baadaye, andika <strong>STATUS</strong> ukifuatiwa na nambari yako ya kumbukumbu.',
+          msg1: 'Sasisho la malisho – Eneo B3 limejaa. Hamisha mifugo hadi Eneo C1 ndani ya siku 3–5. Jibu HELP kwa maelezo zaidi.',
+          msg2: 'Malipo ya carbon credit kwa Januari yameingia. Kiasi cha conservancy yako kimetumwa. Wasiliana na bodi yako kwa maelezo.',
+          time1: 'Leo 9:15',
+          time2: 'Leo 10:02',
+          placeholder: 'Andika ujumbe hapa...',
+          send: 'Tuma',
+          statusReply: 'Kumbukumbu {id}: {status} ({location}). Mtajibu ndani ya siku {days}.',
+          statusNotFound: 'Kumbukumbu {id} haijapatikana. Tuma ujumbe kutoa taarifa ya tatizo lako, utapewa nambari ya kumbukumbu.',
+          received: 'Imepokelewa. Nambari yako ya kumbukumbu: {ref}. Ili kuangalia hali baadaye, tuma: STATUS {ref}',
+          statusLabel: 'Inakaguliwa',
+          locationLabel: 'Ofisi ya Kaunti'
+        }
+      };
+
+      var thread = document.getElementById('phone-thread');
+      var input = document.getElementById('phone-input');
+      var sendBtn = document.getElementById('phone-send');
+      var toolCard = document.querySelector('.tool-card-phone');
+      var introEl = document.getElementById('phone-intro');
+      function currentLang() {
+        var active = toolCard && toolCard.querySelector('.lang-btn.active');
+        return (active && active.getAttribute('data-lang')) || 'en';
+      }
+
+      function applyPhoneLang() {
+        var lang = currentLang();
+        var t = LANG[lang] || LANG.en;
+        if (introEl) introEl.innerHTML = t.intro;
+        if (input) input.placeholder = t.placeholder;
+        if (sendBtn) { sendBtn.textContent = t.send; sendBtn.setAttribute('aria-label', t.send); }
+        if (!thread) return;
+        var initial1 = thread.querySelector('.msg[data-initial="1"]');
+        var initial2 = thread.querySelector('.msg[data-initial="2"]');
+        if (initial1) {
+          var b1 = initial1.querySelector('.msg-body');
+          var t1 = initial1.querySelector('.msg-time');
+          if (b1) b1.textContent = t.msg1;
+          if (t1) t1.textContent = t.time1;
+        }
+        if (initial2) {
+          var b2 = initial2.querySelector('.msg-body');
+          var t2 = initial2.querySelector('.msg-time');
+          if (b2) b2.textContent = t.msg2;
+          if (t2) t2.textContent = t.time2;
+        }
+      }
+
+      function addMsg(outgoing, body, time) {
+        if (!thread) return;
+        time = time || 'Now';
+        var div = document.createElement('div');
+        div.className = 'msg ' + (outgoing ? 'msg-out' : 'msg-in');
+        div.innerHTML = (outgoing ? '' : '<span class="msg-sender">CarbonWatch</span>') +
+          '<span class="msg-body">' + body.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</span>' +
+          '<span class="msg-time">' + time + '</span>';
+        thread.appendChild(div);
+        thread.scrollTop = thread.scrollHeight;
+      }
+
+      function sendMessage() {
+        var text = (input && input.value) ? input.value.trim() : '';
+        if (!text) return;
+        if (input) input.value = '';
+        var lang = currentLang();
+        var t = LANG[lang] || LANG.en;
+        addMsg(true, text, 'Now');
+
+        var upper = text.toUpperCase();
+        var statusMatch = upper.match(/^STATUS\s+(\d+)$/);
+        if (statusMatch) {
+          var id = statusMatch[1];
+          var stored = getStored();
+          var demo = { '48291': { status: t.statusLabel, location: t.locationLabel, days: 7 } };
+          var data = stored[id] || demo[id];
+          if (data) {
+            addMsg(false, t.statusReply.replace('{id}', id).replace('{status}', t.statusLabel).replace('{location}', t.locationLabel).replace('{days}', data.days || 7));
+          } else {
+            addMsg(false, t.statusNotFound.replace('{id}', id));
+          }
+          return;
+        }
+
+        var ref = String(Math.floor(10000 + Math.random() * 90000));
+        var stored = getStored();
+        stored[ref] = { status: t.statusLabel, location: t.locationLabel, days: 7 };
+        setStored(stored);
+        addMsg(false, t.received.replace(/\{ref\}/g, ref));
+      }
+
+      if (toolCard) {
+        toolCard.querySelectorAll('.lang-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            toolCard.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            applyPhoneLang();
+          });
+        });
+      }
+      applyPhoneLang();
+      if (sendBtn) sendBtn.addEventListener('click', sendMessage);
+      if (input) input.addEventListener('keydown', function(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
+    })();
+    </script>
+</body>
+</html>
