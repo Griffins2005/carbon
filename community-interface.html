@@ -60,28 +60,39 @@
                     <div class="phone-frame">
                         <div class="phone-screen">
                             <div class="phone-statusbar">
-                                <span class="phone-time">10:42</span>
-                                <span class="phone-signal">●●●●</span>
-                                <span class="phone-battery">78%</span>
+                                <span class="phone-time">9:41</span>
+                                <span class="phone-icons">
+                                    <span class="phone-signal" data-level="5" aria-label="5G signal">
+                                        <span class="signal-bar"></span>
+                                        <span class="signal-bar"></span>
+                                        <span class="signal-bar"></span>
+                                        <span class="signal-bar"></span>
+                                        <span class="signal-bar"></span>
+                                    </span>
+                                    <span class="phone-network">5G</span>
+                                    <span class="phone-battery">78%</span>
+                                </span>
                             </div>
                             <div class="phone-header">
-                                <span class="phone-back">←</span>
+                                <span class="phone-back" aria-hidden="true">‹</span>
                                 <span class="phone-contact">CarbonWatch</span>
                             </div>
                             <div class="phone-thread" id="phone-thread">
+                                <div class="phone-thread-divider" id="phone-divider">Today 9:15</div>
                                 <div class="msg msg-in" data-initial="1">
                                     <span class="msg-sender">CarbonWatch</span>
                                     <span class="msg-body">Grazing update – Zone B3 in heavy use. Move animals to Zone C1 in next 3–5 days if possible. Reply HELP for info.</span>
-                                    <span class="msg-time">Today 9:15</span>
+                                    <span class="msg-time">9:15</span>
                                 </div>
                                 <div class="msg msg-in" data-initial="2">
                                     <span class="msg-sender">CarbonWatch</span>
                                     <span class="msg-body">Carbon credit payment for January received. Your conservancy share has been sent. Check with your board for details.</span>
-                                    <span class="msg-time">Today 10:02</span>
+                                    <span class="msg-time">10:02</span>
                                 </div>
                             </div>
                             <div class="phone-input-wrap">
-                                <input type="text" id="phone-input" class="phone-input" placeholder="Type message..." maxlength="160" autocomplete="off" />
+                                <span class="phone-attach" aria-hidden="true">+</span>
+                                <input type="text" id="phone-input" class="phone-input" placeholder="Text (Safaricom)" maxlength="160" autocomplete="off" />
                                 <button type="button" id="phone-send" class="phone-send" aria-label="Send">Send</button>
                             </div>
                         </div>
@@ -189,9 +200,10 @@
           intro: 'Use the phone below like a community member: read alerts, send a complaint or feedback, then check status by typing <strong>STATUS</strong> followed by your reference number.',
           msg1: 'Grazing update – Zone B3 in heavy use. Move animals to Zone C1 in next 3–5 days if possible. Reply HELP for info.',
           msg2: 'Carbon credit payment for January received. Your conservancy share has been sent. Check with your board for details.',
-          time1: 'Today 9:15',
-          time2: 'Today 10:02',
-          placeholder: 'Type message...',
+          time1: '9:15',
+          time2: '10:02',
+          divider: 'Today 9:15',
+          placeholder: 'Text (Safaricom)',
           send: 'Send',
           statusReply: 'Ref {id}: {status} ({location}). Expected response: {days} days.',
           statusNotFound: 'Ref {id} not found. Send a message to report an issue and you will get a reference number.',
@@ -203,9 +215,10 @@
           intro: 'Tumia simu hapa chini kama mwananchi: soma arifa, tuma malalamiko au maoni. Ili kuangalia hali baadaye, andika <strong>STATUS</strong> ukifuatiwa na nambari yako ya kumbukumbu.',
           msg1: 'Sasisho la malisho – Eneo B3 limejaa. Hamisha mifugo hadi Eneo C1 ndani ya siku 3–5. Jibu HELP kwa maelezo zaidi.',
           msg2: 'Malipo ya carbon credit kwa Januari yameingia. Kiasi cha conservancy yako kimetumwa. Wasiliana na bodi yako kwa maelezo.',
-          time1: 'Leo 9:15',
-          time2: 'Leo 10:02',
-          placeholder: 'Andika ujumbe hapa...',
+          time1: '9:15',
+          time2: '10:02',
+          divider: 'Leo 9:15',
+          placeholder: 'Andika (Safaricom)',
           send: 'Tuma',
           statusReply: 'Kumbukumbu {id}: {status} ({location}). Mtajibu ndani ya siku {days}.',
           statusNotFound: 'Kumbukumbu {id} haijapatikana. Tuma ujumbe kutoa taarifa ya tatizo lako, utapewa nambari ya kumbukumbu.',
@@ -231,6 +244,8 @@
         if (introEl) introEl.innerHTML = t.intro;
         if (input) input.placeholder = t.placeholder;
         if (sendBtn) { sendBtn.textContent = t.send; sendBtn.setAttribute('aria-label', t.send); }
+        var dividerEl = document.getElementById('phone-divider');
+        if (dividerEl && t.divider) dividerEl.textContent = t.divider;
         if (!thread) return;
         var initial1 = thread.querySelector('.msg[data-initial="1"]');
         var initial2 = thread.querySelector('.msg[data-initial="2"]');
