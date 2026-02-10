@@ -1403,7 +1403,6 @@ footer {
   align-items: flex-end;
   gap: 1px;
   height: 12px;
-  transform: skewX(-12deg);
 }
 .phone-signal .signal-bar {
   width: 2px;
