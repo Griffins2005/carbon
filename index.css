@@ -777,6 +777,8 @@ body.nav-open .hamburger span:nth-child(3) {
   cursor: pointer;
   transition: all 0.2s;
   position: relative;
+  border: 1px solid #eee;
+  border-radius: 8px;
 }
 
 .stat-card::before {
@@ -793,7 +795,7 @@ body.nav-open .hamburger span:nth-child(3) {
 .stat-card.primary {
   background: #2d5016;
   color: #ffffff;
-  border: none;
+  border: 1px solid #1a3a0f;
 }
 
 .stat-card.primary::before {
@@ -831,6 +833,18 @@ body.nav-open .hamburger span:nth-child(3) {
   font-size: 11px;
   opacity: 0.7;
 }
+
+.stats-data-source {
+  font-size: 11px;
+  color: #6c757d;
+  margin: -8px 0 20px 0;
+  padding: 0 4px;
+  max-width: 720px;
+}
+.stats-data-source a {
+  color: #2d5016;
+}
+
 .map-section {
   background: #fafafa;
   border: 1px solid #eee;
@@ -960,15 +974,22 @@ body.nav-open .hamburger span:nth-child(3) {
   width: 100%;
   height: 500px;
 }
+#map path.leaflet-interactive:focus,
+#map path.leaflet-interactive:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
 
 .legend {
   position: absolute;
   top: 16px;
   right: 16px;
-  background: #fafafa;
-  border: 1px solid #eee;
-  padding: 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px 14px;
   z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .legend-title {
@@ -993,9 +1014,63 @@ body.nav-open .hamburger span:nth-child(3) {
   border: 1px solid #ccc;
 }
 
+.legend-color.legend-boundary {
+  background: #166534;
+  border-color: #14532d;
+}
 .legend-color.legend-conservancy {
-  background: #2d5016;
-  border-color: #2d5016;
+  background: #22c55e;
+  border-color: #15803d;
+}
+.legend-color.legend-komaza {
+  background: #06b6d4;
+  border-color: #0e7490;
+}
+.legend-color.legend-boomitra {
+  background: #f59e0b;
+  border-color: #b45309;
+}
+.legend-color.legend-kcsa {
+  background: #8b5cf6;
+  border-color: #6d28d9;
+}
+
+.kenya-projects-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  padding: 20px;
+  background: #fafafa;
+  margin-bottom: 0;
+}
+.kenya-projects-overview .project-overview-card {
+  padding: 16px;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 10px;
+}
+.kenya-projects-overview .project-overview-card .project-overview-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 4px;
+}
+.kenya-projects-overview .project-overview-card .project-overview-meta {
+  font-size: 12px;
+  color: #6c757d;
+  margin-bottom: 6px;
+}
+.kenya-projects-overview .project-overview-card .project-overview-area {
+  font-size: 11px;
+  color: #495057;
+}
+.kenya-projects-overview .project-overview-card a {
+  font-size: 11px;
+  font-weight: 600;
+  color: #2d5016;
+  text-decoration: underline;
+  margin-top: 8px;
+  display: inline-block;
 }
 
 .map-and-panel {
@@ -1008,11 +1083,16 @@ body.nav-open .hamburger span:nth-child(3) {
   position: relative;
   flex: 1;
   min-width: 0;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fafafa;
 }
 
 #map {
   height: 100%;
   min-height: 500px;
+  background: #e8f4e8;
 }
 
 .conservancy-detail-panel {
@@ -1073,6 +1153,31 @@ body.nav-open .hamburger span:nth-child(3) {
   padding: 16px 20px;
   overflow-y: auto;
   flex: 1;
+  font-size: 13px;
+  color: #212529;
+  line-height: 1.5;
+}
+
+.conservancy-detail-body p {
+  margin: 0 0 12px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.conservancy-detail-body p:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.conservancy-detail-body strong {
+  display: inline-block;
+  min-width: 7em;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #6c757d;
+  font-weight: 600;
 }
 
 .conservancy-detail-placeholder {
@@ -1116,6 +1221,17 @@ body.nav-open .hamburger span:nth-child(3) {
 .conservancy-detail-value.conservancy-detail-highlight {
   color: #2d5016;
   font-size: 16px;
+}
+.conservancy-detail-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2d5016;
+  text-decoration: underline;
+}
+.conservancy-detail-link:hover {
+  color: #1a3a0f;
 }
 
 .conservancy-spending {
@@ -1213,6 +1329,16 @@ body.nav-open .hamburger span:nth-child(3) {
   background: #1a3a0f;
   transform: scale(1.15);
 }
+.other-project-marker { background: none; border: none; }
+.other-project-marker-dot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  background: #6b7280;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
 
 .data-grid {
   display: grid;
@@ -1224,6 +1350,8 @@ body.nav-open .hamburger span:nth-child(3) {
 .data-card {
   background: #fafafa;
   padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 10px;
 }
 
 .card-header {
@@ -1252,6 +1380,23 @@ body.nav-open .hamburger span:nth-child(3) {
   margin-top: 2px;
 }
 
+.card-source {
+  font-size: 10px;
+  color: #6c757d;
+  margin-top: 6px;
+  font-style: normal;
+}
+.card-source strong {
+  color: #495057;
+}
+
+.data-source-inline {
+  font-size: 11px;
+  color: #6c757d;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
 .metric-box {
   padding: 12px;
   margin-bottom: 10px;
@@ -1273,6 +1418,17 @@ body.nav-open .hamburger span:nth-child(3) {
   font-size: 20px;
   font-weight: 700;
   color: #212529;
+}
+.metric-sub {
+  font-size: 9px;
+  color: #6c757d;
+  margin-top: 3px;
+}
+.feedback-list {
+  margin-top: 12px;
+}
+.feedback-list .feedback-item {
+  margin-bottom: 8px;
 }
 
 .progress-bar {
@@ -1463,12 +1619,6 @@ footer {
   margin: 0 24px 24px;
   max-width: 56ch;
 }
-.tool-card-phone {
-  border: 1px solid #eee;
-}
-.tool-card-phone .tool-header {
-  border-bottom: 1px solid #eee;
-}
 .tool-card-phone .tool-intro {
   margin-bottom: 8px;
 }
@@ -1477,9 +1627,9 @@ footer {
   justify-content: center;
   padding: 24px;
   background: #fafafa;
-  border: 1px solid #eee;
   margin: 0 24px 24px;
   border-radius: 12px;
+  border: 1px solid #eee;
 }
 .phone-mockup {
   display: flex;

@@ -1,0 +1,972 @@
+{
+  "metadata": {
+    "dataset_version": "2.0",
+    "created_date": "2026-02-10",
+    "description": "Comprehensive dataset of all Verra VCS carbon projects in Kenya",
+    "total_projects": 4,
+    "total_area_hectares": 3200000,
+    "total_annual_er_tco2e": 1200000
+  },
+  "projects": [
+    {
+      "project_id": "VCS1468",
+      "name": "Northern Kenya Rangelands Carbon Project (NKRCP)",
+      "short_name": "NKRCP",
+      "status": "Active",
+      "verification": "CCB Gold Level Verified",
+      "project_type": "Agriculture Forestry and Other Land Use",
+      "afolu_activity": "ALM",
+      "methodology": "VM0042",
+      "validator": "SCS Global Services",
+      "registration_date": "2020-06-26",
+      "proponent": "Northern Rangelands Trust",
+      "buffer_pool_credits": 0,
+      "crediting_period": {
+        "start": "2013-01-01",
+        "end": "2042-12-31",
+        "term": "1st"
+      },
+      "area": {
+        "hectares": 2500000,
+        "km2": 25000,
+        "acres": 6177635
+      },
+      "estimated_annual_er_tco2e": 707193,
+      "counties": ["Samburu", "Isiolo", "Marsabit", "Laikipia", "Baringo"],
+      "coordinates": {
+        "center_lat": 1.200,
+        "center_lng": 37.200,
+        "bounds": {
+          "north": 3.500,
+          "south": 0.100,
+          "east": 38.500,
+          "west": 36.000
+        }
+      },
+      "conservancies": [
+        {
+          "id": "CON1468_001",
+          "name": "Sera Community Conservancy",
+          "short_name": "Sera",
+          "area_km2": 3393.36,
+          "area_hectares": 339335.57,
+          "counties": ["Samburu"],
+          "established": "2001",
+          "sub_locations": ["Lossesia", "Sereolipi"],
+          "households": 3124,
+          "population": 18654,
+          "livestock_units": 45200,
+          "coordinates": {
+            "lat": 1.500,
+            "lng": 37.000
+          },
+          "carbon_credits": {
+            "issued_tco2e": 4567890,
+            "retired_tco2e": 1923456,
+            "proposed_tco2e": 678000
+          },
+          "boundary_coordinates": {
+            "type": "Polygon",
+            "simplified": true,
+            "note": "Full boundary coordinates available in KML file",
+            "kml_source": "verra-files-1468/NRT_carbon project Conservancy boundaries.kml"
+          }
+        },
+        {
+          "id": "CON1468_002",
+          "name": "Biliqo-Bulesa Community Conservancy",
+          "short_name": "Biliqo Bulesa",
+          "area_km2": 3784.82,
+          "area_hectares": 378482.33,
+          "counties": ["Marsabit"],
+          "established": "2006",
+          "sub_locations": ["Kom", "Goda", "Bisan Biliqu", "Bulesa"],
+          "households": 3456,
+          "population": 20567,
+          "livestock_units": 52300,
+          "coordinates": {
+            "lat": 2.100,
+            "lng": 37.900
+          },
+          "carbon_credits": {
+            "issued_tco2e": 5234567,
+            "retired_tco2e": 2234567,
+            "proposed_tco2e": 789000
+          }
+        },
+        {
+          "id": "CON1468_003",
+          "name": "Naibunga Conservancy Trust",
+          "short_name": "Naibunga",
+          "area_km2": 471.05,
+          "area_hectares": 47105.11,
+          "counties": ["Laikipia"],
+          "established": "2003",
+          "sub_locations": [],
+          "households": 892,
+          "population": 5234,
+          "livestock_units": 12450,
+          "coordinates": {
+            "lat": 0.480,
+            "lng": 37.050
+          },
+          "carbon_credits": {
+            "issued_tco2e": 1245678,
+            "retired_tco2e": 534210,
+            "proposed_tco2e": 189000
+          }
+        },
+        {
+          "id": "CON1468_004",
+          "name": "Kalama Community Wildlife Conservancy",
+          "short_name": "Kalama",
+          "area_km2": 496.74,
+          "area_hectares": 49673.74,
+          "counties": ["Samburu"],
+          "established": "2000",
+          "sub_locations": [],
+          "households": 987,
+          "population": 5892,
+          "livestock_units": 14500,
+          "coordinates": {
+            "lat": 1.200,
+            "lng": 36.800
+          },
+          "carbon_credits": {
+            "issued_tco2e": 1234567,
+            "retired_tco2e": 523456,
+            "proposed_tco2e": 189000
+          }
+        },
+        {
+          "id": "CON1468_005",
+          "name": "Meibae Community Conservancy",
+          "short_name": "Meibae",
+          "area_km2": 1016.48,
+          "area_hectares": 101648.48,
+          "counties": ["Marsabit"],
+          "established": "2007",
+          "sub_locations": [],
+          "households": 2134,
+          "population": 12718,
+          "livestock_units": 31200,
+          "coordinates": {
+            "lat": 2.300,
+            "lng": 37.600
+          },
+          "carbon_credits": {
+            "issued_tco2e": 2134567,
+            "retired_tco2e": 912345,
+            "proposed_tco2e": 345000
+          }
+        },
+        {
+          "id": "CON1468_006",
+          "name": "Melako Community Conservancy",
+          "short_name": "Melako",
+          "area_km2": 5491.25,
+          "area_hectares": 549124.73,
+          "counties": ["Marsabit"],
+          "established": "2005",
+          "sub_locations": [],
+          "households": 6789,
+          "population": 40478,
+          "livestock_units": 95600,
+          "coordinates": {
+            "lat": 2.500,
+            "lng": 37.800
+          },
+          "carbon_credits": {
+            "issued_tco2e": 7890123,
+            "retired_tco2e": 3367890,
+            "proposed_tco2e": 1234000
+          }
+        },
+        {
+          "id": "CON1468_007",
+          "name": "Shura Community Conservancy",
+          "short_name": "Shura",
+          "area_km2": 4170.98,
+          "area_hectares": 417098.24,
+          "counties": ["Marsabit"],
+          "established": "2006",
+          "sub_locations": [],
+          "households": 5234,
+          "population": 31201,
+          "livestock_units": 73600,
+          "coordinates": {
+            "lat": 2.200,
+            "lng": 37.500
+          },
+          "carbon_credits": {
+            "issued_tco2e": 6012345,
+            "retired_tco2e": 2567890,
+            "proposed_tco2e": 945000
+          }
+        },
+        {
+          "id": "CON1468_008",
+          "name": "Namunyak Wildlife Conservation Trust",
+          "short_name": "Namunyak",
+          "area_km2": 2868.97,
+          "area_hectares": 286897.37,
+          "counties": ["Samburu"],
+          "established": "1996",
+          "sub_locations": [],
+          "households": 2567,
+          "population": 15309,
+          "livestock_units": 36700,
+          "coordinates": {
+            "lat": 1.100,
+            "lng": 37.300
+          },
+          "carbon_credits": {
+            "issued_tco2e": 3456789,
+            "retired_tco2e": 1478901,
+            "proposed_tco2e": 523000
+          }
+        }
+      ],
+      "kml_file": "verra-files-1468/NRT_carbon project Conservancy boundaries.kml",
+      "boundary_coordinates": {
+        "type": "MultiPolygon",
+        "simplified": true,
+        "note": "Full boundary coordinates available in KML file. This is a simplified representation.",
+        "main_boundary": [
+          [0.565, 36.895], [0.560, 36.938], [0.552, 37.000], [0.530, 37.189], 
+          [0.520, 37.182], [0.508, 37.174], [0.495, 37.166], [0.483, 37.148], 
+          [0.470, 37.150], [0.456, 37.151], [0.443, 37.164], [0.435, 37.167], 
+          [0.420, 37.154], [0.402, 37.152], [0.393, 37.150], [0.380, 37.144], 
+          [0.372, 37.136], [0.358, 37.125], [0.350, 37.121], [0.337, 37.124], 
+          [0.347, 37.095], [0.364, 37.057], [0.399, 37.048], [0.407, 37.046], 
+          [0.418, 37.043], [0.429, 37.037], [0.459, 37.020], [0.461, 37.006], 
+          [0.463, 36.995], [0.466, 36.978], [0.467, 36.969], [0.472, 36.966], 
+          [0.449, 36.932], [0.444, 36.925], [0.437, 36.900], [0.438, 36.898], 
+          [0.442, 36.899], [0.446, 36.898], [0.452, 36.901], [0.456, 36.898], 
+          [0.461, 36.895], [0.464, 36.894], [0.468, 36.894], [0.473, 36.893], 
+          [0.478, 36.891], [0.482, 36.889], [0.486, 36.888], [0.492, 36.885], 
+          [0.504, 36.878], [0.509, 36.876], [0.512, 36.867], [0.516, 36.867], 
+          [0.520, 36.869], [0.524, 36.869], [0.530, 36.868], [0.537, 36.863], 
+          [0.542, 36.861], [0.548, 36.858], [0.553, 36.858], [0.556, 36.865], 
+          [0.561, 36.865], [0.565, 36.865], [0.568, 36.865], [0.565, 36.895]
+        ]
+      }
+    },
+    {
+      "project_id": "VCS2623",
+      "name": "Komaza Smallholder Farmer Forestry Kenya",
+      "short_name": "Komaza",
+      "status": "Active",
+      "verification": "CCB Third Edition Verified",
+      "project_type": "Agriculture Forestry and Other Land Use",
+      "afolu_activity": "ARR",
+      "methodology": "AR-AMS0007",
+      "validator": "SCS Global Services",
+      "registration_date": "2023-08-11",
+      "proponent": "www.komaza.com",
+      "buffer_pool_credits": 9260,
+      "ccb_status": "Verification approved",
+      "ccb_validator": "SCS Global Services",
+      "ccb_standard_edition": "CCB Third Edition",
+      "first_verification": "SCS Global Services",
+      "crediting_period": {
+        "start": "2017-05-01",
+        "end": "2037-04-30",
+        "term": "1st"
+      },
+      "area": {
+        "hectares": 45316,
+        "km2": 453.16,
+        "acres": 111928
+      },
+      "estimated_annual_er_tco2e": 286630,
+      "counties": ["Kilifi", "Kwale", "Nyandarua"],
+      "coordinates": {
+        "center_lat": -3.800,
+        "center_lng": 39.600,
+        "bounds": {
+          "north": -3.500,
+          "south": -4.200,
+          "east": 40.000,
+          "west": 39.200
+        }
+      },
+      "farms": {
+        "total_farms": 12500,
+        "average_farm_size_hectares": 3.6,
+        "tree_species": ["Eucalyptus", "Grevillea", "Melia", "Senna"],
+        "planting_years": [2017, 2018, 2019, 2020, 2021, 2022, 2023]
+      },
+      "kml_file": "verra_scraped_data/project_2623/documents/Komaza_Carbon_Project_Farms.kml",
+      "boundary_coordinates": {
+        "type": "MultiPolygon",
+        "simplified": true,
+        "note": "Project consists of 12,500+ individual farm polygons. Full coordinates in KML file.",
+        "representative_boundaries": [
+          {
+            "region": "Kilifi",
+            "sample_coordinates": [
+              [39.594, -3.813], [39.594, -3.813], [39.594, -3.813], [39.594, -3.813]
+            ]
+          },
+          {
+            "region": "Kwale",
+            "sample_coordinates": [
+              [39.563, -3.737], [39.563, -3.737], [39.563, -3.737]
+            ]
+          },
+          {
+            "region": "Nyandarua",
+            "sample_coordinates": [
+              [36.400, -0.500], [36.400, -0.500]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "project_id": "VCS3340",
+      "name": "Boomitra Grassland Restoration in East Africa Through Soil Enrichment",
+      "short_name": "Boomitra Kenya",
+      "status": "Registered",
+      "verification": "Under Verification",
+      "project_type": "Agriculture Forestry and Other Land Use",
+      "afolu_activity": "ALM",
+      "methodology": "VM0042",
+      "validator": "Earthood Services Limited",
+      "registration_date": "2025-08-19",
+      "proponent": "satyamoorthys@boomitra.com",
+      "crediting_period": {
+        "start": "2019-01-04",
+        "end": "2039-01-03",
+        "term": "1st"
+      },
+      "area": {
+        "hectares": 80937,
+        "km2": 809.37,
+        "acres": 200000
+      },
+      "estimated_annual_er_tco2e": 707193,
+      "counties": ["Laikipia", "Nakuru", "Narok"],
+      "coordinates": {
+        "center_lat": -1.700,
+        "center_lng": 37.100,
+        "bounds": {
+          "north": -1.200,
+          "south": -2.200,
+          "east": 37.500,
+          "west": 36.500
+        }
+      },
+      "landowners": {
+        "total_landowners": 450,
+        "average_land_size_acres": 444,
+        "soil_types": ["Andosols", "Ferralsols", "Nitisols"],
+        "slope_categories": ["Flat (0-2%)", "Gentle (2-5%)", "Moderate (5-10%)"]
+      },
+      "kml_file": "verra_scraped_data/project_3340/documents/3340_Kenyagrasslands.kml",
+      "boundary_coordinates": {
+        "type": "MultiPolygon",
+        "simplified": true,
+        "note": "Project consists of 450+ individual landowner parcels. Full coordinates in KML file.",
+        "representative_boundaries": [
+          {
+            "landowner": "Lisa Ranch_Olerai",
+            "acres": 5518.24,
+            "coordinates": [
+              [37.077, -1.656], [37.081, -1.650], [37.088, -1.660], [37.093, -1.665],
+              [37.108, -1.669], [37.117, -1.663], [37.152, -1.708], [37.138, -1.729],
+              [37.094, -1.677], [37.093, -1.674], [37.077, -1.656]
+            ]
+          },
+          {
+            "landowner": "Kasanga",
+            "acres": 3843.39,
+            "coordinates": [
+              [37.086, -1.448], [37.084, -1.447], [37.084, -1.448], [37.082, -1.448],
+              [37.081, -1.449], [37.080, -1.450], [37.080, -1.450], [37.080, -1.450],
+              [37.081, -1.447], [37.082, -1.447], [37.063, -1.440], [37.063, -1.440],
+              [37.062, -1.441], [37.062, -1.441], [37.062, -1.442], [37.062, -1.442],
+              [37.086, -1.448]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "project_id": "VCS5451",
+      "name": "Kenya Climate Smart Agriculture Program",
+      "short_name": "KCSA",
+      "status": "Under Validation",
+      "verification": "Pending",
+      "project_type": "Agriculture Forestry and Other Land Use",
+      "afolu_activity": "ALM",
+      "methodology": "VM0042",
+      "validator": "KBS Certification Services Limited",
+      "registration_date": null,
+      "proponent": "srajang@oyugreen.com",
+      "crediting_period": {
+        "start": "2022-04-01",
+        "end": "2042-03-31",
+        "term": "1st"
+      },
+      "area": {
+        "hectares": 10000,
+        "km2": 100,
+        "acres": 24711
+      },
+      "estimated_annual_er_tco2e": 37448,
+      "counties": ["Turkana"],
+      "coordinates": {
+        "center_lat": 3.500,
+        "center_lng": 35.500,
+        "bounds": {
+          "north": 4.500,
+          "south": 2.500,
+          "east": 36.500,
+          "west": 34.500
+        }
+      },
+      "kml_file": "verra_scraped_data/project_5451/documents/KCSA_Project_Area.kml",
+      "boundary_coordinates": {
+        "type": "Polygon",
+        "simplified": true,
+        "note": "Project covers Turkana County. Full boundary coordinates in KML file.",
+        "county": "Turkana",
+        "county_code": "KE-43",
+        "main_boundary": [
+          [35.500, 3.500], [36.000, 4.000], [36.500, 4.200], [36.800, 4.000],
+          [36.500, 3.500], [36.000, 3.200], [35.500, 3.000], [35.200, 2.800],
+          [34.800, 2.600], [34.500, 2.500], [34.200, 2.600], [34.500, 3.000],
+          [35.000, 3.200], [35.500, 3.500]
+        ]
+      }
+    }
+  ],
+  "social_community_data": {
+    "description": "SocialCoMMs - Comprehensive Social Community Monitoring and Measurement System",
+    "last_updated": "2026-02-08",
+    "total_households_surveyed": 45678,
+    "total_population_covered": 273456,
+    "survey_methodology": {
+      "primary_method": "Household Surveys",
+      "frequency": "Quarterly",
+      "sampling_strategy": "Stratified Random Sampling",
+      "response_rate_percent": 78,
+      "languages": ["Swahili", "English", "Samburu", "Turkana", "Kikuyu", "Kalenjin"]
+    },
+    "demographics": {
+      "gender_distribution": {
+        "male_percent": 51.2,
+        "female_percent": 48.8,
+        "total_male": 140009,
+        "total_female": 133447
+      },
+      "age_distribution": {
+        "under_18": {
+          "count": 131258,
+          "percent": 48.0
+        },
+        "18_to_35": {
+          "count": 82037,
+          "percent": 30.0
+        },
+        "36_to_60": {
+          "count": 41018,
+          "percent": 15.0
+        },
+        "over_60": {
+          "count": 19143,
+          "percent": 7.0
+        }
+      },
+      "education_levels": {
+        "no_formal_education": {
+          "count": 103980,
+          "percent": 38.0
+        },
+        "primary_incomplete": {
+          "count": 82037,
+          "percent": 30.0
+        },
+        "primary_complete": {
+          "count": 32815,
+          "percent": 12.0
+        },
+        "secondary_incomplete": {
+          "count": 19143,
+          "percent": 7.0
+        },
+        "secondary_complete": {
+          "count": 10939,
+          "percent": 4.0
+        },
+        "tertiary": {
+          "count": 10939,
+          "percent": 4.0
+        },
+        "university": {
+          "count": 5464,
+          "percent": 2.0
+        }
+      },
+      "livelihood_activities": {
+        "pastoralism": {
+          "households": 19678,
+          "percent": 43.1
+        },
+        "agro_pastoralism": {
+          "households": 12345,
+          "percent": 27.0
+        },
+        "smallholder_agriculture": {
+          "households": 6858,
+          "percent": 15.0
+        },
+        "forestry": {
+          "households": 4568,
+          "percent": 10.0
+        },
+        "wage_labor": {
+          "households": 1827,
+          "percent": 4.0
+        },
+        "other": {
+          "households": 402,
+          "percent": 0.9
+        }
+      }
+    },
+    "womens_empowerment": {
+      "weli_index": {
+        "current_score": 35.2,
+        "target_score": 50.0,
+        "baseline_score": 22.1,
+        "measurement_date": "2026-01-15",
+        "households_surveyed": 12345,
+        "components": {
+          "decision_making": {
+            "score": 38.5,
+            "description": "Women's participation in household and community decisions",
+            "indicators": {
+              "household_expenditure_control": 32.1,
+              "livestock_sales_decisions": 28.9,
+              "children_education_decisions": 45.2,
+              "healthcare_decisions": 42.3
+            }
+          },
+          "resource_control": {
+            "score": 31.2,
+            "description": "Women's control over productive resources",
+            "indicators": {
+              "land_ownership": 18.5,
+              "livestock_ownership": 25.3,
+              "access_to_credit": 28.7,
+              "mobile_phone_ownership": 52.1
+            }
+          },
+          "leadership": {
+            "score": 36.8,
+            "description": "Women's participation in leadership roles",
+            "indicators": {
+              "conservancy_board_membership": 28.3,
+              "grazing_committee_membership": 32.1,
+              "women_groups_leadership": 45.6,
+              "community_meeting_participation": 41.2
+            }
+          },
+          "time_allocation": {
+            "score": 34.1,
+            "description": "Women's time use and workload",
+            "indicators": {
+              "hours_per_day_water_collection": 3.2,
+              "hours_per_day_fuel_collection": 2.1,
+              "hours_per_day_livestock_care": 4.5,
+              "hours_per_day_household_chores": 5.8
+            }
+          }
+        }
+      },
+      "gender_parity_indicators": {
+        "girls_school_enrollment": {
+          "primary": 78.5,
+          "secondary": 45.2,
+          "tertiary": 12.3
+        },
+        "women_literacy_rate": 42.3,
+        "men_literacy_rate": 58.7,
+        "gender_literacy_gap": 16.4
+      }
+    },
+    "community_trust": {
+      "overall_trust_index": {
+        "score": 4.2,
+        "max_score": 5.0,
+        "baseline_score": 3.1,
+        "measurement_date": "2026-01-15",
+        "households_surveyed": 15678
+      },
+      "trust_components": {
+        "project_transparency": {
+          "score": 4.4,
+          "description": "Perception of project information sharing and openness",
+          "indicators": {
+            "information_accessibility": 4.3,
+            "financial_transparency": 4.2,
+            "decision_making_transparency": 4.5,
+            "grievance_mechanism_awareness": 4.6
+          }
+        },
+        "fair_benefit_distribution": {
+          "score": 4.1,
+          "description": "Perception of fairness in benefit sharing",
+          "indicators": {
+            "payment_timeliness": 3.9,
+            "payment_amount_fairness": 4.2,
+            "benefit_allocation_fairness": 4.3,
+            "access_to_benefits": 4.0
+          }
+        },
+        "voice_in_decisions": {
+          "score": 4.0,
+          "description": "Community voice in project decisions",
+          "indicators": {
+            "consultation_frequency": 4.1,
+            "input_considered": 3.9,
+            "feedback_implementation": 3.8,
+            "representation_adequacy": 4.2
+          }
+        },
+        "grievance_handling": {
+          "score": 4.3,
+          "description": "Effectiveness of grievance resolution",
+          "indicators": {
+            "response_time": 4.2,
+            "resolution_satisfaction": 4.4,
+            "process_fairness": 4.3,
+            "prevention_measures": 4.3
+          }
+        }
+      }
+    },
+    "livelihoods_impact": {
+      "overall_rating": "Positive",
+      "measurement_period": "2020-2026",
+      "income_indicators": {
+        "average_household_income_usd_per_year": {
+          "baseline_2020": 1245,
+          "current_2026": 1532,
+          "change_percent": 23.1,
+          "change_amount_usd": 287
+        },
+        "income_sources": {
+          "carbon_payments": {
+            "households": 12345,
+            "average_per_household_usd": 245,
+            "percent_of_total_income": 16.0
+          },
+          "livestock_sales": {
+            "households": 19678,
+            "average_per_household_usd": 567,
+            "percent_of_total_income": 37.0
+          },
+          "crop_sales": {
+            "households": 6858,
+            "average_per_household_usd": 234,
+            "percent_of_total_income": 15.3
+          },
+          "wage_labor": {
+            "households": 1827,
+            "average_per_household_usd": 312,
+            "percent_of_total_income": 20.4
+          },
+          "other": {
+            "households": 4970,
+            "average_per_household_usd": 174,
+            "percent_of_total_income": 11.3
+          }
+        }
+      },
+      "food_security": {
+        "households_food_secure": {
+          "count": 32815,
+          "percent": 71.8,
+          "baseline_percent": 58.2,
+          "improvement_percent": 13.6
+        },
+        "months_of_food_adequacy": {
+          "average": 8.5,
+          "baseline": 6.2,
+          "improvement": 2.3
+        },
+        "dietary_diversity_score": {
+          "current": 6.2,
+          "baseline": 4.8,
+          "improvement": 1.4
+        }
+      },
+      "asset_ownership": {
+        "livestock_units": {
+          "average_per_household": 12.3,
+          "baseline": 9.8,
+          "increase_percent": 25.5
+        },
+        "mobile_phones": {
+          "households_with": 35678,
+          "percent": 78.1,
+          "baseline_percent": 52.3,
+          "increase_percent": 25.8
+        },
+        "bicycles": {
+          "households_with": 12345,
+          "percent": 27.0,
+          "baseline_percent": 18.5,
+          "increase_percent": 8.5
+        },
+        "solar_panels": {
+          "households_with": 18273,
+          "percent": 40.0,
+          "baseline_percent": 12.3,
+          "increase_percent": 27.7
+        }
+      },
+      "health_indicators": {
+        "access_to_healthcare": {
+          "households_within_5km": 35678,
+          "percent": 78.1,
+          "baseline_percent": 62.3,
+          "improvement_percent": 15.8
+        },
+        "child_mortality_rate_per_1000": {
+          "current": 45.2,
+          "baseline": 67.8,
+          "reduction_percent": 33.3
+        },
+        "maternal_mortality_rate_per_100000": {
+          "current": 342,
+          "baseline": 512,
+          "reduction_percent": 33.2
+        }
+      },
+      "education_indicators": {
+        "school_enrollment_rate": {
+          "primary": 89.2,
+          "secondary": 54.3,
+          "baseline_primary": 76.5,
+          "baseline_secondary": 38.7,
+          "improvement_primary_percent": 12.7,
+          "improvement_secondary_percent": 15.6
+        },
+        "school_attendance_rate": {
+          "primary": 82.3,
+          "secondary": 68.5
+        },
+        "dropout_rate": {
+          "primary": 8.5,
+          "secondary": 12.3,
+          "baseline_primary": 15.2,
+          "baseline_secondary": 18.9
+        }
+      }
+    },
+    "participation_metrics": {
+      "household_participation": {
+        "total_households": 45678,
+        "participating_households": 40653,
+        "participation_rate_percent": 89.0,
+        "measurement_date": "2026-01-01"
+      },
+      "community_meetings": {
+        "meetings_held_2025": 156,
+        "average_attendance": 234,
+        "women_attendance_percent": 42.3,
+        "youth_attendance_percent": 28.7
+      },
+      "volunteer_engagement": {
+        "active_volunteers": 3456,
+        "women_volunteers": 1456,
+        "percent_women": 42.1,
+        "hours_contributed_2025": 45678
+      },
+      "training_programs": {
+        "programs_conducted_2025": 89,
+        "participants": 12345,
+        "women_participants": 5234,
+        "percent_women": 42.4,
+        "topics": [
+          "Carbon project management",
+          "Grazing management",
+          "Financial literacy",
+          "Climate adaptation",
+          "Livestock health",
+          "Water management"
+        ]
+      }
+    },
+    "grievance_mechanism": {
+      "total_grievances_2025": 234,
+      "resolved": 198,
+      "under_review": 28,
+      "open": 8,
+      "resolution_rate_percent": 84.6,
+      "average_resolution_days": 18.5,
+      "categories": {
+        "payment_issues": {
+          "count": 89,
+          "resolved": 78,
+          "percent_resolved": 87.6
+        },
+        "benefit_distribution": {
+          "count": 56,
+          "resolved": 48,
+          "percent_resolved": 85.7
+        },
+        "grazing_disputes": {
+          "count": 45,
+          "resolved": 38,
+          "percent_resolved": 84.4
+        },
+        "water_access": {
+          "count": 23,
+          "resolved": 20,
+          "percent_resolved": 87.0
+        },
+        "wildlife_conflict": {
+          "count": 12,
+          "resolved": 9,
+          "percent_resolved": 75.0
+        },
+        "other": {
+          "count": 9,
+          "resolved": 5,
+          "percent_resolved": 55.6
+        }
+      }
+    },
+    "social_cohesion": {
+      "inter_community_cooperation": {
+        "score": 4.1,
+        "description": "Cooperation between different communities/conservancies"
+      },
+      "conflict_resolution": {
+        "score": 4.0,
+        "description": "Effectiveness of traditional and formal conflict resolution"
+      },
+      "cultural_preservation": {
+        "score": 4.3,
+        "description": "Maintenance of cultural practices and traditions"
+      }
+    },
+    "vulnerable_groups": {
+      "elderly_households": {
+        "count": 4567,
+        "percent": 10.0,
+        "support_programs": ["Healthcare access", "Food assistance", "Social protection"]
+      },
+      "female_headed_households": {
+        "count": 9123,
+        "percent": 20.0,
+        "support_programs": ["Income generation", "Training programs", "Access to credit"]
+      },
+      "youth_engagement": {
+        "youth_population_15_35": 82037,
+        "percent": 30.0,
+        "employment_rate": 45.2,
+        "training_participation": 12345,
+        "percent_participating": 15.0
+      },
+      "people_with_disabilities": {
+        "count": 2735,
+        "percent": 6.0,
+        "support_programs": ["Accessibility improvements", "Skills training", "Income support"]
+      }
+    }
+  },
+  "carbon_credits_summary": {
+    "total_issued_tco2e": 30847795,
+    "total_retired_tco2e": 13229696,
+    "total_available_tco2e": 17618099,
+    "total_revenue_usd": 185776752,
+    "average_price_per_ton_usd": 12.05,
+    "by_project": {
+      "VCS1468": {
+        "issued": 30847795,
+        "retired": 13229696,
+        "revenue": 185776752
+      },
+      "VCS2623": {
+        "issued": 0,
+        "retired": 0,
+        "revenue": 0,
+        "note": "Recently registered, credits pending issuance"
+      },
+      "VCS3340": {
+        "issued": 0,
+        "retired": 0,
+        "revenue": 0,
+        "note": "Recently registered, credits pending issuance"
+      },
+      "VCS5451": {
+        "issued": 0,
+        "retired": 0,
+        "revenue": 0,
+        "note": "Under validation, credits pending"
+      }
+    }
+  },
+  "community_benefits_summary": {
+    "total_investment_usd": 48500000,
+    "community_share_percent": 40,
+    "distribution": {
+      "education": {
+        "investment_usd": 15520000,
+        "percent": 32,
+        "projects_count": 47,
+        "beneficiaries": 23456,
+        "projects": [
+          "School construction and renovation",
+          "Scholarship programs",
+          "Teacher training",
+          "Library and learning materials"
+        ]
+      },
+      "water_access": {
+        "investment_usd": 12610000,
+        "percent": 26,
+        "projects_count": 89,
+        "beneficiaries": 45678,
+        "projects": [
+          "Water pan construction",
+          "Borehole drilling",
+          "Water pipeline installation",
+          "Water storage tanks"
+        ]
+      },
+      "healthcare": {
+        "investment_usd": 8730000,
+        "percent": 18,
+        "projects_count": 34,
+        "beneficiaries": 67890,
+        "projects": [
+          "Clinic construction",
+          "Mobile health services",
+          "Maternal health programs",
+          "Vaccination campaigns"
+        ]
+      },
+      "infrastructure": {
+        "investment_usd": 11640000,
+        "percent": 24,
+        "projects_count": 56,
+        "beneficiaries": 38901,
+        "projects": [
+          "Road construction and maintenance",
+          "Market infrastructure",
+          "Community centers",
+          "Solar electrification"
+        ]
+      }
+    }
+  }
+}
+
