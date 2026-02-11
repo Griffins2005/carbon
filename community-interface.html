@@ -54,38 +54,93 @@
                     </div>
                 </div>
                 <p class="tool-intro" id="phone-intro">Community members receive alerts and can reply via SMS or IVR. Use the mockup below to see how messages appear in English or Kiswahili.</p>
+                <div class="phone-device-toggle" role="group" aria-label="Device type">
+                    <button type="button" class="device-btn active" data-device="smart" aria-pressed="true">Smartphone</button>
+                    <button type="button" class="device-btn" data-device="feature" aria-pressed="false">Cell phone</button>
+                </div>
                 <div class="phone-mockup">
-                    <div class="phone-frame">
-                        <div class="phone-screen">
-                            <div class="phone-statusbar">
-                                <span class="phone-time" id="phone-time">9:15</span>
-                                <div class="phone-icons">
-                                    <div class="phone-signal" data-level="5" aria-hidden="true">
-                                        <span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span>
+                    <div class="phone-view phone-view-smart active" id="phone-view-smart">
+                        <div class="phone-frame">
+                            <div class="phone-screen">
+                                <div class="phone-statusbar">
+                                    <span class="phone-time" id="phone-time">9:15</span>
+                                    <div class="phone-icons">
+                                        <div class="phone-signal" data-level="5" aria-hidden="true">
+                                            <span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span>
+                                        </div>
+                                        <span class="phone-network">5G</span>
+                                        <span class="phone-battery">100%</span>
                                     </div>
-                                    <span class="phone-network">5G</span>
-                                    <span class="phone-battery">100%</span>
+                                </div>
+                                <div class="phone-header">
+                                    <span class="phone-back" aria-hidden="true">&lsaquo;</span>
+                                    <span class="phone-contact">CarbonWatch</span>
+                                </div>
+                                <div class="phone-thread" id="thread-smart">
+                                    <div class="phone-thread-divider" id="phone-divider">Today 9:15</div>
+                                    <div class="msg msg-in">
+                                        <span class="msg-body" id="phone-msg-in">Reply with your conservancy code to check carbon payment status or report an issue.</span>
+                                        <span class="msg-time">9:14</span>
+                                    </div>
+                                    <div class="msg msg-out">
+                                        <span class="msg-body" id="phone-msg-out">Sera. Payment not received.</span>
+                                        <span class="msg-time">9:15</span>
+                                    </div>
+                                </div>
+                                <div class="phone-input-wrap">
+                                    <span class="phone-attach" aria-hidden="true">+</span>
+                                    <input type="text" class="phone-input" id="phone-input" placeholder="Text (Safaricom)" aria-label="Message input">
+                                    <button type="button" class="phone-send" id="phone-send-btn" aria-label="Send message">Send</button>
                                 </div>
                             </div>
-                            <div class="phone-header">
-                                <span class="phone-back" aria-hidden="true">&lsaquo;</span>
-                                <span class="phone-contact">CarbonWatch</span>
-                            </div>
-                            <div class="phone-thread">
-                                <div class="phone-thread-divider" id="phone-divider">Today 9:15</div>
-                                <div class="msg msg-in">
-                                    <span class="msg-body" id="phone-msg-in">Reply with your conservancy code to check carbon payment status or report an issue.</span>
-                                    <span class="msg-time">9:14</span>
+                        </div>
+                    </div>
+                    <div class="phone-view phone-view-feature" id="phone-view-feature" aria-hidden="true">
+                        <div class="phone-frame feature-phone-frame">
+                            <div class="feature-phone-earpiece" aria-hidden="true"></div>
+                            <div class="feature-phone-screen">
+                                <div class="feature-phone-status">
+                                    <span class="feature-phone-status-left">
+                                        <span class="feature-phone-signal" aria-hidden="true">
+                                            <span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span>
+                                        </span>
+                                        <span class="phone-network">5G</span>
+                                    </span>
+                                    <span class="phone-time" id="phone-time-feature">9:15</span>
                                 </div>
-                                <div class="msg msg-out">
-                                    <span class="msg-body" id="phone-msg-out">Sera. Payment not received.</span>
-                                    <span class="msg-time">9:15</span>
+                                <div class="feature-phone-thread" id="thread-feature">
+                                    <div class="phone-thread-divider" id="phone-divider-feature">Today 9:15</div>
+                                    <div class="msg msg-in">
+                                        <span class="msg-body" id="phone-msg-in-feature">Reply with your conservancy code to check carbon payment status or report an issue.</span>
+                                        <span class="msg-time">9:14</span>
+                                    </div>
+                                    <div class="msg msg-out">
+                                        <span class="msg-body" id="phone-msg-out-feature">Sera. Payment not received.</span>
+                                        <span class="msg-time">9:15</span>
+                                    </div>
+                                </div>
+                                <div class="feature-phone-input-wrap">
+                                    <input type="text" class="feature-phone-input" id="phone-input-feature" placeholder="Text (Safaricom)" aria-label="Message input" maxlength="160">
+                                    <button type="button" class="feature-phone-send" id="phone-send-feature" aria-label="Send">Send</button>
                                 </div>
                             </div>
-                            <div class="phone-input-wrap">
-                                <span class="phone-attach" aria-hidden="true">+</span>
-                                <input type="text" class="phone-input" id="phone-input" placeholder="Text (Safaricom)" aria-label="Message input">
-                                <button type="button" class="phone-send" id="phone-send-btn" aria-label="Send message">Send</button>
+                            <span class="feature-phone-brand">itel</span>
+                            <div class="feature-phone-nav-cluster">
+                                <div class="nav-row nav-row-top">
+                                    <button type="button" class="softkey" aria-label="Soft key"><span class="softkey-four">····</span></button>
+                                    <div class="nav-dpad" aria-hidden="true"><span class="dpad-center">●</span></div>
+                                    <button type="button" class="softkey" aria-label="Soft key"><span class="softkey-four">····</span></button>
+                                </div>
+                                <div class="nav-row nav-row-bottom">
+                                    <button type="button" class="nav-btn nav-call" aria-label="Call">&#x260e;</button>
+                                    <button type="button" class="nav-btn nav-end" aria-label="End">&#x260f;</button>
+                                </div>
+                            </div>
+                            <div class="feature-phone-keypad">
+                                <div class="keypad-row"><button type="button" class="keypad-key" data-char="1">1</button><button type="button" class="keypad-key" data-char="2">2 ABC</button><button type="button" class="keypad-key" data-char="3">3 DEF</button></div>
+                                <div class="keypad-row"><button type="button" class="keypad-key" data-char="4">4 GHI</button><button type="button" class="keypad-key" data-char="5">5 JKL</button><button type="button" class="keypad-key" data-char="6">6 MNO</button></div>
+                                <div class="keypad-row"><button type="button" class="keypad-key" data-char="7">7 PQRS</button><button type="button" class="keypad-key" data-char="8">8 TUV</button><button type="button" class="keypad-key" data-char="9">9 WXYZ</button></div>
+                                <div class="keypad-row"><button type="button" class="keypad-key" data-char="*">*</button><button type="button" class="keypad-key" data-char="0">0</button><button type="button" class="keypad-key" data-char="#">#</button></div>
                             </div>
                         </div>
                     </div>
@@ -179,6 +234,11 @@
     </div>
 
     <footer>
+        <div class="footer-logos">
+            <a href="https://www.nema.go.ke" target="_blank" rel="noopener" class="footer-logo-nema" aria-label="National Environment Management Authority">
+                <img src="./images/nema-logo.png" alt="NEMA – National Environment Management Authority. Mazingira yetu, uhai wetu, wajibu wetu." width="120" height="56">
+            </a>
+        </div>
         <div class="footer-text">© 2026 SMART Project Team at Cornell | CarbonWatch Community Tracker Dashboard</div>
     </footer>
 
