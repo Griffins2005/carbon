@@ -28,7 +28,7 @@
                     <a href="index.html">Home</a>
                     <a href="community-interface.html">Community Interface</a>
                     <a href="scout-engine.html">SCOUT Engine</a>
-                    <a href="dashboard.html" class="active">Public Dashboard</a>
+                    <a href="dashboard.html">Public Dashboard</a>
                     <a href="sources.html">Sources</a>
                 </nav>
             </div>
@@ -44,14 +44,12 @@
 
     <div class="container">
         <section class="layer-section layer-3-intro">
-            <div class="layer-badge">Public Dashboard</div>
             <h3>Public Dashboard</h3>
-            <p class="layer-lead">For regulators, buyers, NGOs, journalists, funders. Every metric comes from the community layer first.</p>
         </section>
 
         <div class="dashboard-content">
             <div class="stats-grid">
-                <div class="stat-card primary" onclick="alert('Total Credits: 30.8M tCO2e verified and issued')">
+                <div class="stat-card primary" >
                     <div class="stat-header">
                         <div class="stat-label">Credits Issued</div>
                         <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -61,7 +59,7 @@
                     <div class="stat-value">30.8M</div>
                     <div class="stat-unit">tCO2e verified</div>
                 </div>
-                <div class="stat-card" onclick="alert('Credits Retired: 13.2M tCO2e permanently retired')">
+                <div class="stat-card" >
                     <div class="stat-header">
                         <div class="stat-label">Credits Retired</div>
                         <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,7 +69,7 @@
                     <div class="stat-value">13.2M</div>
                     <div class="stat-unit">tCO2e retired</div>
                 </div>
-                <div class="stat-card" onclick="alert('Community Benefit: 40% of carbon revenue goes directly to local communities')">
+                <div class="stat-card" >
                     <div class="stat-header">
                         <div class="stat-label">Community Share</div>
                         <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -83,7 +81,7 @@
                     <div class="stat-value">40%</div>
                     <div class="stat-unit">Direct payments</div>
                 </div>
-                <div class="stat-card" onclick="alert('Active Projects: 22 conservancies participating in carbon programs')">
+                <div class="stat-card" >
                     <div class="stat-header">
                         <div class="stat-label">Active Projects</div>
                         <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -96,9 +94,50 @@
             </div>
 
             <div class="map-section">
+                <div class="map-disclaimer" role="note" aria-label="Data source disclaimer">
+                    <strong>Where we get our data</strong>
+                    <p>Project-level numbers come from the <a href="https://registry.verra.org/app/projectDetail/VCS/1468" target="_blank" rel="noopener">Verra Registry VCS 1468</a> and from <a href="https://www.nrt-kenya.org/carbon-project-impact" target="_blank" rel="noopener">NRT Carbon Project Impact</a> and the <a href="https://www.nrt-kenya.org/document-library" target="_blank" rel="noopener">NRT document library</a>. Per-conservancy figures are shown only where officially disclosed; otherwise we show <strong>N/A</strong>. <a href="sources.html">Full sources</a>.</p>
+                </div>
+                <div class="project-summary-block">
+                    <div class="map-header">
+                        <div class="map-title">Project summary</div>
+                    </div>
+                    <p class="project-summary-text">The Northern Kenya Grassland Carbon Project is registered with Verra as <strong>VCS 1468</strong>, with Northern Rangelands Trust as proponent. It covers <strong>1,993,075 hectares</strong> across 14 community conservancies, under methodology VM0032 (Agricultural Land Management). The first crediting period runs from 2013 to 2042. Verra lists the project as <strong>On Hold</strong> — see the notification letter on the registry. For full official details, issuance records and buffer pool figures, see the <a href="https://registry.verra.org/app/projectDetail/VCS/1468" target="_blank" rel="noopener">Verra Registry (VCS 1468)</a>.</p>
+                </div>
+                <div class="verification-cycles-block">
+                    <div class="map-header">
+                        <div class="map-title">Verification cycles (all completed to date)</div>
+                        <div class="map-subtitle">Every cycle that has been verified and from which credits have been issued and sold.</div>
+                    </div>
+                    <table class="verification-cycles-table" aria-label="All verification cycles">
+                        <thead>
+                            <tr>
+                                <th scope="col">Cycle</th>
+                                <th scope="col">Period</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Source</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2013–2016</td>
+                                <td>Completed — verified, credits issued and sold</td>
+                                <td><a href="https://registry.verra.org/app/projectDetail/VCS/1468" target="_blank" rel="noopener">Verra VCS 1468</a></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>2017–2020</td>
+                                <td>Completed — verified, credits issued and sold</td>
+                                <td><a href="https://registry.verra.org/app/projectDetail/VCS/1468" target="_blank" rel="noopener">Verra VCS 1468</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="verification-cycles-totals">Project totals to date (both cycles): <strong>30.8M tCO2e</strong> credits issued (Verra); <strong>13.2M tCO2e</strong> retired/sold; <strong>USD 14.6M+</strong> carbon revenue (NRT). First community payment Feb 2022 (e.g. USD 324,000 per conservancy). <a href="https://registry.verra.org/app/projectDetail/VCS/1468" target="_blank" rel="noopener">Verra 1468</a> · <a href="https://www.nrt-kenya.org/carbon-project-impact" target="_blank" rel="noopener">NRT Carbon Impact</a>.</p>
+                </div>
                 <div class="map-header">
                     <div class="map-title">NRT Conservancies – Northern Kenya</div>
-                    <div class="map-subtitle">Click a conservancy on the map to see details: land, communities, carbon credits sold, revenue received and how it was spent.</div>
+                    <div class="map-subtitle">Click a conservancy to see data by verification cycle. Where figures are not publicly disclosed we show N/A.</div>
                 </div>
                 <div class="map-and-panel">
                     <div class="map-wrapper">
@@ -138,19 +177,19 @@
                             <div class="card-title">Carbon Credit Tracker</div>
                         </div>
                     </div>
-                    <div class="metric-box" onclick="alert('Proposed: 5.2M tCO2e credits under development')">
+                    <div class="metric-box" >
                         <div class="metric-label">Proposed</div>
                         <div class="metric-value">5.2M tCO2e</div>
                     </div>
-                    <div class="metric-box" onclick="alert('Verified: 30.8M tCO2e credits verified by third-party auditors')">
+                    <div class="metric-box" >
                         <div class="metric-label">Verified</div>
                         <div class="metric-value">30.8M tCO2e</div>
                     </div>
-                    <div class="metric-box" onclick="alert('Sold: 13.2M tCO2e credits sold to corporate buyers')">
+                    <div class="metric-box" >
                         <div class="metric-label">Sold</div>
                         <div class="metric-value">13.2M tCO2e</div>
                     </div>
-                    <div class="metric-box" onclick="alert('Buyers: Microsoft, Delta Airlines, Shell Energy')">
+                    <div class="metric-box" >
                         <div class="metric-label">Primary Buyers</div>
                         <div style="font-size: 11px; font-weight: 600; color: #495057; margin-top: 4px;">Microsoft, Delta, Shell</div>
                     </div>
@@ -167,7 +206,7 @@
                             <div class="card-subtitle">Social Conservancy Oversight Tool</div>
                         </div>
                     </div>
-                    <div class="metric-box" onclick="alert('WELI: 35% - Women empowerment in livestock index. Target: 50%')">
+                    <div class="metric-box" >
                         <div class="metric-label">Women's Empowerment (WELI)</div>
                         <div class="metric-value">35%</div>
                         <div style="font-size: 9px; color: #6c757d; margin-top: 3px;">Target: 50%</div>
@@ -175,11 +214,11 @@
                             <div class="progress-fill" style="width: 35%;"></div>
                         </div>
                     </div>
-                    <div class="metric-box" onclick="alert('Trust Index: 4.2/5.0 - High community confidence in project')">
+                    <div class="metric-box" >
                         <div class="metric-label">Community Trust</div>
                         <div class="metric-value">4.2 / 5.0</div>
                     </div>
-                    <div class="metric-box" onclick="alert('Participation: 89% of households actively engaged')">
+                    <div class="metric-box" >
                         <div class="metric-label">Household Participation</div>
                         <div class="metric-value">89%</div>
                     </div>
@@ -194,21 +233,21 @@
                             <div class="card-title">Feedback & Complaints</div>
                         </div>
                     </div>
-                    <div class="feedback-item" onclick="alert('Water pan access issue in Kalama - Resolved Jan 10, 2026')">
+                    <div class="feedback-item" >
                         <div>
                             <div class="feedback-text">Water pan access - Kalama</div>
                             <div class="feedback-date">Resolved: Jan 10, 2026</div>
                         </div>
                         <div class="status-tag status-resolved">RESOLVED</div>
                     </div>
-                    <div class="feedback-item" onclick="alert('Grazing boundary dispute - Under review by management')">
+                    <div class="feedback-item" >
                         <div>
                             <div class="feedback-text">Grazing boundary dispute</div>
                             <div class="feedback-date">Submitted: Jan 14, 2026</div>
                         </div>
                         <div class="status-tag status-review">REVIEW</div>
                     </div>
-                    <div class="feedback-item" onclick="alert('Payment delay inquiry - Case opened Jan 15, 2026')">
+                    <div class="feedback-item" >
                         <div>
                             <div class="feedback-text">Payment delay inquiry</div>
                             <div class="feedback-date">Submitted: Jan 15, 2026</div>
@@ -229,17 +268,17 @@
                     </div>
                 </div>
                 <div class="projects-grid">
-                    <div class="project-card" onclick="alert('Education: $2.4M invested in 12 school upgrades')">
+                    <div class="project-card" >
                         <div class="project-title">Education Infrastructure</div>
                         <div class="project-amount">$2.4M</div>
                         <div class="project-detail">12 schools upgraded</div>
                     </div>
-                    <div class="project-card" onclick="alert('Water: $1.8M invested in 24 water pan construction projects')">
+                    <div class="project-card" >
                         <div class="project-title">Water Access Projects</div>
                         <div class="project-amount">$1.8M</div>
                         <div class="project-detail">24 water pans constructed</div>
                     </div>
-                    <div class="project-card" onclick="alert('Healthcare: $1.2M invested in 8 new clinic facilities')">
+                    <div class="project-card" >
                         <div class="project-title">Healthcare Facilities</div>
                         <div class="project-amount">$1.2M</div>
                         <div class="project-detail">8 clinics established</div>

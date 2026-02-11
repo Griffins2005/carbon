@@ -24,29 +24,46 @@
     return '$' + n.toLocaleString();
   }
 
+  function na(v) {
+    return (v === null || v === undefined || v === '') ? 'N/A' : v;
+  }
+  function naNum(v) {
+    return (v === null || v === undefined) ? 'N/A' : v.toLocaleString();
+  }
+  function naMoney(v) {
+    return (v === null || v === undefined) ? 'N/A' : formatMoney(v);
+  }
+
   function renderConservancyDetail(c) {
     if (!c) return '';
-    var spendingRows = (c.spending || []).map(function(s) {
-      return '<tr><td>' + s.category + '</td><td class="conservancy-amount">' + formatMoney(s.amount) + '</td></tr>';
+    var cycles = c.cycles || [];
+    var cycleRows = cycles.map(function(cy, i) {
+      var carbonStr = (cy.carbonSold != null) ? naNum(cy.carbonSold) + ' tCO2e' : 'N/A';
+      var amountStr = naMoney(cy.amountReceivedUSD);
+      var spendingStr = 'N/A';
+      if (cy.spending && cy.spending.length) {
+        spendingStr = cy.spending.map(function(s) { return s.category + ': ' + formatMoney(s.amount); }).join('; ');
+      }
+      return '<tr><td>' + (i + 1) + '</td><td>' + (cy.period || 'N/A') + '</td><td>' + carbonStr + '</td><td>' + amountStr + '</td><td>' + spendingStr + '</td></tr>';
     }).join('');
+    var landStr = 'N/A';
+    if (c.landKm2 != null) landStr = c.landKm2.toLocaleString() + ' km²';
+    else if (c.landHectares != null) landStr = (c.landHectares / 100).toLocaleString() + ' km²';
+    var firstPaymentStr = (c.firstPaymentFeb2022USD != null) ? formatMoney(c.firstPaymentFeb2022USD) + ' (NRT, Feb 2022)' : 'N/A';
     return (
       '<div class="conservancy-detail-grid">' +
-        '<div class="conservancy-detail-item"><span class="conservancy-detail-label">Land area</span><span class="conservancy-detail-value">' + c.landKm2.toLocaleString() + ' km²</span></div>' +
-        '<div class="conservancy-detail-item"><span class="conservancy-detail-label">Communities</span><span class="conservancy-detail-value">' + c.numCommunities + '</span></div>' +
-        '<div class="conservancy-detail-item"><span class="conservancy-detail-label">Families</span><span class="conservancy-detail-value">' + c.numFamilies.toLocaleString() + '</span></div>' +
-        '<div class="conservancy-detail-item"><span class="conservancy-detail-label">Population</span><span class="conservancy-detail-value">' + c.population.toLocaleString() + '</span></div>' +
-        '<div class="conservancy-detail-item"><span class="conservancy-detail-label">Carbon sold (cycle)</span><span class="conservancy-detail-value">' + c.carbonSoldCycle.toLocaleString() + ' ' + (c.carbonUnit || 'tCO2e') + '</span></div>' +
-        '<div class="conservancy-detail-item"><span class="conservancy-detail-label">Verification cycle</span><span class="conservancy-detail-value">' + (c.verificationCycle || '—') + '</span></div>' +
-        '<div class="conservancy-detail-item"><span class="conservancy-detail-label">Amount received</span><span class="conservancy-detail-value conservancy-detail-highlight">' + formatMoney(c.amountReceivedUSD) + '</span></div>' +
-        '<div class="conservancy-detail-item"><span class="conservancy-detail-label">Community share</span><span class="conservancy-detail-value">' + (c.communitySharePct || '—') + '%</span></div>' +
-        '<div class="conservancy-detail-item full-width"><span class="conservancy-detail-label">Status</span><span class="conservancy-detail-value">' + (c.status || '—') + '</span></div>' +
-        '<div class="conservancy-detail-item full-width"><span class="conservancy-detail-label">Year joined NRT</span><span class="conservancy-detail-value">' + (c.yearJoined || '—') + '</span></div>' +
+        '<div class="conservancy-detail-item"><span class="conservancy-detail-label">Land area</span><span class="conservancy-detail-value">' + landStr + '</span></div>' +
+        '<div class="conservancy-detail-item"><span class="conservancy-detail-label">First payment (Feb 2022)</span><span class="conservancy-detail-value conservancy-detail-highlight">' + firstPaymentStr + '</span></div>' +
+        '<div class="conservancy-detail-item"><span class="conservancy-detail-label">Communities</span><span class="conservancy-detail-value">' + na(c.numCommunities) + '</span></div>' +
+        '<div class="conservancy-detail-item"><span class="conservancy-detail-label">Families</span><span class="conservancy-detail-value">' + naNum(c.numFamilies) + '</span></div>' +
+        '<div class="conservancy-detail-item"><span class="conservancy-detail-label">Population</span><span class="conservancy-detail-value">' + naNum(c.population) + '</span></div>' +
+        '<div class="conservancy-detail-item full-width"><span class="conservancy-detail-label">Year joined NRT</span><span class="conservancy-detail-value">' + na(c.yearJoined) + '</span></div>' +
+        '<div class="conservancy-detail-item full-width"><span class="conservancy-detail-label">Status</span><span class="conservancy-detail-value">' + na(c.status) + '</span></div>' +
       '</div>' +
-      (spendingRows ? (
-        '<div class="conservancy-spending"><h5>How the amount was spent</h5><table class="conservancy-spending-table"><thead><tr><th>Category</th><th>Amount</th></tr></thead><tbody>' +
-        spendingRows +
-        '</tbody></table></div>'
-      ) : '')
+      '<div class="conservancy-cycles-detail"><h5>Verification cycles (carbon sold, amount received, spending)</h5>' +
+      '<table class="conservancy-cycles-table"><thead><tr><th>Cycle</th><th>Period</th><th>Carbon sold</th><th>Amount received</th><th>Spending</th></tr></thead><tbody>' +
+      (cycleRows || '<tr><td colspan="5">N/A</td></tr>') +
+      '</tbody></table></div>'
     );
   }
 
