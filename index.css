@@ -1169,7 +1169,20 @@ body.nav-open .hamburger span:nth-child(3) {
   padding-bottom: 0;
   border-bottom: none;
 }
-
+.conservancy-detail-body ul.conservancy-cycles {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px 0;
+  font-size: 12px;
+  color: #374151;
+}
+.conservancy-detail-body ul.conservancy-cycles li {
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+}
+.conservancy-detail-body ul.conservancy-cycles li:last-child {
+  border-bottom: none;
+}
 .conservancy-detail-body strong {
   display: inline-block;
   min-width: 7em;

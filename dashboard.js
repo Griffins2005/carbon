@@ -1,6 +1,7 @@
 /**
  * Dashboard – interactive map with boundaries and detail panel.
- * Data: kenya-carbon-projects.json; kenya-carbon-projects-comprehensive.json (NRT conservancy polygons).
+ * Prefers kenya-carbon-harmonized.json (merged from primary + comprehensive + conservancies.js + 4 KMLs).
+ * Fallback: kenya-carbon-projects.json + kenya-carbon-projects-comprehensive.json (+ conservancies.js).
  */
 (function() {
   'use strict';
@@ -24,6 +25,12 @@
   }
   function naNum(v) {
     return (v === null || v === undefined) ? 'N/A' : Number(v).toLocaleString();
+  }
+  /** Use N/A instead of zero where data isn't available (optional counts/amounts). */
+  function naNumOrZero(v) {
+    if (v === null || v === undefined || v === '') return 'N/A';
+    var n = Number(v);
+    return (n === 0 || isNaN(n)) ? 'N/A' : n.toLocaleString();
   }
   function formatAreaHa(ha) {
     if (ha == null) return 'N/A';
@@ -82,6 +89,16 @@
     }).filter(Boolean);
   }
 
+  function polygonCentroid(latlngs) {
+    if (!latlngs || latlngs.length < 1) return null;
+    var sumLat = 0, sumLng = 0;
+    latlngs.forEach(function(p) {
+      sumLat += p[0];
+      sumLng += p[1];
+    });
+    return [sumLat / latlngs.length, sumLng / latlngs.length];
+  }
+
   function convexHull(points) {
     if (!points || points.length < 3) return points || [];
     var pts = points.slice();
@@ -105,16 +122,6 @@
       hull.push(q);
     }
     return hull;
-  }
-
-  function clipToKenyaTurkana(latlngs) {
-    if (!latlngs || latlngs.length < 3) return latlngs;
-    var minLng = 34.55;
-    return latlngs.map(function(p) {
-      if (!p || p.length < 2) return p;
-      if (p[1] < minLng) return [p[0], minLng];
-      return p;
-    });
   }
 
   var KENYA_COUNTY_CENTERS = {
@@ -232,35 +239,89 @@
     }
   }
 
+  function unwrapVal(v) {
+    if (v != null && typeof v === 'object' && 'value' in v) return v.value;
+    return v;
+  }
   function renderConservancyDetail(c) {
     if (!c) return '';
     var name = c.name || c.short_name || 'Conservancy';
-    var areaStr = c.area_km2 != null ? formatAreaKm2(c.area_km2) : (c.area_hectares != null ? formatAreaHa(c.area_hectares) + ' (ha)' : 'N/A');
+    var areaKm2 = unwrapVal(c.area_km2) != null ? unwrapVal(c.area_km2) : c.area_km2;
+    var areaHa = unwrapVal(c.area_hectares) != null ? unwrapVal(c.area_hectares) : c.landHectares;
+    var areaStr = areaKm2 != null ? formatAreaKm2(areaKm2) : (areaHa != null ? formatAreaHa(areaHa) + ' (ha)' : 'N/A');
     var cc = c.carbon_credits || {};
-    var issued = cc.issued_tco2e != null ? naNum(cc.issued_tco2e) + ' tCO2e' : 'N/A';
-    var retired = cc.retired_tco2e != null ? naNum(cc.retired_tco2e) + ' tCO2e' : 'N/A';
-    var pop = c.population != null ? naNum(c.population) : 'N/A';
-    var hh = c.households != null ? naNum(c.households) : 'N/A';
+    var issuedVal = unwrapVal(cc.issued_tco2e);
+    var retiredVal = unwrapVal(cc.retired_tco2e);
+    var proposedVal = unwrapVal(cc.proposed_tco2e);
+    var issued = (issuedVal != null && Number(issuedVal) !== 0) ? naNum(issuedVal) + ' tCO2e' : 'N/A';
+    var retired = (retiredVal != null && Number(retiredVal) !== 0) ? naNum(retiredVal) + ' tCO2e' : 'N/A';
+    var proposed = (proposedVal != null && Number(proposedVal) !== 0) ? naNum(proposedVal) + ' tCO2e' : 'N/A';
+    var pop = naNumOrZero(unwrapVal(c.population));
+    var hh = naNumOrZero(unwrapVal(c.households));
+    var livestock = naNumOrZero(unwrapVal(c.livestock_units));
     var counties = (c.counties && c.counties.length) ? c.counties.join(', ') : 'N/A';
     var established = c.established || 'N/A';
-    return '<p><strong>Land area</strong> ' + areaStr + '</p>' +
-      '<p><strong>Carbon issued</strong> ' + issued + '</p>' +
-      '<p><strong>Carbon retired</strong> ' + retired + '</p>' +
+    var subLocs = (c.sub_locations && c.sub_locations.length) ? c.sub_locations.join(', ') : 'N/A';
+    var firstPayment = (c.firstPaymentFeb2022USD != null || c.first_payment_feb_2022_usd != null) ? formatMoney(c.firstPaymentFeb2022USD != null ? c.firstPaymentFeb2022USD : c.first_payment_feb_2022_usd) : 'N/A';
+    var communities = naNumOrZero(c.numCommunities);
+    var status = (c.status != null && c.status !== '') ? c.status : 'N/A';
+    var html = '<p><strong>Land area</strong> ' + areaStr + '</p>' +
+      '<p><strong>Counties</strong> ' + counties + '</p>' +
+      '<p><strong>Sub-locations</strong> ' + subLocs + '</p>' +
+      '<p><strong>Established</strong> ' + established + '</p>' +
       '<p><strong>Households</strong> ' + hh + '</p>' +
       '<p><strong>Population</strong> ' + pop + '</p>' +
-      '<p><strong>Counties</strong> ' + counties + '</p>' +
-      '<p><strong>Established</strong> ' + established + '</p>';
+      '<p><strong>Livestock units</strong> ' + livestock + '</p>' +
+      (communities !== 'N/A' ? '<p><strong>Communities</strong> ' + communities + '</p>' : '') +
+      '<p><strong>Carbon issued</strong> ' + issued + '</p>' +
+      '<p><strong>Carbon retired</strong> ' + retired + '</p>' +
+      '<p><strong>Carbon proposed</strong> ' + proposed + '</p>' +
+      '<p><strong>First payment (Feb 2022)</strong> ' + firstPayment + '</p>' +
+      (status !== 'N/A' ? '<p><strong>Status</strong> ' + status + '</p>' : '');
+    var cycles = c.cycles && Array.isArray(c.cycles) && c.cycles.length;
+    if (cycles) {
+      html += '<p><strong>Verification cycles</strong></p><ul class="conservancy-cycles">';
+      c.cycles.forEach(function(cy) {
+        var sold = (cy.carbonSold != null && Number(cy.carbonSold) !== 0) ? naNum(cy.carbonSold) + ' tCO2e' : 'N/A';
+        var received = (cy.amountReceivedUSD != null && Number(cy.amountReceivedUSD) !== 0) ? formatMoney(cy.amountReceivedUSD) : 'N/A';
+        var spend = (cy.spending != null && cy.spending !== '') ? cy.spending : 'N/A';
+        html += '<li><strong>' + (cy.period || '') + '</strong>: Sold ' + sold + ', Received ' + received + ', Spending ' + spend + '</li>';
+      });
+      html += '</ul>';
+    }
+    return html;
   }
 
   function renderProjectDetail(p) {
     if (!p) return '';
     var name = p.short_name || p.name || p.project_id;
     var areaStr = (p.area && p.area.hectares != null) ? formatAreaHa(p.area.hectares) : 'N/A';
+    var areaKm2 = (p.area && p.area.km2 != null) ? formatAreaKm2(p.area.km2) : 'N/A';
     var counties = (p.counties && p.counties.length) ? p.counties.join(', ') : 'N/A';
-    return '<p><strong>Project</strong> ' + name + ' (' + (p.project_id || '') + ')</p>' +
-      '<p><strong>Area</strong> ' + areaStr + '</p>' +
+    var status = p.status || 'N/A';
+    var proponent = p.proponent || 'N/A';
+    var verification = p.verification || 'N/A';
+    var methodology = p.methodology || 'N/A';
+    var crediting = p.crediting_period ? ((p.crediting_period.start || '') + ' – ' + (p.crediting_period.end || '')) : 'N/A';
+    var html = '<p><strong>Project</strong> ' + name + ' (' + (p.project_id || '') + ')</p>' +
+      '<p><strong>Area</strong> ' + areaStr + (areaKm2 !== 'N/A' ? ' (' + areaKm2 + ')' : '') + '</p>' +
       '<p><strong>Counties</strong> ' + counties + '</p>' +
-      '<p><strong>Status</strong> ' + (p.status || 'N/A') + '</p>';
+      '<p><strong>Status</strong> ' + status + '</p>' +
+      '<p><strong>Proponent</strong> ' + proponent + '</p>' +
+      '<p><strong>Verification</strong> ' + verification + '</p>' +
+      '<p><strong>Methodology</strong> ' + methodology + '</p>' +
+      '<p><strong>Crediting period</strong> ' + crediting + '</p>';
+    if (p.farms && (p.farms.total_farms != null || p.farms.average_farm_size_hectares != null)) {
+      var farms = (p.farms.total_farms != null ? naNumOrZero(p.farms.total_farms) : 'N/A') + ' farms';
+      if (p.farms.average_farm_size_hectares != null) farms += ', avg ' + p.farms.average_farm_size_hectares + ' ha';
+      html += '<p><strong>Farms</strong> ' + farms + '</p>';
+    }
+    if (p.landowners && (p.landowners.total_landowners != null || p.landowners.average_land_size_acres != null)) {
+      var owners = (p.landowners.total_landowners != null ? naNumOrZero(p.landowners.total_landowners) : 'N/A') + ' landowners';
+      if (p.landowners.average_land_size_acres != null) owners += ', avg ' + Number(p.landowners.average_land_size_acres).toLocaleString() + ' acres';
+      html += '<p><strong>Landowners</strong> ' + owners + '</p>';
+    }
+    return html;
   }
 
   function initMap() {
@@ -270,10 +331,23 @@
     var data = KENYA_DATA;
     var comp = KENYA_COMPREHENSIVE;
     var nrtProject = data && data.projects ? data.projects.filter(function(p) { return (p.project_id || '') === 'VCS1468'; })[0] : null;
-    var conservanciesPrimary = (nrtProject && nrtProject.conservancies) ? nrtProject.conservancies : (window.NRT_CONSERVANCIES || []);
+    // Use all 14 NRT conservancies from conservancies.js for map markers; JSON may have fewer.
+    var conservanciesPrimary = (window.NRT_CONSERVANCIES && window.NRT_CONSERVANCIES.length >= 14) ? window.NRT_CONSERVANCIES : ((nrtProject && nrtProject.conservancies) ? nrtProject.conservancies : (window.NRT_CONSERVANCIES || []));
+    // Collect all conservancies that have boundary geodata, from any project (NRT and others).
     var conservanciesWithBoundaries = [];
+    if (comp && comp.projects && Array.isArray(comp.projects)) {
+      comp.projects.forEach(function(proj) {
+        if (!proj.conservancies || !Array.isArray(proj.conservancies)) return;
+        proj.conservancies.forEach(function(c) {
+          var bc = c.boundary_coordinates;
+          if (bc && bc.simplified_coordinates && Array.isArray(bc.simplified_coordinates)) {
+            conservanciesWithBoundaries.push({ _project: proj, conservancy: c });
+          }
+        });
+      });
+    }
     var nrtFromComp = comp && comp.projects ? comp.projects.filter(function(p) { return (p.project_id || '') === 'VCS1468'; })[0] : null;
-    if (nrtFromComp && nrtFromComp.conservancies) conservanciesWithBoundaries = nrtFromComp.conservancies;
+    var nrtBoundariesOnly = (nrtFromComp && nrtFromComp.conservancies) ? nrtFromComp.conservancies : [];
     var allProjects = (data && data.projects) ? data.projects : [];
     var allBounds = [];
 
@@ -301,10 +375,13 @@
     }
     if (panelClose) panelClose.addEventListener('click', hidePanel);
 
+    function normalizeName(s) {
+      return (s || '').toLowerCase().replace(/\s+/g, '').replace(/'/g, '');
+    }
     function mergeConservancyData(compC) {
-      var key = (compC.short_name || compC.name || '').toLowerCase().replace(/\s+/g, '');
+      var key = normalizeName(compC.short_name || compC.name);
       var match = conservanciesPrimary.filter(function(p) {
-        var n = (p.short_name || p.name || '').toLowerCase().replace(/\s+/g, '');
+        var n = normalizeName(p.short_name || p.name);
         return n === key || n.indexOf(key) >= 0 || key.indexOf(n) >= 0;
       })[0];
       return match || compC;
@@ -319,7 +396,7 @@
     var markersLayer = L.layerGroup();
 
     var nrtBoundaryPoints = [];
-    conservanciesWithBoundaries.forEach(function(compC) {
+    nrtBoundariesOnly.forEach(function(compC) {
       var bc = compC.boundary_coordinates;
       if (!bc || !bc.simplified_coordinates || !Array.isArray(bc.simplified_coordinates)) return;
       var latlngs = parseSimplifiedCoordinates(bc.simplified_coordinates);
@@ -341,7 +418,10 @@
     nrtMain.forEach(function(c) { allBounds.push(c); });
     nrtPoly.bringToFront();
 
-    conservanciesWithBoundaries.forEach(function(compC) {
+    var conservancyPolygonsDrawn = [];
+    conservanciesWithBoundaries.forEach(function(item) {
+      var compC = item.conservancy;
+      var proj = item._project;
       var bc = compC.boundary_coordinates;
       if (!bc || !bc.simplified_coordinates || !Array.isArray(bc.simplified_coordinates)) return;
       var latlngs = parseSimplifiedCoordinates(bc.simplified_coordinates);
@@ -349,12 +429,16 @@
       latlngs.forEach(function(c) { allBounds.push(c); });
       var merged = mergeConservancyData(compC);
       var name = compC.name || compC.short_name || 'Conservancy';
-      var poly = L.polygon(latlngs, s.nrtConservancy).addTo(nrtConservanciesLayer);
+      var style = ((proj && (proj.project_id || '') === 'VCS1468') ? s.nrtConservancy : s.nrtConservancy);
+      var poly = L.polygon(latlngs, style).addTo(nrtConservanciesLayer);
       poly.on('click', function() { showPanel(name, renderConservancyDetail(merged)); });
-      poly.on('mouseover', function() { this.setStyle({ fillOpacity: 0.35, weight: 2.5, color: s.nrtConservancy.color, fillColor: s.nrtConservancy.fillColor }); this.bringToFront(); });
-      poly.on('mouseout', function() { this.setStyle(s.nrtConservancy); });
-      poly.bindTooltip(name, { permanent: false, direction: 'center' });
+      poly.on('mouseover', function() { this.setStyle({ fillOpacity: 0.35, weight: 2.5, color: style.color, fillColor: style.fillColor }); this.bringToFront(); });
+      poly.on('mouseout', function() { this.setStyle(style); });
+      poly.bindTooltip(name + ((proj && (proj.project_id || '') !== 'VCS1468') ? ' (' + (proj.short_name || proj.name || '') + ')' : ''), { permanent: false, direction: 'center' });
       poly._data = merged;
+      poly._latlngs = latlngs;
+      poly._compC = compC;
+      conservancyPolygonsDrawn.push(poly);
     });
 
     var greenIcon = L.divIcon({ className: 'conservancy-marker', html: '<span class="conservancy-marker-dot"></span>', iconSize: [24, 24], iconAnchor: [12, 12] });
@@ -369,6 +453,24 @@
       marker.on('mouseover', function() { marker.getTooltip() && marker.openTooltip(); });
       marker.bindTooltip(name, { permanent: false, direction: 'top', offset: [0, -10] });
       marker._data = c;
+    });
+
+    conservancyPolygonsDrawn.forEach(function(poly) {
+      var compC = poly._compC;
+      var latlngs = poly._latlngs;
+      if (!latlngs || latlngs.length < 1) return;
+      var key = normalizeName(compC.short_name || compC.name);
+      var hasMarker = conservanciesPrimary.some(function(p) { return normalizeName(p.short_name || p.name) === key; });
+      if (hasMarker) return;
+      var center = polygonCentroid(latlngs);
+      if (!center) return;
+      allBounds.push(center);
+      var name = compC.name || compC.short_name || 'Conservancy';
+      var marker = L.marker(center, { icon: greenIcon }).addTo(markersLayer);
+      marker.on('click', function() { showPanel(name, renderConservancyDetail(poly._data)); });
+      marker.on('mouseover', function() { marker.getTooltip() && marker.openTooltip(); });
+      marker.bindTooltip(name, { permanent: false, direction: 'top', offset: [0, -10] });
+      marker._data = poly._data;
     });
 
     nrtConservanciesLayer.addTo(map);
@@ -389,7 +491,6 @@
 
       if (bc && bc.main_boundary && Array.isArray(bc.main_boundary)) {
         var latlngs = parseBoundaryLatLngs(bc.main_boundary);
-        if ((p.project_id || '') === 'VCS5451') latlngs = clipToKenyaTurkana(latlngs);
         if (latlngs.length >= 3 && layer) {
           var poly = L.polygon(latlngs, style).addTo(layer);
           latlngs.forEach(function(c) { allBounds.push(c); });
@@ -461,7 +562,7 @@
 
     L.control.layers(null, {
       'NRT project boundary': nrtBoundaryLayer,
-      'NRT conservancy boundaries': nrtConservanciesLayer,
+      'Conservancy boundaries': nrtConservanciesLayer,
       'Komaza (VCS 2623)': komazaLayer,
       'Boomitra Kenya (VCS 3340)': boomitraLayer,
       'KCSA (VCS 5451)': kcsaLayer,
@@ -470,17 +571,38 @@
   }
 
   function run() {
-    var primary = typeof fetch !== 'undefined'
+    var hasFetch = typeof fetch !== 'undefined';
+    var harmonized = hasFetch
+      ? fetch('kenya-carbon-harmonized.json').then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
+      : Promise.resolve(null);
+    var primary = hasFetch
       ? fetch('kenya-carbon-projects.json').then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
       : Promise.resolve(null);
-    var comprehensive = typeof fetch !== 'undefined'
+    var comprehensive = hasFetch
       ? fetch('kenya-carbon-projects-comprehensive.json').then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
       : Promise.resolve(null);
-    Promise.all([primary, comprehensive]).then(function(results) {
-      KENYA_DATA = results[0];
-      KENYA_COMPREHENSIVE = results[1] || null;
-      if (KENYA_DATA) updateDashboardFromData(KENYA_DATA);
-      initMap();
+
+    harmonized.then(function(harmonizedData) {
+      if (harmonizedData && harmonizedData.projects && harmonizedData.metadata) {
+        KENYA_DATA = harmonizedData;
+        KENYA_COMPREHENSIVE = harmonizedData;
+        var nrtProj = harmonizedData.projects.filter(function(p) { return (p.project_id || '') === 'VCS1468'; })[0];
+        if (nrtProj && nrtProj.conservancies && nrtProj.conservancies.length) {
+          window.NRT_CONSERVANCIES = nrtProj.conservancies.filter(function(c) { return c.nrt_primary_14 === true; });
+          if (window.NRT_CONSERVANCIES.length < 14) {
+            window.NRT_CONSERVANCIES = nrtProj.conservancies.slice(0, 14);
+          }
+        }
+        if (KENYA_DATA) updateDashboardFromData(KENYA_DATA);
+        initMap();
+        return;
+      }
+      Promise.all([primary, comprehensive]).then(function(results) {
+        KENYA_DATA = results[0];
+        KENYA_COMPREHENSIVE = results[1] || null;
+        if (KENYA_DATA) updateDashboardFromData(KENYA_DATA);
+        initMap();
+      });
     });
   }
 
