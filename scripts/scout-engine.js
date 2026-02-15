@@ -118,6 +118,7 @@
       });
     }
     applyScoutLang();
+    initSocialCommsCharts();
 
     if (form && reportEl) {
       form.addEventListener('submit', function(e) {
@@ -158,6 +159,81 @@
         reportEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }
+  }
+
+  var PIE_COLORS = ['#1e3a0f', '#166534', '#15803d', '#0d9488', '#16a34a', '#65a30d', '#a3e635', '#86efac', '#4b5563', '#6b7280'];
+
+  function escapeHtml(s) {
+    var div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
+  function buildPieChart(title, items, colors) {
+    var total = 0;
+    items.forEach(function(item) { total += (item.percent != null ? item.percent : (item.count != null ? item.count : 0)); });
+    if (total <= 0) return '';
+    var cumul = 0;
+    var paths = [];
+    for (var i = 0; i < items.length; i++) {
+      var pct = items[i].percent != null ? items[i].percent : (total > 0 ? (items[i].count || 0) / total * 100 : 0);
+      if (pct <= 0) continue;
+      var startDeg = -90 + 360 * (cumul / 100);
+      var endDeg = -90 + 360 * ((cumul + pct) / 100);
+      cumul += pct;
+      var startRad = startDeg * Math.PI / 180;
+      var endRad = endDeg * Math.PI / 180;
+      var x1 = 50 + 40 * Math.cos(startRad);
+      var y1 = 50 + 40 * Math.sin(startRad);
+      var x2 = 50 + 40 * Math.cos(endRad);
+      var y2 = 50 + 40 * Math.sin(endRad);
+      var large = pct > 50 ? 1 : 0;
+      var d = 'M 50 50 L ' + x1.toFixed(2) + ' ' + y1.toFixed(2) + ' A 40 40 0 ' + large + ' 1 ' + x2.toFixed(2) + ' ' + y2.toFixed(2) + ' Z';
+      var color = colors[i % colors.length];
+      paths.push('<path fill="' + color + '" stroke="#fff" stroke-width="0.8" d="' + d + '"/>');
+    }
+    var legend = items.map(function(item, i) {
+      var pct = item.percent != null ? item.percent : (item.count != null && total > 0 ? ((item.count / total) * 100).toFixed(1) : '');
+      var color = colors[i % colors.length];
+      return '<div class="social-pie-legend-item"><span class="social-pie-dot" style="background:' + color + '"></span><span class="social-pie-label">' + escapeHtml(item.label) + '</span><span class="social-pie-pct">' + (pct !== '' ? (typeof pct === 'number' ? pct.toFixed(1) : pct) + '%' : '') + '</span></div>';
+    }).join('');
+    return '<div class="social-pie-card">' +
+      '<h4 class="social-pie-title">' + escapeHtml(title) + '</h4>' +
+      '<div class="social-pie-viz">' +
+      '<svg viewBox="0 0 100 100" class="social-pie-svg" aria-hidden="true">' + paths.join('') + '</svg>' +
+      '</div>' +
+      '<div class="social-pie-legend">' + legend + '</div>' +
+      '</div>';
+  }
+
+  function initSocialCommsCharts() {
+    var grid = document.getElementById('social-comms-charts-grid');
+    if (!grid) return;
+    if (typeof fetch === 'undefined') {
+      grid.innerHTML = '<p class="social-comms-charts-missing">Charts require fetch. Data: <code>data/social-comms.json</code>.</p>';
+      return;
+    }
+    fetch('data/social-comms.json').then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; }).then(function(data) {
+      if (!data) {
+        grid.innerHTML = '<p class="social-comms-charts-missing">Could not load <code>data/social-comms.json</code>.</p>';
+        return;
+      }
+      var titles = {
+        livelihood: 'Livelihood activities',
+        grievance_categories: 'Grievances by category (2025)',
+        gender: 'Gender',
+        age: 'Age distribution',
+        education: 'Education level',
+        income_sources: 'Income sources'
+      };
+      var order = ['livelihood', 'grievance_categories', 'income_sources', 'gender', 'age', 'education'];
+      var html = '';
+      order.forEach(function(key) {
+        var arr = data[key];
+        if (Array.isArray(arr) && arr.length) html += buildPieChart(titles[key] || key, arr, PIE_COLORS);
+      });
+      grid.innerHTML = html || '<p class="social-comms-charts-missing">No chart data in social-comms.json.</p>';
+    });
   }
 
   if (document.readyState === 'loading') {

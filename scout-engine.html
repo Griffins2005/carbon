@@ -170,50 +170,24 @@
             </div>
 
             <div class="empowerment-dimensions">
-                <h4>Empowerment dimensions</h4>
-                <p>SCOUT maps inputs to these dimensions (see <a href="https://www.ilri.org/knowledge/publications/womens-empowerment-livestock-index" target="_blank" rel="noopener">ILRI WELI</a>):</p>
-                <div class="dimensions-viz">
-                    <div class="dimensions-pie-wrap" aria-hidden="true">
-                        <svg viewBox="0 0 100 100" class="pie-svg" role="img" aria-label="Six equal empowerment dimensions as a donut chart">
-                            <!-- Donut segments (clockwise from top): 1 Production, 2 Nutrition, 3 Resources, 4 Income, 5 Opportunities, 6 Time & workload. Small gaps between segments. -->
-                            <circle cx="50" cy="50" r="40" fill="none" stroke="#1e3a0f" stroke-width="22" stroke-dasharray="39 212" stroke-dashoffset="0"/>
-                            <circle cx="50" cy="50" r="40" fill="none" stroke="#0d9488" stroke-width="22" stroke-dasharray="39 212" stroke-dashoffset="-42"/>
-                            <circle cx="50" cy="50" r="40" fill="none" stroke="#15803d" stroke-width="22" stroke-dasharray="39 212" stroke-dashoffset="-84"/>
-                            <circle cx="50" cy="50" r="40" fill="none" stroke="#16a34a" stroke-width="22" stroke-dasharray="39 212" stroke-dashoffset="-126"/>
-                            <circle cx="50" cy="50" r="40" fill="none" stroke="#65a30d" stroke-width="22" stroke-dasharray="39 212" stroke-dashoffset="-168"/>
-                            <circle cx="50" cy="50" r="40" fill="none" stroke="#a3e635" stroke-width="22" stroke-dasharray="39 212" stroke-dashoffset="-210"/>
-                            <circle cx="50" cy="50" r="26" fill="#faf9f6" stroke="#e5e7eb" stroke-width="1"/>
-                            <text x="50" y="52" class="pie-center-text" text-anchor="middle" aria-hidden="true">1–6</text>
-                        </svg>
-                    </div>
-                    <div class="dimensions-legend">
-                        <div class="dimensions-legend-item"><span class="dim-num" aria-hidden="true">1</span><span class="dim-dot" style="background:#1e3a0f"></span><span>Production</span></div>
-                        <div class="dimensions-legend-item"><span class="dim-num" aria-hidden="true">2</span><span class="dim-dot" style="background:#0d9488"></span><span>Nutrition</span></div>
-                        <div class="dimensions-legend-item"><span class="dim-num" aria-hidden="true">3</span><span class="dim-dot" style="background:#15803d"></span><span>Resources</span></div>
-                        <div class="dimensions-legend-item"><span class="dim-num" aria-hidden="true">4</span><span class="dim-dot" style="background:#16a34a"></span><span>Income</span></div>
-                        <div class="dimensions-legend-item"><span class="dim-num" aria-hidden="true">5</span><span class="dim-dot" style="background:#65a30d"></span><span>Opportunities</span></div>
-                        <div class="dimensions-legend-item"><span class="dim-num" aria-hidden="true">6</span><span class="dim-dot" style="background:#a3e635"></span><span>Time &amp; workload</span></div>
-                    </div>
+                <h4>Social CoMMs — community data</h4>
+                <p>Pie charts from Social CoMMs–style monitoring (livelihood, grievances, demographics). Data: <code>data/social-comms.json</code>. SCOUT maps survey inputs to WELI-style <a href="https://www.ilri.org/knowledge/publications/womens-empowerment-livestock-index" target="_blank" rel="noopener">empowerment dimensions</a>.</p>
+                <div class="social-comms-charts-grid" id="social-comms-charts-grid">
+                    <!-- Injected by scout-engine.js -->
                 </div>
-                <div class="dimensions-strip" role="list" aria-label="Dimensions in order">
-                    <div class="dimensions-strip-item" style="--dim-color:#1e3a0f"><span class="dimensions-strip-num">1</span><span class="dimensions-strip-label">Production</span></div>
-                    <div class="dimensions-strip-item" style="--dim-color:#0d9488"><span class="dimensions-strip-num">2</span><span class="dimensions-strip-label">Nutrition</span></div>
-                    <div class="dimensions-strip-item" style="--dim-color:#15803d"><span class="dimensions-strip-num">3</span><span class="dimensions-strip-label">Resources</span></div>
-                    <div class="dimensions-strip-item" style="--dim-color:#16a34a"><span class="dimensions-strip-num">4</span><span class="dimensions-strip-label">Income</span></div>
-                    <div class="dimensions-strip-item" style="--dim-color:#65a30d"><span class="dimensions-strip-num">5</span><span class="dimensions-strip-label">Opportunities</span></div>
-                    <div class="dimensions-strip-item" style="--dim-color:#a3e635"><span class="dimensions-strip-num">6</span><span class="dimensions-strip-label">Time &amp; workload</span></div>
-                </div>
-                <ol class="dimensions-list">
-                    <li><strong>1.</strong> Decisions about agricultural production</li>
-                    <li><strong>2.</strong> Decisions related to nutrition</li>
-                    <li><strong>3.</strong> Access to and control over resources</li>
-                    <li><strong>4.</strong> Control and use of income</li>
-                    <li><strong>5.</strong> Access to and control of opportunities</li>
-                    <li><strong>6.</strong> Workload and control over own time</li>
+                <h5 class="dimensions-list-heading">Empowerment dimensions (SCOUT survey)</h5>
+                <ol class="dimensions-list" start="1">
+                    <li>Decisions about agricultural production</li>
+                    <li>Decisions related to nutrition</li>
+                    <li>Access to and control over resources</li>
+                    <li>Control and use of income</li>
+                    <li>Access to and control of opportunities</li>
+                    <li>Workload and control over own time</li>
+                    <li>Voice in meetings and ability to speak and be heard in conservancy and carbon-project decisions</li>
                 </ol>
-                <div class="sdg-badges">
-                    <span class="sdg-badge">SDG 5: Gender Equality</span>
-                    <span class="sdg-badge">SDG 10: Reduced Inequalities</span>
+                <div class="sdg-badges" role="list" aria-label="Related Sustainable Development Goals">
+                    <a href="https://sdgs.un.org/goals/goal5" target="_blank" rel="noopener" class="sdg-badge sdg-5" title="SDG 5: Gender Equality">SDG 5<span class="sdg-badge-label">Gender Equality</span></a>
+                    <a href="https://sdgs.un.org/goals/goal10" target="_blank" rel="noopener" class="sdg-badge sdg-10" title="SDG 10: Reduced Inequalities">SDG 10<span class="sdg-badge-label">Reduced Inequalities</span></a>
                 </div>
             </div>
 

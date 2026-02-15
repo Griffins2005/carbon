@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "source": "SocialCoMMs-style data compiled from kenya-carbon-projects.json for CarbonWatch dashboard charts",
+    "last_updated": "2026-02-08",
+    "description": "Pie-chart-ready series for community and grievance indicators."
+  },
+  "livelihood": [
+    { "label": "Pastoralism", "value": 19678, "percent": 43.1 },
+    { "label": "Agro-pastoralism", "value": 12345, "percent": 27.0 },
+    { "label": "Smallholder agriculture", "value": 6858, "percent": 15.0 },
+    { "label": "Forestry", "value": 4568, "percent": 10.0 },
+    { "label": "Wage labour", "value": 1827, "percent": 4.0 },
+    { "label": "Other", "value": 402, "percent": 0.9 }
+  ],
+  "grievance_categories": [
+    { "label": "Payment issues", "count": 89, "percent": 38.0 },
+    { "label": "Benefit distribution", "count": 56, "percent": 23.9 },
+    { "label": "Grazing disputes", "count": 45, "percent": 19.2 },
+    { "label": "Water access", "count": 23, "percent": 9.8 },
+    { "label": "Wildlife conflict", "count": 12, "percent": 5.1 },
+    { "label": "Other", "count": 9, "percent": 3.8 }
+  ],
+  "gender": [
+    { "label": "Male", "percent": 51.2 },
+    { "label": "Female", "percent": 48.8 }
+  ],
+  "age": [
+    { "label": "Under 18", "percent": 48.0 },
+    { "label": "18–35", "percent": 30.0 },
+    { "label": "36–60", "percent": 15.0 },
+    { "label": "60+", "percent": 7.0 }
+  ],
+  "education": [
+    { "label": "No formal education", "percent": 38.0 },
+    { "label": "Primary incomplete", "percent": 30.0 },
+    { "label": "Primary complete", "percent": 12.0 },
+    { "label": "Secondary incomplete", "percent": 7.0 },
+    { "label": "Secondary complete", "percent": 4.0 },
+    { "label": "Tertiary", "percent": 4.0 },
+    { "label": "University", "percent": 2.0 }
+  ],
+  "income_sources": [
+    { "label": "Livestock sales", "percent": 37.0 },
+    { "label": "Wage labour", "percent": 20.4 },
+    { "label": "Carbon payments", "percent": 16.0 },
+    { "label": "Crop sales", "percent": 15.3 },
+    { "label": "Other", "percent": 11.3 }
+  ]
+}
