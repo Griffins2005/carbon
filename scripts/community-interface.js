@@ -11,7 +11,8 @@
       msgIn: 'Reply with your conservancy code to check carbon payment status or report an issue.',
       msgOut: 'Sera. Payment not received.',
       placeholder: 'Text (Safaricom)',
-      send: 'Send'
+      send: 'Send',
+      ack: 'Message received. We will get back to you. Ref: CW-XXXX.'
     },
     sw: {
       intro: 'Wanachama wa jamii wanapokea arifa na wanaweza kujibu kupitia SMS au IVR. Tumia mfano hapa chini kuona jinsi ujumbe unavyoonekana kwa Kiswahili. Andika ujumbe na kutuma kujaribu.',
@@ -19,7 +20,8 @@
       msgIn: 'Jibu kwa msimbo wa conservancy yako kuangalia hali ya malipo ya kaboni au ripoti tatizo.',
       msgOut: 'Sera. Malipo hayajapokelewa.',
       placeholder: 'Andika (Safaricom)',
-      send: 'Tuma'
+      send: 'Tuma',
+      ack: 'Ujumbe umepokelewa. Tutawasiliana nawe. Kumbukumbu: CW-XXXX.'
     }
   };
 
@@ -87,6 +89,25 @@
     }
     if (inputSmart) inputSmart.value = '';
     if (inputFeat) inputFeat.value = '';
+
+    var d = LANG[currentLang()] || LANG.en;
+    var ackText = (d.ack || 'Message received. We will get back to you. Ref: CW-XXXX.').replace('CW-XXXX', 'CW-' + Math.floor(1000 + Math.random() * 9000));
+    var ackTime = getTime();
+    var ackHtml = '<span class="msg-body">' + escapeHtml(ackText) + '</span><span class="msg-time">' + escapeHtml(ackTime) + '</span>';
+    var msgIn = document.createElement('div');
+    msgIn.className = 'msg msg-in';
+    msgIn.innerHTML = ackHtml;
+    function addAck() {
+      if (threadSmart) {
+        threadSmart.appendChild(msgIn.cloneNode(true));
+        threadSmart.scrollTop = threadSmart.scrollHeight;
+      }
+      if (threadFeat) {
+        threadFeat.appendChild(msgIn.cloneNode(true));
+        threadFeat.scrollTop = threadFeat.scrollHeight;
+      }
+    }
+    setTimeout(addAck, 900);
   }
 
   function escapeHtml(s) {

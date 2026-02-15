@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CarbonWatch Kenya | Home</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle fill='%232d5016' cx='50' cy='50' r='50'/><path fill='%23ffffff' d='M50 25l10 15h-20z M40 45h20v20h-20z'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./index.css">
 </head>
-<body>
+<body class="page-home">
     <header>
         <div class="header-content">
             <div class="logo-section">
@@ -26,7 +29,7 @@
                 <nav class="layer-nav">
                     <a href="index.html">Home</a>
                     <a href="community-interface.html">Community Interface</a>
-                    <a href="scout-engine.html">SCOUT Engine</a>
+                    <a href="scout-engine.html">SCOUT Tool</a>
                     <a href="dashboard.html">Public Dashboard</a>
                     <a href="sources.html">Sources</a>
                 </nav>
@@ -36,44 +39,84 @@
                     <div class="live-dot"></div>
                     LIVE
                 </div>
-                <button class="btn-export">EXPORT</button>
+                <a href="dashboard.html" class="btn-export btn-export-link">EXPORT</a>
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <div class="home-content">
-            <section class="home-intro">
-                <h2 class="home-title">CarbonWatch Kenya</h2>
-                <p class="home-lead">Transparent carbon credit flows and community voice for NRT conservancies in northern Kenya.</p>
-            </section>
+    <main>
+        <section class="home-hero" id="home-hero" aria-label="Northern Kenya landscape">
+            <div class="home-hero-bg" role="img" aria-label="Northern Kenya landscape"></div>
+            <div class="home-hero-overlay"></div>
+            <div class="home-hero-inner">
+                <p class="home-hero-badge">Research &amp; Transparency Platform</p>
+                <h2 class="home-hero-title">CarbonWatch Kenya</h2>
+                <p class="home-hero-lead">Transparent carbon credit flows and community voice for rangeland and forest carbon projects in Kenya.</p>
+                <p class="home-hero-caption">Northern Kenya landscape</p>
+            </div>
+        </section>
 
-            <section class="home-links">
-                <h3 class="home-heading">Tools</h3>
-                <ul class="home-list">
-                    <li><a href="community-interface.html">Community Interface</a> — SMS and IVR for community input and alerts.</li>
-                    <li><a href="scout-engine.html">SCOUT Engine</a> — Empowerment and governance surveys.</li>
-                    <li><a href="dashboard.html">Public Dashboard</a> — Project data, verification cycles, and conservancy map.</li>
-                    <li><a href="sources.html">Sources</a> — Data sources and methodology.</li>
-                </ul>
-            </section>
+        <section class="home-mission">
+            <div class="home-mission-inner">
+                <h3 class="home-mission-title">Project focus</h3>
+                <p class="home-mission-text">CarbonWatch is <strong>Kenya’s platform</strong> for transparency and community voice in carbon credit projects. We track Verra-registered projects across Kenya—including the Northern Kenya Rangeland Project (NRT), Komaza, Boomitra, and KCSA—and connect communities through communication tools, social measurement (SCOUT), and a public dashboard.</p>
+            </div>
+        </section>
 
-            <section class="home-about">
-                <h3 class="home-heading">About</h3>
-                <p>CarbonWatch connects NRT conservancy communities to carbon credit flows through communication, measurement, and public accountability. Community feedback flows via SMS/IVR; SCOUT maps inputs to empowerment dimensions (<a href="https://www.ilri.org/knowledge/publications/womens-empowerment-livestock-index" target="_blank" rel="noopener">ILRI WELI</a>). The public dashboard shows project-level data and per-conservancy figures where disclosed.</p>
-            </section>
-        </div>
-    </div>
+        <section class="home-about">
+            <div class="home-about-inner">
+                <h3 class="home-about-heading">About</h3>
+                <p>Community feedback flows via SMS/IVR; the SCOUT tool maps inputs to empowerment dimensions (<a href="https://www.ilri.org/knowledge/publications/womens-empowerment-livestock-index" target="_blank" rel="noopener">ILRI WELI</a>). The public dashboard shows Kenya project-level data and per-conservancy figures where disclosed.</p>
+            </div>
+        </section>
+
+        <section class="home-tools">
+            <div class="home-tools-inner">
+                <h3 class="home-tools-heading">Platform tools</h3>
+                <div class="home-tools-grid">
+                    <a href="scout-engine.html" class="home-tool-card home-tool-card-primary">
+                        <span class="home-tool-card-label">Survey</span>
+                        <h4 class="home-tool-card-title">SCOUT Tool</h4>
+                        <p class="home-tool-card-desc">Empowerment and governance surveys aligned to WELI dimensions. Run the survey here or in the field.</p>
+                        <span class="home-tool-card-action">Start survey →</span>
+                    </a>
+                    <a href="community-interface.html" class="home-tool-card">
+                        <span class="home-tool-card-label">Communication</span>
+                        <h4 class="home-tool-card-title">Community Interface</h4>
+                        <p class="home-tool-card-desc">SMS and IVR for community input, alerts, and feedback.</p>
+                        <span class="home-tool-card-action">Explore →</span>
+                    </a>
+                    <a href="dashboard.html" class="home-tool-card">
+                        <span class="home-tool-card-label">Data</span>
+                        <h4 class="home-tool-card-title">Public Dashboard</h4>
+                        <p class="home-tool-card-desc">Kenya project data, verification cycles, conservancy map, and export.</p>
+                        <span class="home-tool-card-action">View dashboard →</span>
+                    </a>
+                    <a href="sources.html" class="home-tool-card">
+                        <span class="home-tool-card-label">Methodology</span>
+                        <h4 class="home-tool-card-title">Sources</h4>
+                        <p class="home-tool-card-desc">Data sources, references, and methodology.</p>
+                        <span class="home-tool-card-action">View sources →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <div class="footer-logos">
-            <a href="https://www.nema.go.ke" target="_blank" rel="noopener" class="footer-logo-nema" aria-label="National Environment Management Authority">
-                <img src="./images/nema-logo.png" alt="NEMA – National Environment Management Authority. Mazingira yetu, uhai wetu, wajibu wetu." width="120" height="56">
+        <div class="footer-inner">
+        <div class="footer-partners">
+            <a href="https://www.cornell.edu" target="_blank" rel="noopener" class="footer-logo-partner" aria-label="Cornell University">
+                <img src="./images/cornell-logo.png" alt="Cornell University" width="140" height="52">
+            </a>
+            <a href="https://dyson.cornell.edu" target="_blank" rel="noopener" class="footer-logo-partner" aria-label="Dyson School">
+                <img src="./images/cornell-dyson-logo.png" alt="Charles H. Dyson School of Applied Economics and Management" width="140" height="52">
             </a>
         </div>
-        <div class="footer-text">© 2026 SMART Project Team at Cornell | CarbonWatch Community Tracker Dashboard</div>
+        <div class="footer-text">© 2026 CarbonWatch Community Tracker Dashboard · Student Multidisciplinary Applied Research Team at Cornell and Dyson School</div>
+        </div>
     </footer>
 
-    <script src="./script.js"></script>
+    <script src="./scripts/script.js"></script>
 </body>
 </html>

@@ -27,7 +27,7 @@
                 <nav class="layer-nav">
                     <a href="index.html">Home</a>
                     <a href="community-interface.html">Community Interface</a>
-                    <a href="scout-engine.html">SCOUT Engine</a>
+                    <a href="scout-engine.html">SCOUT Tool</a>
                     <a href="dashboard.html">Public Dashboard</a>
                     <a href="sources.html">Sources</a>
                 </nav>
@@ -37,75 +37,145 @@
                     <div class="live-dot"></div>
                     LIVE
                 </div>
-                <button class="btn-export">EXPORT</button>
+                <div class="header-export-wrap">
+                    <button type="button" class="btn-export" id="header-export-btn" aria-haspopup="true" aria-expanded="false">EXPORT ▾</button>
+                    <div class="export-dropdown" id="export-dropdown" role="menu" aria-label="Export options">
+                        <button type="button" role="menuitem" data-export="csv">Download data (CSV)</button>
+                        <button type="button" role="menuitem" data-export="pdf">Print / Save as PDF</button>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
     <div class="container">
-        <section class="layer-section layer-3-intro">
-            <h3>Public Dashboard</h3>
-        </section>
-
-        <div class="dashboard-content">
+        <section class="dashboard-top-section">
+            <h2 class="dashboard-top-heading">Public Dashboard</h2>
+            <div class="project-selector-wrap">
+                <label for="dashboard-project-select" class="project-selector-label">Project</label>
+                <select id="dashboard-project-select" class="project-selector" aria-label="Select project to view">
+                    <option value="all">Kenya total (all 4 projects)</option>
+                    <option value="VCS1468">Northern Kenya Rangeland / NRT (VCS 1468)</option>
+                    <option value="VCS2623">Komaza (VCS 2623)</option>
+                    <option value="VCS3340">Boomitra Kenya (VCS 3340)</option>
+                    <option value="VCS5451">KCSA (VCS 5451)</option>
+                </select>
+            </div>
+            <p class="dashboard-top-subheading" id="dashboard-subheading">Totals across all 4 Verra projects in Kenya</p>
             <div class="stats-grid" id="stats-grid">
-                <div class="stat-card primary" >
+                <div class="stat-card primary">
                     <div class="stat-header">
-                        <div class="stat-label">Credits Issued</div>
-                        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                        </svg>
+                        <div class="stat-label">Credits Issued <button type="button" class="stat-info" aria-label="Source and calculation" data-tooltip="Total tCO2e credits issued across all 4 Verra projects in Kenya. Source: Verra Registry, project proponents.">ⓘ</button></div>
+                        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                     </div>
                     <div class="stat-value" id="stat-credits-issued">30.8M</div>
                     <div class="stat-unit">tCO2e verified</div>
                 </div>
-                <div class="stat-card" >
+                <div class="stat-card">
                     <div class="stat-header">
-                        <div class="stat-label">Credits Retired</div>
-                        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-                        </svg>
+                        <div class="stat-label">Credits Retired <button type="button" class="stat-info" aria-label="Source and calculation" data-tooltip="Total tCO2e credits retired/sold across all 4 Verra projects in Kenya. Source: Verra Registry, project proponents.">ⓘ</button></div>
+                        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                     </div>
                     <div class="stat-value" id="stat-credits-retired">13.2M</div>
                     <div class="stat-unit">tCO2e retired</div>
                 </div>
-                <div class="stat-card" >
+                <div class="stat-card">
                     <div class="stat-header">
-                        <div class="stat-label">Community Share</div>
-                        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
+                        <div class="stat-label">Community Share <button type="button" class="stat-info" aria-label="Source and calculation" data-tooltip="Share of carbon revenue paid directly to communities. NRT: 40% to conservancies. Source: NRT Carbon Impact.">ⓘ</button></div>
+                        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     </div>
                     <div class="stat-value" id="stat-community-share">40%</div>
                     <div class="stat-unit">Direct payments</div>
                 </div>
-                <div class="stat-card" >
+                <div class="stat-card">
                     <div class="stat-header">
-                        <div class="stat-label">Verra Projects (Kenya)</div>
-                        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                        </svg>
+                        <div class="stat-label">Verra Projects (Kenya) <button type="button" class="stat-info" aria-label="Source and calculation" data-tooltip="Number of Verra VCS projects in Kenya we track: NRT (1468), Komaza (2623), Boomitra (3340), KCSA (5451).">ⓘ</button></div>
+                        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
                     </div>
                     <div class="stat-value" id="stat-total-projects">4</div>
-                    <div class="stat-unit">NRT + Komaza, Boomitra, KCSA</div>
+                    <div class="stat-unit">4 Verra projects in Kenya</div>
                 </div>
             </div>
-            <p class="stats-data-source" id="stats-data-source">Credits issued, retired and community share: <strong>NRT (VCS 1468)</strong> only. Project count: all 4 Kenya projects. Sources: <a href="https://registry.verra.org/app/projectDetail/VCS/1468" target="_blank" rel="noopener">Verra Registry</a>, <a href="https://www.nrt-kenya.org/carbon-project-impact" target="_blank" rel="noopener">NRT Carbon Impact</a>.</p>
+            <p class="stats-data-source" id="stats-data-source">All figures above are platform totals (all 4 projects). Community share shown where disclosed. <a href="sources.html">Sources</a>.</p>
+            <div id="stat-tooltip" class="stat-tooltip" role="tooltip" aria-hidden="true" hidden></div>
+        </section>
 
+        <div class="dashboard-content">
             <div class="map-section">
+                <div class="map-instructions" role="region" aria-label="How to use the map">
+                    <strong>How to use the map</strong>
+                    <p class="map-instructions-why">This map shows where Kenya’s Verra-registered carbon projects are located so you can explore project and conservancy-level data.</p>
+                    <ul>
+                        <li><strong>NRT boundary</strong> (green outline) — Select it to see the whole Northern Kenya Rangeland Project.</li>
+                        <li><strong>Conservancies</strong> (solid green areas) — Select one to see that conservancy’s details in the side panel.</li>
+                        <li><strong>Other projects</strong> (Komaza, Boomitra, KCSA) — Select an area or marker to see that project’s details.</li>
+                        <li><strong>Layers</strong> — Use the control (top right of map) to turn layers on or off.</li>
+                        <li><strong>Legend</strong> — Colors are explained in the legend below the map.</li>
+                        <li><strong>Mobile</strong> — Pinch to zoom; tap a region to select it.</li>
+                    </ul>
+                </div>
                 <div class="map-disclaimer" role="note" aria-label="Data source disclaimer">
                     <strong>Where we get our data</strong>
-                    <p>We track Verra VCS projects in Kenya: Project-level data comes from the <a href="https://registry.verra.org" target="_blank" rel="noopener">Verra Registry</a>, <a href="https://www.nrt-kenya.org/carbon-project-impact" target="_blank" rel="noopener">NRT Carbon Project Impact</a>, and project documents. Per-conservancy figures are shown where officially disclosed; otherwise <strong>N/A</strong>. <a href="sources.html">Full sources</a>.</p>
+                    <p>We track Verra VCS projects in Kenya. Project-level data comes from the <a href="https://registry.verra.org" target="_blank" rel="noopener">Verra Registry</a>, project proponents (e.g. <a href="https://www.nrt-kenya.org/carbon-project-impact" target="_blank" rel="noopener">NRT Carbon Impact</a>), and project documents. Per-conservancy figures are shown where officially disclosed; otherwise <strong>N/A</strong>. <a href="sources.html">Full sources</a>.</p>
+                </div>
+                <div class="map-header">
+                    <div class="map-title">Kenya carbon projects – Verra-registered projects and conservancies</div>
+                </div>
+                <div class="map-and-panel">
+                    <div class="map-wrapper">
+                        <div id="map"></div>
+                        <div class="legend">
+                            <div class="legend-title">MAP LEGEND</div>
+                            <div class="legend-item"><div class="legend-color legend-boundary"></div><span>Northern Kenya Rangeland (NRT) boundary</span></div>
+                            <div class="legend-item"><div class="legend-color legend-conservancy"></div><span>Conservancy</span></div>
+                            <div class="legend-item"><div class="legend-color legend-komaza"></div><span>Komaza (VCS 2623)</span></div>
+                            <div class="legend-item"><div class="legend-color legend-boomitra"></div><span>Boomitra Kenya (VCS 3340)</span></div>
+                            <div class="legend-item"><div class="legend-color legend-kcsa"></div><span>KCSA (VCS 5451)</span></div>
+                        </div>
+                    </div>
+                    <div id="conservancy-detail-panel" class="conservancy-detail-panel" aria-hidden="true">
+                        <div class="conservancy-detail-header">
+                            <h4 class="conservancy-detail-name" id="conservancy-detail-name">Select a conservancy or project</h4>
+                            <button type="button" class="conservancy-detail-close" id="conservancy-detail-close" aria-label="Close panel">×</button>
+                        </div>
+                        <div class="conservancy-detail-body" id="conservancy-detail-body">
+                            <p class="conservancy-detail-placeholder">Click a conservancy or project area on the map to view details.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="compare-filter-section" id="compare-filter-section">
+                    <div class="compare-filter-header">
+                        <h4 class="compare-filter-title">Compare & filter</h4>
+                        <p class="compare-filter-desc">Select two conservancies or projects to view them side by side.</p>
+                    </div>
+                    <div class="compare-filter-controls">
+                        <div class="compare-filter-group">
+                            <label for="compare-select-a">First</label>
+                            <select id="compare-select-a" class="compare-select" aria-label="First conservancy or project">
+                                <option value="">— Select —</option>
+                            </select>
+                        </div>
+                        <span class="compare-filter-vs" aria-hidden="true">vs</span>
+                        <div class="compare-filter-group">
+                            <label for="compare-select-b">Second</label>
+                            <select id="compare-select-b" class="compare-select" aria-label="Second conservancy or project">
+                                <option value="">— Select —</option>
+                            </select>
+                        </div>
+                        <button type="button" id="compare-clear-btn" class="btn-compare-clear">Clear</button>
+                    </div>
+                    <div id="compare-filter-result" class="compare-filter-result" aria-hidden="true" hidden>
+                        <h5 class="compare-filter-result-title" id="compare-filter-result-title">Compare: A vs B</h5>
+                        <div class="compare-filter-result-body compare-filter-table-wrap" id="compare-filter-result-body"></div>
+                    </div>
                 </div>
                 <div id="kenya-projects-overview" class="kenya-projects-overview"></div>
                 <div class="project-summary-block">
                     <div class="map-header">
                         <div class="map-title">Project summary</div>
                     </div>
-                    <p class="project-summary-text" id="project-summary-text">The Northern Kenya Grassland Carbon Project (NRT) is registered as <strong>VCS 1468</strong>, with Northern Rangelands Trust as proponent. It covers <strong>1,993,075 hectares</strong> across 14 community conservancies. We also track <strong>Komaza</strong> (VCS 2623), <strong>Boomitra Kenya</strong> (VCS 3340), and <strong>KCSA</strong> (VCS 5451). For official details and issuance records, see the <a href="https://registry.verra.org" target="_blank" rel="noopener">Verra Registry</a>.</p>
-                    <p class="data-source-inline">Hectare figure and conservancy count: <strong>NRT (VCS 1468)</strong> from Verra Registry and NRT project documents.</p>
+                    <p class="project-summary-text" id="project-summary-text">Kenya’s Verra-registered carbon projects include the <strong>Northern Kenya Grassland Carbon Project</strong> (VCS 1468, proponent NRT; 1,993,075 ha, 14 conservancies), <strong>Komaza</strong> (VCS 2623), <strong>Boomitra Kenya</strong> (VCS 3340), and <strong>KCSA</strong> (VCS 5451). For official details and issuance records, see the <a href="https://registry.verra.org" target="_blank" rel="noopener">Verra Registry</a>.</p>
+                    <p class="data-source-inline">Hectare and conservancy count: VCS 1468 from Verra Registry and project documents.</p>
                 </div>
                 <div class="verification-cycles-block">
                     <div class="map-header">
@@ -136,49 +206,8 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p class="verification-cycles-totals">Project totals to date (both cycles): <strong>30.8M tCO2e</strong> credits issued (Verra); <strong>13.2M tCO2e</strong> retired/sold; <strong>USD 14.6M+</strong> carbon revenue (NRT). First community payment Feb 2022 (e.g. USD 324,000 per conservancy). <a href="https://registry.verra.org/app/projectDetail/VCS/1468" target="_blank" rel="noopener">Verra 1468</a> · <a href="https://www.nrt-kenya.org/carbon-project-impact" target="_blank" rel="noopener">NRT Carbon Impact</a>.</p>
-                    <p class="data-source-inline">All figures in this block: <strong>NRT (VCS 1468)</strong> only. Source: Verra Registry, NRT Carbon Impact.</p>
-                </div>
-                <div class="map-header">
-                    <div class="map-title">Kenya carbon projects – NRT conservancies & other Verra projects</div>
-                    <div class="map-subtitle">Click conservancy markers or project boundaries for details. Use the layer control (top right) to toggle layers.</div>
-                </div>
-                <div class="map-and-panel">
-                    <div class="map-wrapper">
-                        <div id="map"></div>
-                        <div class="legend">
-                            <div class="legend-title">MAP LEGEND</div>
-                            <div class="legend-item">
-                                <div class="legend-color legend-boundary"></div>
-                                <span>NRT project boundary</span>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-color legend-conservancy"></div>
-                                <span>Conservancy boundary</span>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-color legend-komaza"></div>
-                                <span>Komaza (VCS 2623)</span>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-color legend-boomitra"></div>
-                                <span>Boomitra Kenya (VCS 3340)</span>
-                            </div>
-                            <div class="legend-item">
-                                <div class="legend-color legend-kcsa"></div>
-                                <span>KCSA (VCS 5451)</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="conservancy-detail-panel" class="conservancy-detail-panel" aria-hidden="true">
-                        <div class="conservancy-detail-header">
-                            <h4 class="conservancy-detail-name" id="conservancy-detail-name">Select a conservancy or project</h4>
-                            <button type="button" class="conservancy-detail-close" id="conservancy-detail-close" aria-label="Close panel">×</button>
-                        </div>
-                        <div class="conservancy-detail-body" id="conservancy-detail-body">
-                            <p class="conservancy-detail-placeholder">Click a conservancy marker or project area on the map to view details.</p>
-                        </div>
-                    </div>
+                    <p class="verification-cycles-totals">VCS 1468 totals to date (both cycles): <strong>30.8M tCO2e</strong> credits issued (Verra); <strong>13.2M tCO2e</strong> retired/sold; <strong>USD 14.6M+</strong> carbon revenue. First community payment Feb 2022 (e.g. USD 324,000 per conservancy). <a href="https://registry.verra.org/app/projectDetail/VCS/1468" target="_blank" rel="noopener">Verra 1468</a> · <a href="https://www.nrt-kenya.org/carbon-project-impact" target="_blank" rel="noopener">NRT Carbon Impact</a>.</p>
+                    <p class="data-source-inline">Figures in this block: VCS 1468 (Northern Kenya Rangeland) only. Source: Verra Registry, NRT Carbon Impact.</p>
                 </div>
             </div>
 
@@ -187,7 +216,7 @@
                     <div class="card-header">
                         <div>
                             <div class="card-title">Carbon Credit Tracker</div>
-                            <div class="card-source">Issued/retired/revenue: <strong>NRT (VCS 1468)</strong> from Verra Registry & NRT Carbon Impact. Komaza, Boomitra, KCSA credits pending. Data: kenya-carbon-projects.json.</div>
+                            <div class="card-source">Kenya platform. Issued/retired/revenue from <strong>VCS 1468 (NRT)</strong>; Verra Registry & project sources. Komaza, Boomitra, KCSA pending. Data: kenya-carbon-projects.json.</div>
                         </div>
                     </div>
                     <div class="metric-box">
@@ -213,7 +242,7 @@
                         <div>
                             <div class="card-title">SCOUT Social Metrics</div>
                             <div class="card-subtitle">SocialCoMMs – Social Community Monitoring</div>
-                            <div class="card-source">Source: <strong>NRT conservancies</strong> – SocialCoMMs survey data (kenya-carbon-projects.json).</div>
+                            <div class="card-source">Source: Kenya project data – SocialCoMMs survey (e.g. NRT conservancies); kenya-carbon-projects.json.</div>
                         </div>
                     </div>
                     <div class="metric-box" >
@@ -242,7 +271,7 @@
                     <div class="card-header">
                         <div>
                             <div class="card-title">Grievance mechanism (2025)</div>
-                            <div class="card-source">Source: <strong>NRT conservancies</strong> – SocialCoMMs grievance data (kenya-carbon-projects.json).</div>
+                            <div class="card-source">Source: Kenya project data – SocialCoMMs grievance (e.g. NRT conservancies); kenya-carbon-projects.json.</div>
                         </div>
                     </div>
                     <div class="metric-box">
@@ -266,7 +295,7 @@
                     <div>
                         <div class="card-title">Community benefits (from carbon revenue)</div>
                         <div class="card-subtitle" id="benefits-subtitle">Community share: 40%</div>
-                        <div class="card-source">Source: <strong>NRT Carbon Impact</strong> & project disclosures (kenya-carbon-projects.json). Distribution and beneficiaries: NRT conservancy context.</div>
+                        <div class="card-source">Source: Kenya project disclosures (e.g. NRT Carbon Impact) & kenya-carbon-projects.json. Distribution and beneficiaries: project/conservancy context.</div>
                     </div>
                 </div>
                 <div class="projects-grid" id="community-benefits-grid"></div>
@@ -275,17 +304,22 @@
     </div>
 
     <footer>
-        <div class="footer-logos">
-            <a href="https://www.nema.go.ke" target="_blank" rel="noopener" class="footer-logo-nema" aria-label="National Environment Management Authority">
-                <img src="./images/nema-logo.png" alt="NEMA – National Environment Management Authority. Mazingira yetu, uhai wetu, wajibu wetu." width="120" height="56">
+        <div class="footer-inner">
+        <div class="footer-partners">
+            <a href="https://www.cornell.edu" target="_blank" rel="noopener" class="footer-logo-partner" aria-label="Cornell University">
+                <img src="./images/cornell-logo.png" alt="Cornell University" width="140" height="52">
+            </a>
+            <a href="https://dyson.cornell.edu" target="_blank" rel="noopener" class="footer-logo-partner" aria-label="Dyson School">
+                <img src="./images/cornell-dyson-logo.png" alt="Charles H. Dyson School of Applied Economics and Management" width="140" height="52">
             </a>
         </div>
-        <div class="footer-text">© 2026 SMART Project Team at Cornell | CarbonWatch Community Tracker Dashboard</div>
+        <div class="footer-text">© 2026 CarbonWatch Community Tracker Dashboard · Student Multidisciplinary Applied Research Team at Cornell and Dyson School</div>
+        </div>
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="./conservancies.js"></script>
-    <script src="./script.js"></script>
-    <script src="./dashboard.js"></script>
+    <script src="./scripts/conservancies.js"></script>
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/dashboard.js"></script>
 </body>
 </html>

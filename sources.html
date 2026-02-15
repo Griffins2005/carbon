@@ -7,7 +7,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle fill='%232d5016' cx='50' cy='50' r='50'/><path fill='%23ffffff' d='M50 25l10 15h-20z M40 45h20v20h-20z'/></svg>">
     <link rel="stylesheet" href="./index.css">
 </head>
-<body>
+<body class="sources-page">
     <header>
         <div class="header-content">
             <div class="logo-section">
@@ -26,7 +26,7 @@
                 <nav class="layer-nav">
                     <a href="index.html">Home</a>
                     <a href="community-interface.html">Community Interface</a>
-                    <a href="scout-engine.html">SCOUT Engine</a>
+                    <a href="scout-engine.html">SCOUT Tool</a>
                     <a href="dashboard.html">Public Dashboard</a>
                     <a href="sources.html">Sources</a>
                 </nav>
@@ -36,78 +36,192 @@
                     <div class="live-dot"></div>
                     LIVE
                 </div>
-                <button class="btn-export">EXPORT</button>
+                <a href="dashboard.html" class="btn-export btn-export-link">EXPORT</a>
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <section class="layer-section">
-            <h3>Sources &amp; data</h3>
+    <main class="sources-main">
+        <section class="sources-hero">
+            <h2 class="sources-hero-title">Sources &amp; data</h2>
+            <p class="sources-hero-desc">Transparent citations for every figure, map, and tool on CarbonWatch. Verra Registry, NRT, and methodology references.</p>
+            <nav class="sources-nav" aria-label="On this page">
+                <a href="#carbon-projects">Carbon projects</a>
+                <a href="#nrt">NRT / VCS 1468</a>
+                <a href="#scout">SCOUT &amp; WELI</a>
+                <a href="#community">Community &amp; monitoring</a>
+                <a href="#vcs1468-detail">VCS 1468 details</a>
+                <a href="#dashboard-data">Dashboard data</a>
+            </nav>
+        </section>
 
-            <div class="sources-block">
-                <h4>Northern Rangelands Trust (NRT) &amp; carbon project</h4>
-                <ul class="sources-list">
-                    <li><a href="https://www.nrt-kenya.org/" target="_blank" rel="noopener">NRT Kenya</a> — Northern Rangelands Trust main site.</li>
-                    <li><a href="https://www.nrt-kenya.org/carbon-project-impact" target="_blank" rel="noopener">Carbon Project Impact</a> — NRT Northern Kenya Rangelands Carbon Project: 14 conservancies, benefit sharing, community revenue.</li>
-                    <li><a href="https://www.nrt-kenya.org/carbon-project-partners" target="_blank" rel="noopener">Carbon Project Partners</a> — NKRCP partners and structure.</li>
-                    <li><a href="https://www.nrt-kenya.org/document-library" target="_blank" rel="noopener">NRT Document library</a> — Reports, guides, State of Conservancies.</li>
-                    <li><a href="https://www.nrt-kenya.org/new-page-49" target="_blank" rel="noopener">NRT Annual Report 2023</a> — Latest annual report.</li>
-                    <li><a href="https://www.nrt-kenya.org/news-2/2022/12/16/carbon-project-distributes-levies-to-three-counties" target="_blank" rel="noopener">Carbon Project distributes levies to counties</a> — Benefit sharing to Isiolo, Samburu, Laikipia, Marsabit.</li>
+        <div class="sources-content">
+            <article id="carbon-projects" class="sources-card">
+                <div class="sources-card-head">
+                    <span class="sources-card-badge">Registry</span>
+                    <h3 class="sources-card-title">Kenya carbon projects &amp; Verra Registry</h3>
+                </div>
+                <p class="sources-card-lead">CarbonWatch tracks Verra-registered carbon projects in Kenya. Primary source: Verra Registry.</p>
+                <p class="sources-card-text">Projects we track: <strong>Northern Kenya Grassland Carbon (VCS 1468, NRT)</strong>, <strong>Komaza (VCS 2623)</strong>, <strong>Boomitra Kenya (VCS 3340)</strong>, <strong>KCSA (VCS 5451)</strong>.</p>
+                <ul class="sources-link-list" role="list">
+                    <li>
+                        <a href="https://registry.verra.org" target="_blank" rel="noopener" class="sources-link">
+                            <span class="sources-link-text">Verra Registry</span>
+                            <span class="sources-link-desc">Official project and issuance data for all VCS projects in Kenya.</span>
+                            <span class="sources-link-icon" aria-hidden="true">↗</span>
+                        </a>
+                    </li>
                 </ul>
-            </div>
+            </article>
 
-            <div class="sources-block">
-                <h4>SCOUT Engine &amp; empowerment dimensions</h4>
-                <ul class="sources-list">
-                    <li><a href="https://www.ilri.org/knowledge/publications/womens-empowerment-livestock-index" target="_blank" rel="noopener">ILRI WELI</a> — Six dimensions: production, nutrition, resources, income, opportunities, workload/time.</li>
-                    <li><a href="https://weai.ifpri.info/versions/pro-weai/" target="_blank" rel="noopener">Pro-WEAI (IFPRI)</a> — Project-level Women’s Empowerment in Agriculture Index; intrinsic, instrumental, collective agency.</li>
-                    <li><a href="https://weai.ifpri.info/about-weai/" target="_blank" rel="noopener">About WEAI</a> — WEAI framework.</li>
+            <article id="nrt" class="sources-card">
+                <div class="sources-card-head">
+                    <span class="sources-card-badge">NRT</span>
+                    <h3 class="sources-card-title">Northern Kenya Rangeland Project (NRT / VCS 1468)</h3>
+                </div>
+                <ul class="sources-link-list" role="list">
+                    <li>
+                        <a href="https://www.nrt-kenya.org/" target="_blank" rel="noopener" class="sources-link">
+                            <span class="sources-link-text">NRT Kenya</span>
+                            <span class="sources-link-desc">Northern Rangelands Trust.</span>
+                            <span class="sources-link-icon" aria-hidden="true">↗</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.nrt-kenya.org/carbon-project-impact" target="_blank" rel="noopener" class="sources-link">
+                            <span class="sources-link-text">Carbon Project Impact</span>
+                            <span class="sources-link-desc">Northern Kenya Rangelands Carbon Project: 14 conservancies, benefit sharing, community revenue.</span>
+                            <span class="sources-link-icon" aria-hidden="true">↗</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.nrt-kenya.org/carbon-project-partners" target="_blank" rel="noopener" class="sources-link">
+                            <span class="sources-link-text">Carbon Project Partners</span>
+                            <span class="sources-link-desc">NKRCP partners and structure.</span>
+                            <span class="sources-link-icon" aria-hidden="true">↗</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.nrt-kenya.org/document-library" target="_blank" rel="noopener" class="sources-link">
+                            <span class="sources-link-text">NRT Document library</span>
+                            <span class="sources-link-desc">Reports, guides, State of Conservancies.</span>
+                            <span class="sources-link-icon" aria-hidden="true">↗</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.nrt-kenya.org/new-page-49" target="_blank" rel="noopener" class="sources-link">
+                            <span class="sources-link-text">NRT Annual Report 2023</span>
+                            <span class="sources-link-icon" aria-hidden="true">↗</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.nrt-kenya.org/news-2/2022/12/16/carbon-project-distributes-levies-to-three-counties" target="_blank" rel="noopener" class="sources-link">
+                            <span class="sources-link-text">Carbon Project distributes levies to counties</span>
+                            <span class="sources-link-desc">Benefit sharing to Isiolo, Samburu, Laikipia, Marsabit.</span>
+                            <span class="sources-link-icon" aria-hidden="true">↗</span>
+                        </a>
+                    </li>
                 </ul>
-            </div>
+            </article>
 
-            <div class="sources-block">
-                <h4>Community Interface &amp; socio-economic monitoring</h4>
-                <ul class="sources-list">
-                    <li><a href="https://www.nrt-kenya.org/document-library" target="_blank" rel="noopener">NRT Document library</a> — Social CoMMs and socio-economic monitoring guides for NRT member conservancies.</li>
-                    <li>Social CoMMs: a guide to socio-economic monitoring in NRT member community conservancies (Deepali Gohil, Jessica Musengezi, NRT) — Baseline surveys, household assets, security, conservancy, wildlife, financing.</li>
+            <article id="scout" class="sources-card">
+                <div class="sources-card-head">
+                    <span class="sources-card-badge">Methodology</span>
+                    <h3 class="sources-card-title">SCOUT Tool &amp; empowerment dimensions</h3>
+                </div>
+                <ul class="sources-link-list" role="list">
+                    <li>
+                        <a href="https://www.ilri.org/knowledge/publications/womens-empowerment-livestock-index" target="_blank" rel="noopener" class="sources-link">
+                            <span class="sources-link-text">ILRI WELI</span>
+                            <span class="sources-link-desc">Six dimensions: production, nutrition, resources, income, opportunities, workload/time.</span>
+                            <span class="sources-link-icon" aria-hidden="true">↗</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://weai.ifpri.info/versions/pro-weai/" target="_blank" rel="noopener" class="sources-link">
+                            <span class="sources-link-text">Pro-WEAI (IFPRI)</span>
+                            <span class="sources-link-desc">Project-level Women’s Empowerment in Agriculture Index; intrinsic, instrumental, collective agency.</span>
+                            <span class="sources-link-icon" aria-hidden="true">↗</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://weai.ifpri.info/about-weai/" target="_blank" rel="noopener" class="sources-link">
+                            <span class="sources-link-text">About WEAI</span>
+                            <span class="sources-link-desc">WEAI framework.</span>
+                            <span class="sources-link-icon" aria-hidden="true">↗</span>
+                        </a>
+                    </li>
                 </ul>
-            </div>
+            </article>
 
-            <div class="sources-block">
-                <h4>Verra project summary (VCS 1468)</h4>
-                <p>Official data from the Verra Registry. Project status: <strong>On Hold</strong> — see notification letter on Verra.</p>
-                <ul class="sources-list">
-                    <li><strong>ID:</strong> 1468 (VCS). <strong>Proponent:</strong> Northern Rangelands Trust. <strong>VCS / CCB status:</strong> On Hold.</li>
-                    <li><strong>Estimated annual emission reductions:</strong> 1,797,493 tCO2e. <strong>Total buffer pool credits:</strong> 1,238,467.</li>
-                    <li><strong>VCS project type:</strong> Agriculture Forestry and Other Land Use (AFOLU), ALM. <strong>Methodology:</strong> VM0032.</li>
-                    <li><strong>Area:</strong> 1,993,075 ha. <strong>Crediting period (1st):</strong> 01/01/2013 – 31/12/2042. <strong>Registration:</strong> 05/05/2020.</li>
-                    <li><strong>Validators:</strong> VCS — Ruby Canyon Engineering, Inc.; CCB — First: Aster Global Environmental Solutions Inc., Second: Ruby Canyon Engineering, Inc. CCB Third Edition.</li>
-                    <li><a href="https://registry.verra.org/app/projectDetail/VCS/1468" target="_blank" rel="noopener">Verra Registry VCS 1468</a></li>
+            <article id="community" class="sources-card">
+                <div class="sources-card-head">
+                    <span class="sources-card-badge">Social</span>
+                    <h3 class="sources-card-title">Community Interface &amp; socio-economic monitoring</h3>
+                </div>
+                <ul class="sources-link-list" role="list">
+                    <li>
+                        <a href="https://www.nrt-kenya.org/document-library" target="_blank" rel="noopener" class="sources-link">
+                            <span class="sources-link-text">NRT Document library</span>
+                            <span class="sources-link-desc">Social CoMMs and socio-economic monitoring guides (NRT member conservancies; Kenya community carbon contexts).</span>
+                            <span class="sources-link-icon" aria-hidden="true">↗</span>
+                        </a>
+                    </li>
+                    <li class="sources-note">
+                        <span class="sources-link-text">Social CoMMs</span>
+                        <span class="sources-link-desc">A guide to socio-economic monitoring in community conservancies (Deepali Gohil, Jessica Musengezi, NRT) — Baseline surveys, household assets, security, conservancy, wildlife, financing.</span>
+                    </li>
                 </ul>
-            </div>
-            <div class="sources-block">
-                <h4>Dashboard data &amp; verification cycles</h4>
-                <ul class="sources-list">
-                    <li>Two verification cycles completed to date — <strong>2013–2016</strong> and <strong>2017–2020</strong> (Verra VCS 1468). Monitoring/verification for 2021+ in progress.</li>
-                    <li><strong>Conservancy land area:</strong> From <a href="https://www.northernkenyacommunitycarbon.org/where-we-work" target="_blank" rel="noopener">Northern Kenya Community Carbon – Where We Work</a> and NRT/Sera Conservancy (e.g. Sera ~340,000 ha, Namunyak ~344,000 ha). Ol Donyiro land area not listed → N/A.</li>
+            </article>
+
+            <article id="vcs1468-detail" class="sources-card sources-card-highlight">
+                <div class="sources-card-head">
+                    <span class="sources-card-badge">VCS 1468</span>
+                    <h3 class="sources-card-title">Verra VCS 1468 (Northern Kenya Grassland Carbon)</h3>
+                </div>
+                <p class="sources-card-lead">Official data from the Verra Registry. Project status: <strong>On Hold</strong> — see notification letter on Verra.</p>
+                <dl class="sources-dl">
+                    <dt>ID</dt><dd>1468 (VCS). Proponent: Northern Rangelands Trust. VCS / CCB status: On Hold.</dd>
+                    <dt>Estimated annual emission reductions</dt><dd>1,797,493 tCO2e. Total buffer pool credits: 1,238,467.</dd>
+                    <dt>VCS project type</dt><dd>Agriculture Forestry and Other Land Use (AFOLU), ALM. Methodology: VM0032.</dd>
+                    <dt>Area</dt><dd>1,993,075 ha. Crediting period (1st): 01/01/2013 – 31/12/2042. Registration: 05/05/2020.</dd>
+                    <dt>Validators</dt><dd>VCS — Ruby Canyon Engineering, Inc.; CCB — First: Aster Global Environmental Solutions Inc., Second: Ruby Canyon Engineering, Inc. CCB Third Edition.</dd>
+                </dl>
+                <a href="https://registry.verra.org/app/projectDetail/VCS/1468" target="_blank" rel="noopener" class="sources-cta">
+                    View on Verra Registry ↗
+                </a>
+            </article>
+
+            <article id="dashboard-data" class="sources-card">
+                <div class="sources-card-head">
+                    <span class="sources-card-badge">Dashboard</span>
+                    <h3 class="sources-card-title">Dashboard data &amp; verification cycles (Kenya)</h3>
+                </div>
+                <ul class="sources-fact-list" role="list">
+                    <li>VCS 1468: two verification cycles completed — <strong>2013–2016</strong> and <strong>2017–2020</strong>. Monitoring/verification for 2021+ in progress.</li>
+                    <li><strong>Conservancy land area (VCS 1468):</strong> From <a href="https://www.northernkenyacommunitycarbon.org/where-we-work" target="_blank" rel="noopener">Northern Kenya Community Carbon – Where We Work</a> and project data (e.g. Sera ~340,000 ha, Namunyak ~344,000 ha). Ol Donyiro land area not listed → N/A.</li>
                     <li><strong>First payment (Feb 2022):</strong> USD 324,000 to each of the 14 conservancies (NRT Carbon Project Impact). Per-cycle carbon sold, amount received and spending per conservancy not publicly disclosed → N/A.</li>
-                    <li>NKRCP: 14 NRT-member conservancies; ~2M ha; USD 14.6M+ carbon revenue to date; 5% to county governments (e.g. Nov 2022: Ksh 23.8M to Isiolo, Samburu, Laikipia). <a href="https://www.nrt-kenya.org/carbon-project-impact" target="_blank" rel="noopener">NRT Carbon Project Impact</a>.</li>
+                    <li>Northern Kenya Rangeland (VCS 1468): 14 conservancies; ~2M ha; USD 14.6M+ carbon revenue to date; 5% to county governments (e.g. Nov 2022: Ksh 23.8M to Isiolo, Samburu, Laikipia). <a href="https://www.nrt-kenya.org/carbon-project-impact" target="_blank" rel="noopener">NRT Carbon Project Impact</a>.</li>
                     <li>State of Conservancies Report (NRT) — Conservancy-level data; <a href="https://www.nrt-kenya.org/document-library" target="_blank" rel="noopener">NRT document library</a> for latest reports.</li>
                 </ul>
-            </div>
-        </section>
-    </div>
+            </article>
+        </div>
+    </main>
 
     <footer>
-        <div class="footer-logos">
-            <a href="https://www.nema.go.ke" target="_blank" rel="noopener" class="footer-logo-nema" aria-label="National Environment Management Authority">
-                <img src="./images/nema-logo.png" alt="NEMA – National Environment Management Authority. Mazingira yetu, uhai wetu, wajibu wetu." width="120" height="56">
+        <div class="footer-inner">
+        <div class="footer-partners">
+            <a href="https://www.cornell.edu" target="_blank" rel="noopener" class="footer-logo-partner" aria-label="Cornell University">
+                <img src="./images/cornell-logo.png" alt="Cornell University" width="140" height="52">
+            </a>
+            <a href="https://dyson.cornell.edu" target="_blank" rel="noopener" class="footer-logo-partner" aria-label="Dyson School">
+                <img src="./images/cornell-dyson-logo.png" alt="Charles H. Dyson School of Applied Economics and Management" width="140" height="52">
             </a>
         </div>
-        <div class="footer-text">© 2026 SMART Project Team at Cornell | CarbonWatch Community Tracker Dashboard</div>
+        <div class="footer-text">© 2026 CarbonWatch Community Tracker Dashboard · Student Multidisciplinary Applied Research Team at Cornell and Dyson School</div>
+        </div>
     </footer>
 
-    <script src="./script.js"></script>
+    <script src="./scripts/script.js"></script>
 </body>
 </html>

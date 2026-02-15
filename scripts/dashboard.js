@@ -10,11 +10,11 @@
   var KENYA_COMPREHENSIVE = null;
 
   var MAP_STYLES = {
-    nrtProject:    { color: '#14532d', weight: 4, fillColor: '#166534', fillOpacity: 0.08 },
-    nrtConservancy: { color: '#15803d', weight: 1.5, fillColor: '#22c55e', fillOpacity: 0.18 },
-    komaza:        { color: '#0e7490', weight: 2, fillColor: '#06b6d4', fillOpacity: 0.25 },
-    boomitra:      { color: '#b45309', weight: 2, fillColor: '#f59e0b', fillOpacity: 0.25 },
-    kcsa:          { color: '#6d28d9', weight: 2, fillColor: '#8b5cf6', fillOpacity: 0.25 }
+    nrtProject:    { color: '#14532d', weight: 4, fillColor: '#166534', fillOpacity: 0.12 },
+    nrtConservancy: { color: '#15803d', weight: 2, fillColor: '#22c55e', fillOpacity: 0.68 },
+    komaza:        { color: '#0e7490', weight: 2, fillColor: '#06b6d4', fillOpacity: 0.6 },
+    boomitra:      { color: '#b45309', weight: 2, fillColor: '#f59e0b', fillOpacity: 0.6 },
+    kcsa:          { color: '#6d28d9', weight: 2, fillColor: '#8b5cf6', fillOpacity: 0.6 }
   };
 
   function formatMoney(n) {
@@ -136,17 +136,20 @@
     var meta = data.metadata;
     var el;
     if (meta.total_projects != null && (el = document.getElementById('stat-total-projects'))) el.textContent = meta.total_projects;
-    var nrt = data.projects && data.projects.filter(function(p) { return (p.project_id || '') === 'VCS1468'; })[0];
-    if (nrt && nrt.conservancies && nrt.conservancies.length) {
-      var totalIssued = 0, totalRetired = 0;
-      nrt.conservancies.forEach(function(c) {
-        var cc = c.carbon_credits || {};
-        if (cc.issued_tco2e != null) totalIssued += Number(cc.issued_tco2e);
-        if (cc.retired_tco2e != null) totalRetired += Number(cc.retired_tco2e);
+    var totalIssued = 0, totalRetired = 0;
+    if (data.projects && data.projects.length) {
+      data.projects.forEach(function(proj) {
+        if (proj.conservancies && Array.isArray(proj.conservancies)) {
+          proj.conservancies.forEach(function(c) {
+            var cc = c.carbon_credits || {};
+            if (cc.issued_tco2e != null) totalIssued += Number(cc.issued_tco2e);
+            if (cc.retired_tco2e != null) totalRetired += Number(cc.retired_tco2e);
+          });
+        }
       });
-      if (totalIssued > 0 && (el = document.getElementById('stat-credits-issued'))) el.textContent = (totalIssued / 1e6).toFixed(1) + 'M';
-      if (totalRetired > 0 && (el = document.getElementById('stat-credits-retired'))) el.textContent = (totalRetired / 1e6).toFixed(1) + 'M';
     }
+    if (totalIssued > 0 && (el = document.getElementById('stat-credits-issued'))) el.textContent = (totalIssued / 1e6).toFixed(1) + 'M';
+    if (totalRetired > 0 && (el = document.getElementById('stat-credits-retired'))) el.textContent = (totalRetired / 1e6).toFixed(1) + 'M';
     var container = document.getElementById('kenya-projects-overview');
     if (!container || !data.projects || !data.projects.length) return;
     var html = '';
@@ -162,12 +165,12 @@
         '</div>';
     });
     container.innerHTML = html;
-    if (data.carbon_credits_summary) {
+    if (data.carbon_credits_summary && (data.carbon_credits_summary.total_issued_tco2e != null || data.carbon_credits_summary.total_retired_tco2e != null)) {
       var ccs = data.carbon_credits_summary;
       if ((el = document.getElementById('stat-credits-issued')) && ccs.total_issued_tco2e != null) el.textContent = (ccs.total_issued_tco2e / 1e6).toFixed(1) + 'M';
       if ((el = document.getElementById('stat-credits-retired')) && ccs.total_retired_tco2e != null) el.textContent = (ccs.total_retired_tco2e / 1e6).toFixed(1) + 'M';
-      if ((el = document.getElementById('stat-community-share')) && data.community_benefits_summary && data.community_benefits_summary.community_share_percent != null) el.textContent = data.community_benefits_summary.community_share_percent + '%';
     }
+    if ((el = document.getElementById('stat-community-share')) && data.community_benefits_summary && data.community_benefits_summary.community_share_percent != null) el.textContent = data.community_benefits_summary.community_share_percent + '%';
     populateDashboardCards(data);
   }
 
@@ -195,12 +198,21 @@
       var part = sc.participation_metrics && sc.participation_metrics.household_participation;
       if (part && (el = document.getElementById('data-participation'))) el.textContent = part.participation_rate_percent != null ? part.participation_rate_percent + '%' : '—';
       if ((el = document.getElementById('data-population'))) el.textContent = sc.total_population_covered != null ? naNum(sc.total_population_covered) : '—';
+    } else {
+      /* Dummy SCOUT / SocialCoMMs when no survey data (illustrative) */
+      if ((el = document.getElementById('data-weli'))) el.textContent = '—';
+      if ((el = document.getElementById('data-weli-target'))) el.textContent = 'Target: 50%';
+      if ((el = document.getElementById('data-weli-fill'))) el.style.width = '0%';
+      if ((el = document.getElementById('data-trust'))) el.textContent = '—';
+      if ((el = document.getElementById('data-participation'))) el.textContent = '—';
+      if ((el = document.getElementById('data-population'))) el.textContent = '—';
     }
     if (data.social_community_data && data.social_community_data.grievance_mechanism) {
       var gm = data.social_community_data.grievance_mechanism;
+      var rateVal = gm.resolution_rate_percent != null ? gm.resolution_rate_percent : (gm.resolved != null && gm.total_grievances_2025 != null && gm.total_grievances_2025 > 0 ? Math.round(100 * gm.resolved / gm.total_grievances_2025) : null);
       if ((el = document.getElementById('data-grievances-total'))) el.textContent = gm.total_grievances_2025 != null ? gm.total_grievances_2025 : '—';
       if ((el = document.getElementById('data-grievances-resolved'))) el.textContent = gm.resolved != null ? gm.resolved : '—';
-      if ((el = document.getElementById('data-grievances-rate'))) el.textContent = gm.resolution_rate_percent != null ? gm.resolution_rate_percent + '%' : '—';
+      if ((el = document.getElementById('data-grievances-rate'))) el.textContent = rateVal != null ? rateVal + '%' : '—';
       var list = document.getElementById('feedback-list');
       if (list && gm.categories) {
         var items = [];
@@ -216,6 +228,13 @@
             '<div class="status-tag ' + status + '">' + (i.count || 0) + '</div></div>';
         }).join('');
       }
+    } else {
+      /* Dummy grievance when no data (illustrative) */
+      if ((el = document.getElementById('data-grievances-total'))) el.textContent = '—';
+      if ((el = document.getElementById('data-grievances-resolved'))) el.textContent = '—';
+      if ((el = document.getElementById('data-grievances-rate'))) el.textContent = '—';
+      var list = document.getElementById('feedback-list');
+      if (list) list.innerHTML = '';
     }
     if (data.community_benefits_summary) {
       var cbs = data.community_benefits_summary;
@@ -292,6 +311,96 @@
     return html;
   }
 
+  function renderDetailForPanel(item) {
+    if (item && item.project_id && (item.area || item.proponent)) return renderProjectDetail(item);
+    return renderConservancyDetail(item);
+  }
+
+  /** Return array of { label, value } for table comparison. */
+  function getDetailRows(item) {
+    if (!item) return [];
+    var rows = [];
+    function add(label, value) {
+    if (value != null && value !== '') rows.push({ label: label, value: String(value) });
+    }
+    if (item.project_id && (item.area || item.proponent)) {
+      var p = item;
+      var areaStr = (p.area && p.area.hectares != null) ? formatAreaHa(p.area.hectares) : '';
+      if (areaStr) rows.push({ label: 'Area', value: areaStr + ((p.area && p.area.km2 != null) ? ' (' + formatAreaKm2(p.area.km2) + ')' : '') });
+      if (p.counties && p.counties.length) rows.push({ label: 'Counties', value: p.counties.join(', ') });
+      add('Status', p.status);
+      add('Proponent', p.proponent);
+      add('Verification', p.verification);
+      add('Methodology', p.methodology);
+      if (p.crediting_period) rows.push({ label: 'Crediting period', value: (p.crediting_period.start || '') + ' – ' + (p.crediting_period.end || '') });
+      if (p.farms && (p.farms.total_farms != null || p.farms.average_farm_size_hectares != null)) {
+        var farms = (p.farms.total_farms != null ? naNumOrZero(p.farms.total_farms) : '') + ' farms';
+        if (p.farms.average_farm_size_hectares != null) farms += ', avg ' + p.farms.average_farm_size_hectares + ' ha';
+        rows.push({ label: 'Farms', value: farms });
+      }
+      if (p.landowners && (p.landowners.total_landowners != null || p.landowners.average_land_size_acres != null)) {
+        var owners = (p.landowners.total_landowners != null ? naNumOrZero(p.landowners.total_landowners) : '') + ' landowners';
+        if (p.landowners.average_land_size_acres != null) owners += ', avg ' + Number(p.landowners.average_land_size_acres).toLocaleString() + ' acres';
+        rows.push({ label: 'Landowners', value: owners });
+      }
+      return rows;
+    }
+    var c = item;
+    var areaKm2 = unwrapVal(c.area_km2) != null ? unwrapVal(c.area_km2) : c.area_km2;
+    var areaHa = unwrapVal(c.area_hectares) != null ? unwrapVal(c.area_hectares) : c.landHectares;
+    var areaStr = areaKm2 != null ? formatAreaKm2(areaKm2) : (areaHa != null ? formatAreaHa(areaHa) + ' (ha)' : '');
+    if (areaStr) rows.push({ label: 'Land area', value: areaStr });
+    if (c.counties && c.counties.length) rows.push({ label: 'Counties', value: c.counties.join(', ') });
+    if (c.sub_locations && c.sub_locations.length) rows.push({ label: 'Sub-locations', value: c.sub_locations.join(', ') });
+    add('Established', c.established);
+    add('Households', naNumOrZero(unwrapVal(c.households)));
+    add('Population', naNumOrZero(unwrapVal(c.population)));
+    add('Livestock units', naNumOrZero(unwrapVal(c.livestock_units)));
+    if (c.numCommunities != null) rows.push({ label: 'Communities', value: naNumOrZero(c.numCommunities) });
+    var cc = c.carbon_credits || {};
+    var issued = (unwrapVal(cc.issued_tco2e) != null && Number(cc.issued_tco2e) !== 0) ? naNum(cc.issued_tco2e) + ' tCO2e' : '';
+    var retired = (unwrapVal(cc.retired_tco2e) != null && Number(cc.retired_tco2e) !== 0) ? naNum(cc.retired_tco2e) + ' tCO2e' : '';
+    var proposed = (unwrapVal(cc.proposed_tco2e) != null && Number(cc.proposed_tco2e) !== 0) ? naNum(cc.proposed_tco2e) + ' tCO2e' : '';
+    if (issued) rows.push({ label: 'Carbon issued', value: issued });
+    if (retired) rows.push({ label: 'Carbon retired', value: retired });
+    if (proposed) rows.push({ label: 'Carbon proposed', value: proposed });
+    if (c.firstPaymentFeb2022USD != null || c.first_payment_feb_2022_usd != null) rows.push({ label: 'First payment (Feb 2022)', value: formatMoney(c.firstPaymentFeb2022USD != null ? c.firstPaymentFeb2022USD : c.first_payment_feb_2022_usd) });
+    add('Status', c.status);
+    return rows;
+  }
+
+  function buildComparisonTableHTML(dataA, dataB) {
+    var rowsA = getDetailRows(dataA);
+    var rowsB = getDetailRows(dataB);
+    var byLabelA = {};
+    var byLabelB = {};
+    rowsA.forEach(function(r) { byLabelA[r.label] = r.value; });
+    rowsB.forEach(function(r) { byLabelB[r.label] = r.value; });
+    var allLabels = [];
+    var seen = {};
+    rowsA.forEach(function(r) { if (!seen[r.label]) { seen[r.label] = true; allLabels.push(r.label); } });
+    rowsB.forEach(function(r) { if (!seen[r.label]) { seen[r.label] = true; allLabels.push(r.label); } });
+    var nameA = dataA.name || dataA.short_name || dataA.project_id || 'A';
+    var nameB = dataB.name || dataB.short_name || dataB.project_id || 'B';
+    var html = '<table class="compare-filter-table" aria-label="Comparison">' +
+      '<thead><tr><th scope="col">Metric</th><th scope="col">' + escapeHtml(nameA) + '</th><th scope="col">' + escapeHtml(nameB) + '</th></tr></thead><tbody>';
+    allLabels.forEach(function(label) {
+      var vA = byLabelA[label] != null ? byLabelA[label] : '—';
+      var vB = byLabelB[label] != null ? byLabelB[label] : '—';
+      html += '<tr><th scope="row">' + escapeHtml(label) + '</th><td>' + escapeHtml(vA) + '</td><td>' + escapeHtml(vB) + '</td></tr>';
+    });
+    html += '</tbody></table>';
+    return html;
+  }
+  function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
   function renderProjectDetail(p) {
     if (!p) return '';
     var name = p.short_name || p.name || p.project_id;
@@ -351,7 +460,14 @@
     var allProjects = (data && data.projects) ? data.projects : [];
     var allBounds = [];
 
-    var map = L.map('map', { zoomControl: true }).setView([0.75, 37.25], 6);
+    var kenyaBounds = L.latLngBounds([[ -4.72, 33.91 ], [ 5.03, 41.91 ]]);
+    var map = L.map('map', {
+      zoomControl: true,
+      touchZoom: true,
+      tap: true,
+      maxBounds: kenyaBounds,
+      maxBoundsViscosity: 1
+    }).setView([0.75, 37.25], 6);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }).addTo(map);
 
     var panel = document.getElementById('conservancy-detail-panel');
@@ -362,6 +478,7 @@
     function showPanel(title, html) {
       if (!panel || !panelName || !panelBody) return;
       panelName.textContent = title;
+      panelBody.className = 'conservancy-detail-body';
       panelBody.innerHTML = html;
       panel.classList.add('conservancy-detail-panel-visible');
       panel.setAttribute('aria-hidden', 'false');
@@ -371,7 +488,7 @@
       panel.classList.remove('conservancy-detail-panel-visible');
       panel.setAttribute('aria-hidden', 'true');
       if (panelName) panelName.textContent = 'Select a conservancy or project';
-      if (panelBody) panelBody.innerHTML = '<p class="conservancy-detail-placeholder">Click a conservancy marker or project area on the map to view details.</p>';
+      if (panelBody) { panelBody.className = 'conservancy-detail-body'; panelBody.innerHTML = '<p class="conservancy-detail-placeholder">Click a conservancy or project area on the map to view details.</p>'; }
     }
     if (panelClose) panelClose.addEventListener('click', hidePanel);
 
@@ -414,7 +531,11 @@
     var first = nrtMain[0], last = nrtMain[nrtMain.length - 1];
     if (first && last && (first[0] !== last[0] || first[1] !== last[1])) nrtMain.push([first[0], first[1]]);
     var nrtPoly = L.polygon(nrtMain, Object.assign({}, s.nrtProject, { weight: 5, fillOpacity: 0.04 })).addTo(nrtBoundaryLayer);
-    nrtPoly.bindTooltip('NRT project boundary – whole project (VCS 1468)', { permanent: false, direction: 'center', className: 'nrt-boundary-tooltip' });
+    nrtPoly.bindTooltip('NRT project boundary (VCS 1468)', { permanent: false, direction: 'center', className: 'nrt-boundary-tooltip' });
+    if (nrtProject) {
+      var nrtTitle = nrtProject.short_name || nrtProject.name || 'Northern Kenya Rangeland Project (NRT / VCS 1468)';
+      nrtPoly.on('click', function() { showPanel(nrtTitle, renderProjectDetail(nrtProject)); });
+    }
     nrtMain.forEach(function(c) { allBounds.push(c); });
     nrtPoly.bringToFront();
 
@@ -432,7 +553,7 @@
       var style = ((proj && (proj.project_id || '') === 'VCS1468') ? s.nrtConservancy : s.nrtConservancy);
       var poly = L.polygon(latlngs, style).addTo(nrtConservanciesLayer);
       poly.on('click', function() { showPanel(name, renderConservancyDetail(merged)); });
-      poly.on('mouseover', function() { this.setStyle({ fillOpacity: 0.35, weight: 2.5, color: style.color, fillColor: style.fillColor }); this.bringToFront(); });
+      poly.on('mouseover', function() { this.setStyle({ fillOpacity: 0.75, weight: 2.5, color: style.color, fillColor: style.fillColor }); this.bringToFront(); });
       poly.on('mouseout', function() { this.setStyle(style); });
       poly.bindTooltip(name + ((proj && (proj.project_id || '') !== 'VCS1468') ? ' (' + (proj.short_name || proj.name || '') + ')' : ''), { permanent: false, direction: 'center' });
       poly._data = merged;
@@ -535,7 +656,8 @@
         if (used[key]) return;
         used[key] = true;
         allBounds.push(pos);
-        var otherIcon = L.divIcon({ className: 'other-project-marker', html: '<span class="other-project-marker-dot"></span>', iconSize: [18, 18], iconAnchor: [9, 9] });
+        var dotClass = (p.project_id || '') === 'VCS2623' ? 'komaza-dot' : (p.project_id || '') === 'VCS3340' ? 'boomitra-dot' : (p.project_id || '') === 'VCS5451' ? 'kcsa-dot' : '';
+        var otherIcon = L.divIcon({ className: 'other-project-marker', html: '<span class="other-project-marker-dot ' + dotClass + '"></span>', iconSize: [18, 18], iconAnchor: [9, 9] });
         var m = L.marker(pos, { icon: otherIcon }).addTo(markersLayer);
         var projName = (p.short_name || p.name || p.project_id) + (county ? ' – ' + county : '');
         m.on('click', function() { showPanel(p.short_name || p.name || p.project_id, renderProjectDetail(p)); });
@@ -543,7 +665,8 @@
       });
       if (counties.length === 0 && centerLat != null && centerLng != null) {
         allBounds.push([centerLat, centerLng]);
-        var otherIcon = L.divIcon({ className: 'other-project-marker', html: '<span class="other-project-marker-dot"></span>', iconSize: [18, 18], iconAnchor: [9, 9] });
+        var dotClass = (p.project_id || '') === 'VCS2623' ? 'komaza-dot' : (p.project_id || '') === 'VCS3340' ? 'boomitra-dot' : (p.project_id || '') === 'VCS5451' ? 'kcsa-dot' : '';
+        var otherIcon = L.divIcon({ className: 'other-project-marker', html: '<span class="other-project-marker-dot ' + dotClass + '"></span>', iconSize: [18, 18], iconAnchor: [9, 9] });
         var m = L.marker([centerLat, centerLng], { icon: otherIcon }).addTo(markersLayer);
         var projName = p.short_name || p.name || p.project_id;
         m.on('click', function() { showPanel(projName, renderProjectDetail(p)); });
@@ -568,18 +691,97 @@
       'KCSA (VCS 5451)': kcsaLayer,
       'Markers': markersLayer
     }, { collapsed: true }).addTo(map);
+
+    function buildComparisonHTML(dataA, dataB) {
+      var nameA = dataA.name || dataA.short_name || dataA.project_id || 'A';
+      var nameB = dataB.name || dataB.short_name || dataB.project_id || 'B';
+      return '<div class="comparison-col"><h5>' + nameA + '</h5>' + renderDetailForPanel(dataA) + '</div><div class="comparison-col"><h5>' + nameB + '</h5>' + renderDetailForPanel(dataB) + '</div>';
+    }
+    function showComparison(dataA, dataB) {
+      if (!panel || !panelName || !panelBody) return;
+      var nameA = dataA.name || dataA.short_name || dataA.project_id || 'A';
+      var nameB = dataB.name || dataB.short_name || dataB.project_id || 'B';
+      panelName.textContent = 'Compare: ' + nameA + ' vs ' + nameB;
+      panelBody.className = 'conservancy-detail-body comparison-view';
+      panelBody.innerHTML = buildComparisonHTML(dataA, dataB);
+      panel.classList.add('conservancy-detail-panel-visible');
+      panel.setAttribute('aria-hidden', 'false');
+    }
+    var filterResultEl = document.getElementById('compare-filter-result');
+    var filterResultTitle = document.getElementById('compare-filter-result-title');
+    var filterResultBody = document.getElementById('compare-filter-result-body');
+    function updateCompareFilterResult(dataA, dataB) {
+      if (!filterResultEl || !filterResultTitle || !filterResultBody) return;
+      if (!dataA || !dataB) {
+        filterResultEl.setAttribute('hidden', '');
+        filterResultEl.setAttribute('aria-hidden', 'true');
+        return;
+      }
+      var nameA = dataA.name || dataA.short_name || dataA.project_id || 'A';
+      var nameB = dataB.name || dataB.short_name || dataB.project_id || 'B';
+      filterResultTitle.textContent = 'Compare: ' + nameA + ' vs ' + nameB;
+      filterResultBody.innerHTML = buildComparisonTableHTML(dataA, dataB);
+      filterResultEl.removeAttribute('hidden');
+      filterResultEl.setAttribute('aria-hidden', 'false');
+    }
+    function clearCompareFilterResult() {
+      updateCompareFilterResult(null, null);
+    }
+    var comparables = [];
+    conservanciesPrimary.forEach(function(c, i) {
+      var merged = mergeConservancyData(c);
+      comparables.push({ value: 'c:' + i, label: (c.name || c.short_name) + ' (Conservancy)', data: merged });
+    });
+    allProjects.forEach(function(p, i) {
+      comparables.push({ value: 'p:' + i, label: (p.short_name || p.name || p.project_id) + ' (Project)', data: p });
+    });
+    var selectA = document.getElementById('compare-select-a');
+    var selectB = document.getElementById('compare-select-b');
+    var clearCompareBtn2 = document.getElementById('compare-clear-btn');
+    if (selectA && selectB) {
+      comparables.forEach(function(o) {
+        var optA = document.createElement('option');
+        optA.value = o.value;
+        optA.textContent = o.label;
+        selectA.appendChild(optA);
+        var optB = document.createElement('option');
+        optB.value = o.value;
+        optB.textContent = o.label;
+        selectB.appendChild(optB);
+      });
+      var dataByValue = {};
+      comparables.forEach(function(o) { dataByValue[o.value] = o.data; });
+      function updateComparison() {
+        var vA = selectA.value;
+        var vB = selectB.value;
+        if (vA && vB && dataByValue[vA] && dataByValue[vB]) {
+          updateCompareFilterResult(dataByValue[vA], dataByValue[vB]);
+        } else {
+          clearCompareFilterResult();
+        }
+      }
+      selectA.addEventListener('change', updateComparison);
+      selectB.addEventListener('change', updateComparison);
+      if (clearCompareBtn2) {
+        clearCompareBtn2.addEventListener('click', function() {
+          selectA.value = '';
+          selectB.value = '';
+          clearCompareFilterResult();
+        });
+      }
+    }
   }
 
   function run() {
     var hasFetch = typeof fetch !== 'undefined';
     var harmonized = hasFetch
-      ? fetch('kenya-carbon-harmonized.json').then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
+      ? fetch('data/kenya-carbon-harmonized.json').then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
       : Promise.resolve(null);
     var primary = hasFetch
-      ? fetch('kenya-carbon-projects.json').then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
+      ? fetch('data/kenya-carbon-projects.json').then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
       : Promise.resolve(null);
     var comprehensive = hasFetch
-      ? fetch('kenya-carbon-projects-comprehensive.json').then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
+      ? fetch('data/kenya-carbon-projects-comprehensive.json').then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
       : Promise.resolve(null);
 
     harmonized.then(function(harmonizedData) {
@@ -593,8 +795,20 @@
             window.NRT_CONSERVANCIES = nrtProj.conservancies.slice(0, 14);
           }
         }
-        if (KENYA_DATA) updateDashboardFromData(KENYA_DATA);
+        primary.then(function(primaryData) {
+          if (primaryData && KENYA_DATA) {
+            if (primaryData.carbon_credits_summary) KENYA_DATA.carbon_credits_summary = primaryData.carbon_credits_summary;
+            if (primaryData.social_community_data) KENYA_DATA.social_community_data = primaryData.social_community_data;
+            if (primaryData.community_benefits_summary) KENYA_DATA.community_benefits_summary = primaryData.community_benefits_summary;
+          }
+          if (KENYA_DATA) updateDashboardFromData(KENYA_DATA);
+        }).catch(function() {
+          if (KENYA_DATA) updateDashboardFromData(KENYA_DATA);
+        });
         initMap();
+        initProjectSelector();
+        initExportButtons();
+        initStatTooltips();
         return;
       }
       Promise.all([primary, comprehensive]).then(function(results) {
@@ -602,8 +816,187 @@
         KENYA_COMPREHENSIVE = results[1] || null;
         if (KENYA_DATA) updateDashboardFromData(KENYA_DATA);
         initMap();
+        initProjectSelector();
+        initExportButtons();
+        initStatTooltips();
       });
     });
+  }
+
+  function getProjectTotals(projectId) {
+    if (!KENYA_DATA || !KENYA_DATA.projects) return { issued: 0, retired: 0, communityShare: null };
+    if (projectId === 'all') {
+      var totalIssued = 0, totalRetired = 0;
+      KENYA_DATA.projects.forEach(function(proj) {
+        if (proj.conservancies && Array.isArray(proj.conservancies)) {
+          proj.conservancies.forEach(function(c) {
+            var cc = c.carbon_credits || {};
+            if (cc.issued_tco2e != null) totalIssued += Number(cc.issued_tco2e);
+            if (cc.retired_tco2e != null) totalRetired += Number(cc.retired_tco2e);
+          });
+        }
+      });
+      var cbs = KENYA_DATA.community_benefits_summary;
+      return { issued: totalIssued, retired: totalRetired, communityShare: (cbs && cbs.community_share_percent != null) ? cbs.community_share_percent : null };
+    }
+    var p = KENYA_DATA.projects.filter(function(proj) { return (proj.project_id || '') === projectId; })[0];
+    if (!p) return { issued: 0, retired: 0, communityShare: null };
+    var issued = 0, retired = 0;
+    if (p.conservancies && Array.isArray(p.conservancies)) {
+      p.conservancies.forEach(function(c) {
+        var cc = c.carbon_credits || {};
+        if (cc.issued_tco2e != null) issued += Number(cc.issued_tco2e);
+        if (cc.retired_tco2e != null) retired += Number(cc.retired_tco2e);
+      });
+    }
+    var communityShare = (projectId === 'VCS1468') ? 40 : null;
+    return { issued: issued, retired: retired, communityShare: communityShare };
+  }
+
+  function applyProjectSelection(projectId) {
+    var subheading = document.getElementById('dashboard-subheading');
+    if (subheading) {
+      if (projectId === 'all') subheading.textContent = 'Totals across all 4 Verra projects in Kenya';
+      else if (projectId === 'VCS1468') subheading.textContent = 'Northern Kenya Rangeland / NRT (VCS 1468)';
+      else if (projectId === 'VCS2623') subheading.textContent = 'Komaza (VCS 2623)';
+      else if (projectId === 'VCS3340') subheading.textContent = 'Boomitra Kenya (VCS 3340)';
+      else if (projectId === 'VCS5451') subheading.textContent = 'KCSA (VCS 5451)';
+      else subheading.textContent = 'Selected project';
+    }
+    var totals = getProjectTotals(projectId);
+    var el;
+    if (totals.issued > 0 && (el = document.getElementById('stat-credits-issued'))) el.textContent = (totals.issued / 1e6).toFixed(1) + 'M';
+    else if ((el = document.getElementById('stat-credits-issued'))) el.textContent = totals.issued > 0 ? (totals.issued / 1e6).toFixed(1) + 'M' : '—';
+    if (totals.retired > 0 && (el = document.getElementById('stat-credits-retired'))) el.textContent = (totals.retired / 1e6).toFixed(1) + 'M';
+    else if ((el = document.getElementById('stat-credits-retired'))) el.textContent = totals.retired > 0 ? (totals.retired / 1e6).toFixed(1) + 'M' : '—';
+    if ((el = document.getElementById('stat-community-share'))) el.textContent = totals.communityShare != null ? totals.communityShare + '%' : '—';
+    var sourceEl = document.getElementById('stats-data-source');
+    if (sourceEl) {
+      if (projectId === 'all') sourceEl.innerHTML = 'All figures above are platform totals (all 4 projects). Community share shown where disclosed. <a href="sources.html">Sources</a>.';
+      else sourceEl.innerHTML = 'Figures for the selected project. Community share shown where disclosed (NRT: 40%). <a href="sources.html">Sources</a>.';
+    }
+    var cards = document.querySelectorAll('.kenya-projects-overview .project-overview-card');
+    cards.forEach(function(card) {
+      var id = card.getAttribute('data-project-id');
+      card.classList.toggle('project-selected', projectId === 'all' || id === projectId);
+    });
+  }
+
+  function initProjectSelector() {
+    var sel = document.getElementById('dashboard-project-select');
+    if (!sel) return;
+    sel.addEventListener('change', function() { applyProjectSelection(sel.value); });
+    applyProjectSelection(sel.value);
+  }
+
+  function doExportCsv() {
+    if (!KENYA_DATA || !KENYA_DATA.projects) return;
+    var rows = ['Project,Proponent,Area (ha),Status'];
+    KENYA_DATA.projects.forEach(function(p) {
+      var area = (p.area && p.area.hectares != null) ? p.area.hectares : '';
+      rows.push([p.short_name || p.name || p.project_id, (p.proponent || '').replace(/,/g, ' '), area, p.status || ''].join(','));
+    });
+    var nrt = KENYA_DATA.projects.filter(function(p) { return (p.project_id || '') === 'VCS1468'; })[0];
+    if (nrt && nrt.conservancies && nrt.conservancies.length) {
+      rows.push('');
+      rows.push('Conservancy,Land (ha),Population,Households');
+      nrt.conservancies.forEach(function(c) {
+        var name = (c.name || c.short_name || '').replace(/,/g, ' ');
+        var ha = c.landHectares != null ? c.landHectares : (c.area_hectares != null ? c.area_hectares : '');
+        var pop = c.population != null ? c.population : '';
+        var hh = c.households != null ? c.households : (c.numFamilies != null ? c.numFamilies : '');
+        rows.push([name, ha, pop, hh].join(','));
+      });
+    }
+    var blob = new Blob([rows.join('\n')], { type: 'text/csv;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'carbonwatch-kenya-data.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+  function doExportPdf() {
+    window.print();
+  }
+  function initExportButtons() {
+    var headerBtn = document.getElementById('header-export-btn');
+    var dropdown = document.getElementById('export-dropdown');
+    if (headerBtn && dropdown) {
+      headerBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var open = dropdown.getAttribute('hidden') == null;
+        if (open) {
+          dropdown.setAttribute('hidden', '');
+          headerBtn.setAttribute('aria-expanded', 'false');
+        } else {
+          dropdown.removeAttribute('hidden');
+          headerBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+      dropdown.querySelectorAll('[data-export]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          if (btn.getAttribute('data-export') === 'csv') doExportCsv();
+          else if (btn.getAttribute('data-export') === 'pdf') doExportPdf();
+          dropdown.setAttribute('hidden', '');
+          headerBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+      document.addEventListener('click', function() {
+        dropdown.setAttribute('hidden', '');
+        headerBtn.setAttribute('aria-expanded', 'false');
+      });
+    }
+  }
+
+  function initStatTooltips() {
+    var tooltipEl = document.getElementById('stat-tooltip');
+    var buttons = document.querySelectorAll('.stat-info');
+    var activeBtn = null;
+    var justOpened = false;
+    if (!tooltipEl || !buttons.length) return;
+    function hide() {
+      tooltipEl.setAttribute('hidden', '');
+      tooltipEl.setAttribute('aria-hidden', 'true');
+      activeBtn = null;
+    }
+    var tipWidth = 280;
+    var tipHeightEst = 80;
+    function show(btn) {
+      var text = btn.getAttribute('data-tooltip') || btn.getAttribute('title') || '';
+      if (!text) return;
+      var rect = btn.getBoundingClientRect();
+      var left = rect.left + (rect.width / 2) - (tipWidth / 2);
+      left = Math.max(8, Math.min(left, window.innerWidth - tipWidth - 8));
+      var top = rect.bottom + 8;
+      if (top + tipHeightEst > window.innerHeight - 8) top = rect.top - tipHeightEst - 8;
+      tooltipEl.style.left = left + 'px';
+      tooltipEl.style.top = Math.max(8, top) + 'px';
+      tooltipEl.textContent = text;
+      tooltipEl.removeAttribute('hidden');
+      tooltipEl.setAttribute('aria-hidden', 'false');
+      activeBtn = btn;
+    }
+    function handleClick(e) {
+      e.stopPropagation();
+      var btn = e.currentTarget;
+      if (activeBtn === btn) {
+        hide();
+        return;
+      }
+      activeBtn = btn;
+      justOpened = true;
+      show(btn);
+      setTimeout(function() { justOpened = false; }, 0);
+    }
+    buttons.forEach(function(btn) {
+      btn.addEventListener('click', handleClick);
+    });
+    document.addEventListener('click', function(e) {
+      if (justOpened) return;
+      if (e.target.closest('#stat-tooltip') || e.target.closest('.stat-info')) return;
+      hide();
+    });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') hide(); });
   }
 
   if (document.readyState === 'loading') {

@@ -81,7 +81,33 @@
     });
   }
 
+  function scrollToFirstQuestion() {
+    var first = document.getElementById('scout-first-question');
+    if (first) {
+      first.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var firstInput = first.querySelector('input[type="radio"]');
+      if (firstInput) {
+        setTimeout(function() { firstInput.focus({ preventScroll: true }); }, 400);
+      }
+    }
+  }
+
   function init() {
+    if (location.hash === '#scout-first-question') {
+      setTimeout(scrollToFirstQuestion, 100);
+    }
+    var startBtn = document.getElementById('scout-start-survey-btn');
+    if (startBtn) {
+      startBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (document.getElementById('scout-first-question')) {
+          history.replaceState(null, '', document.location.pathname + '#scout-first-question');
+          scrollToFirstQuestion();
+        } else {
+          document.location.hash = 'scout-first-question';
+        }
+      });
+    }
     if (toolCard) {
       toolCard.querySelectorAll('.lang-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {

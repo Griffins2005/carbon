@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SCOUT Engine | CarbonWatch Kenya</title>
+    <title>SCOUT Tool | CarbonWatch Kenya</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle fill='%232d5016' cx='50' cy='50' r='50'/><path fill='%23ffffff' d='M50 25l10 15h-20z M40 45h20v20h-20z'/></svg>">
     <link rel="stylesheet" href="./index.css">
 </head>
@@ -26,7 +26,7 @@
                 <nav class="layer-nav">
                     <a href="index.html">Home</a>
                     <a href="community-interface.html">Community Interface</a>
-                    <a href="scout-engine.html">SCOUT Engine</a>
+                    <a href="scout-engine.html">SCOUT Tool</a>
                     <a href="dashboard.html">Public Dashboard</a>
                     <a href="sources.html">Sources</a>
                 </nav>
@@ -36,7 +36,7 @@
                     <div class="live-dot"></div>
                     LIVE
                 </div>
-                <button class="btn-export">EXPORT</button>
+                <a href="dashboard.html" class="btn-export btn-export-link">EXPORT</a>
             </div>
         </div>
     </header>
@@ -46,8 +46,15 @@
             <h3>Vulnerable Populations in Decision-Making</h3>
 
             <div class="tool-card tool-card-scout">
-                <div class="tool-header">
-                    <h2 class="tool-title">SCOUT survey</h2>
+                <div class="tool-header tool-header-with-start">
+                    <div>
+                        <h2 class="tool-title">SCOUT survey</h2>
+                        <p class="tool-title-desc">Answer 7 short questions; get empowerment indices, red flags, and action prompts.</p>
+                    </div>
+                    <a href="#scout-first-question" id="scout-start-survey-btn" class="tool-start-btn">Start Survey</a>
+                </div>
+                <div class="tool-header tool-header-lang">
+                    <span class="tool-header-lang-label">Language</span>
                     <div class="lang-buttons" role="group" aria-label="Language">
                         <button type="button" class="lang-btn active" data-lang="en">English</button>
                         <button type="button" class="lang-btn" data-lang="sw">Kiswahili</button>
@@ -55,7 +62,7 @@
                 </div>
                 <p class="tool-intro" id="scout-intro">Survey for community members—aligned to empowerment dimensions (WELI-style). Answer each question; SCOUT will produce indices, warning signs, and action prompts. Use as in the field (phone or tablet) or to see how the tool works.</p>
                 <form id="scout-survey-form" class="scout-survey-form">
-                    <div class="survey-section">
+                    <div class="survey-section" id="scout-first-question">
                         <span class="survey-dimension" data-i18n="dim1">Production decisions</span>
                         <p class="survey-q" data-i18n="q1">When your household decides what to grow or which animals to keep, what is your role?</p>
                         <div class="survey-options" role="radiogroup" aria-label="Production decisions">
@@ -165,18 +172,57 @@
             <div class="empowerment-dimensions">
                 <h4>Empowerment dimensions</h4>
                 <p>SCOUT maps inputs to these dimensions (see <a href="https://www.ilri.org/knowledge/publications/womens-empowerment-livestock-index" target="_blank" rel="noopener">ILRI WELI</a>):</p>
+                <div class="dimensions-viz">
+                    <div class="dimensions-pie-wrap" aria-hidden="true">
+                        <svg viewBox="0 0 100 100" class="pie-svg" role="img" aria-label="Six equal empowerment dimensions as a donut chart">
+                            <!-- Donut segments (clockwise from top): 1 Production, 2 Nutrition, 3 Resources, 4 Income, 5 Opportunities, 6 Time & workload. Small gaps between segments. -->
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="#1e3a0f" stroke-width="22" stroke-dasharray="39 212" stroke-dashoffset="0"/>
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="#0d9488" stroke-width="22" stroke-dasharray="39 212" stroke-dashoffset="-42"/>
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="#15803d" stroke-width="22" stroke-dasharray="39 212" stroke-dashoffset="-84"/>
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="#16a34a" stroke-width="22" stroke-dasharray="39 212" stroke-dashoffset="-126"/>
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="#65a30d" stroke-width="22" stroke-dasharray="39 212" stroke-dashoffset="-168"/>
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="#a3e635" stroke-width="22" stroke-dasharray="39 212" stroke-dashoffset="-210"/>
+                            <circle cx="50" cy="50" r="26" fill="#faf9f6" stroke="#e5e7eb" stroke-width="1"/>
+                            <text x="50" y="52" class="pie-center-text" text-anchor="middle" aria-hidden="true">1–6</text>
+                        </svg>
+                    </div>
+                    <div class="dimensions-legend">
+                        <div class="dimensions-legend-item"><span class="dim-num" aria-hidden="true">1</span><span class="dim-dot" style="background:#1e3a0f"></span><span>Production</span></div>
+                        <div class="dimensions-legend-item"><span class="dim-num" aria-hidden="true">2</span><span class="dim-dot" style="background:#0d9488"></span><span>Nutrition</span></div>
+                        <div class="dimensions-legend-item"><span class="dim-num" aria-hidden="true">3</span><span class="dim-dot" style="background:#15803d"></span><span>Resources</span></div>
+                        <div class="dimensions-legend-item"><span class="dim-num" aria-hidden="true">4</span><span class="dim-dot" style="background:#16a34a"></span><span>Income</span></div>
+                        <div class="dimensions-legend-item"><span class="dim-num" aria-hidden="true">5</span><span class="dim-dot" style="background:#65a30d"></span><span>Opportunities</span></div>
+                        <div class="dimensions-legend-item"><span class="dim-num" aria-hidden="true">6</span><span class="dim-dot" style="background:#a3e635"></span><span>Time &amp; workload</span></div>
+                    </div>
+                </div>
+                <div class="dimensions-strip" role="list" aria-label="Dimensions in order">
+                    <div class="dimensions-strip-item" style="--dim-color:#1e3a0f"><span class="dimensions-strip-num">1</span><span class="dimensions-strip-label">Production</span></div>
+                    <div class="dimensions-strip-item" style="--dim-color:#0d9488"><span class="dimensions-strip-num">2</span><span class="dimensions-strip-label">Nutrition</span></div>
+                    <div class="dimensions-strip-item" style="--dim-color:#15803d"><span class="dimensions-strip-num">3</span><span class="dimensions-strip-label">Resources</span></div>
+                    <div class="dimensions-strip-item" style="--dim-color:#16a34a"><span class="dimensions-strip-num">4</span><span class="dimensions-strip-label">Income</span></div>
+                    <div class="dimensions-strip-item" style="--dim-color:#65a30d"><span class="dimensions-strip-num">5</span><span class="dimensions-strip-label">Opportunities</span></div>
+                    <div class="dimensions-strip-item" style="--dim-color:#a3e635"><span class="dimensions-strip-num">6</span><span class="dimensions-strip-label">Time &amp; workload</span></div>
+                </div>
                 <ol class="dimensions-list">
-                    <li>Decisions about agricultural production</li>
-                    <li>Decisions related to nutrition</li>
-                    <li>Access to and control over resources</li>
-                    <li>Control and use of income</li>
-                    <li>Access to and control of opportunities</li>
-                    <li>Workload and control over own time</li>
+                    <li><strong>1.</strong> Decisions about agricultural production</li>
+                    <li><strong>2.</strong> Decisions related to nutrition</li>
+                    <li><strong>3.</strong> Access to and control over resources</li>
+                    <li><strong>4.</strong> Control and use of income</li>
+                    <li><strong>5.</strong> Access to and control of opportunities</li>
+                    <li><strong>6.</strong> Workload and control over own time</li>
                 </ol>
                 <div class="sdg-badges">
                     <span class="sdg-badge">SDG 5: Gender Equality</span>
                     <span class="sdg-badge">SDG 10: Reduced Inequalities</span>
                 </div>
+            </div>
+
+            <div class="scout-flow-mobile" aria-label="How the survey works on mobile">
+                <h4>How the survey works</h4>
+                <p><strong>1.</strong> Answer 7 short questions (one per empowerment dimension).</p>
+                <p><strong>2.</strong> Each question has 5 options from “no say” to “full control.”</p>
+                <p><strong>3.</strong> Submit to get your SCOUT report: indices, red flags, and action prompts.</p>
+                <p>Use on phone or tablet in the field, or here to see how the tool works.</p>
             </div>
 
             <div class="layer-grid">
@@ -195,15 +241,20 @@
     </div>
 
     <footer>
-        <div class="footer-logos">
-            <a href="https://www.nema.go.ke" target="_blank" rel="noopener" class="footer-logo-nema" aria-label="National Environment Management Authority">
-                <img src="./images/nema-logo.png" alt="NEMA – National Environment Management Authority. Mazingira yetu, uhai wetu, wajibu wetu." width="120" height="56">
+        <div class="footer-inner">
+        <div class="footer-partners">
+            <a href="https://www.cornell.edu" target="_blank" rel="noopener" class="footer-logo-partner" aria-label="Cornell University">
+                <img src="./images/cornell-logo.png" alt="Cornell University" width="140" height="52">
+            </a>
+            <a href="https://dyson.cornell.edu" target="_blank" rel="noopener" class="footer-logo-partner" aria-label="Dyson School">
+                <img src="./images/cornell-dyson-logo.png" alt="Charles H. Dyson School of Applied Economics and Management" width="140" height="52">
             </a>
         </div>
-        <div class="footer-text">© 2026 SMART Project Team at Cornell | CarbonWatch Community Tracker Dashboard</div>
+        <div class="footer-text">© 2026 CarbonWatch Community Tracker Dashboard · Student Multidisciplinary Applied Research Team at Cornell and Dyson School</div>
+        </div>
     </footer>
 
-    <script src="./script.js"></script>
-    <script src="./scout-engine.js"></script>
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/scout-engine.js"></script>
 </body>
 </html>
