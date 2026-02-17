@@ -12,6 +12,10 @@
 body {
   background: var(--milk-white);
   color: #212529;
+  overflow-x: hidden;
+}
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 header {
@@ -1420,6 +1424,8 @@ body.nav-open .hamburger span:nth-child(3) {
 .container {
   max-width: 1400px;
   margin: 0 auto;
+  width: 100%;
+  min-width: 0;
   padding: 24px;
 }
 
@@ -3677,116 +3683,467 @@ footer {
   font-weight: 600;
 }
 
+/* ========== Mobile & narrow screens (768px and below) ========== */
 @media (max-width: 768px) {
-  .hamburger {
-    display: flex;
-    position: relative;
-    z-index: 1000;
-  }
-  .nav-wrap {
-    position: static;
-  }
-  .layer-nav {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #2d5016;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    z-index: 999;
-    padding: 80px 24px 24px;
-  }
-  .layer-nav a {
-    font-size: 16px;
-    padding: 8px 0;
-  }
-  body.nav-open .layer-nav {
-    display: flex;
-  }
-  body.nav-open {
-    overflow: hidden;
+  /* Header – compact, touch-friendly */
+  header {
+    padding: 12px 16px;
   }
   .header-content {
     flex-wrap: nowrap;
-    gap: 12px;
+    gap: 10px;
+    justify-content: space-between;
+  }
+  .logo-section {
+    order: 1;
+    flex: 1;
+    min-width: 0;
+  }
+  .logo-section a {
+    gap: 8px;
+  }
+  .logo-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+  h1 {
+    font-size: 16px;
+  }
+  .tagline {
+    font-size: 10px;
+  }
+  .header-actions {
+    order: 2;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .live-indicator {
+    padding: 6px 10px;
+    font-size: 9px;
+  }
+  .btn-export {
+    padding: 10px 14px;
+    font-size: 11px;
+    min-height: 44px;
+  }
+  .nav-wrap {
+    order: 3;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .hamburger {
+    display: flex;
+    position: relative;
+    z-index: 1001;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+  .hamburger:hover,
+  .hamburger[aria-expanded="true"] {
+    background: rgba(255,255,255,0.25);
+  }
+  .layer-nav {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 220px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    padding: 10px 0;
+    z-index: 1000;
+    border: 1px solid rgba(0,0,0,0.08);
+  }
+  .layer-nav a {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #212529;
+    padding: 14px 20px;
+    min-height: 48px;
+    text-decoration: none;
+    border: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .layer-nav a:hover {
+    background: rgba(45,80,22,0.08);
+    color: #2d5016;
+  }
+  body.nav-open .layer-nav {
+    display: block;
+  }
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(0,0,0,0.35);
+  }
+  body.nav-open .nav-overlay {
+    display: block;
   }
   .hero-title {
     font-size: 18px;
   }
-  .layer-grid {
-    grid-template-columns: 1fr;
+
+  /* Container – no overflow */
+  .container {
+    padding: 12px 16px;
+    max-width: 100%;
   }
-  .stats-grid, .data-grid, .projects-grid {
-    grid-template-columns: 1fr;
+
+  /* Home */
+  .home-hero {
+    min-height: 320px;
   }
-  .social-comms-charts-grid {
+  .home-hero-inner,
+  .hero-home {
+    padding: 24px 16px 32px;
+  }
+  .home-hero-title {
+    font-size: clamp(1.5rem, 6vw, 1.75rem);
+  }
+  .home-hero-lead {
+    font-size: 14px;
+  }
+  .btn-start-survey,
+  .home-hero-link {
+    padding: 14px 24px;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .home-tools-inner {
+    padding: 28px 16px 40px;
+  }
+  .home-tools-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .home-tool-card {
+    padding: 20px 18px;
+    min-height: auto;
+  }
+  .home-tool-card-title {
+    font-size: 1rem;
+  }
+  .home-tool-card-desc {
+    font-size: 13px;
+  }
+  .home-mission-inner {
+    padding: 28px 16px;
+  }
+
+  /* Dashboard */
+  .dashboard-top-section {
+    padding: 12px 0 0;
+  }
+  .dashboard-top-heading {
+    font-size: 1.25rem;
+    line-height: 1.3;
+  }
+  .project-selector-wrap {
+    width: 100%;
+    margin: 10px 0;
+  }
+  .project-selector {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+  .dashboard-top-subheading {
+    font-size: 12px;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .stat-card {
+    padding: 16px 14px;
+  }
+  .stat-header {
+    flex-wrap: wrap;
+  }
+  .stat-label {
+    font-size: 12px;
+  }
+  .stat-info {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0;
+    margin-left: 6px;
+  }
+  .stat-value {
+    font-size: 24px;
+  }
+  .stat-unit {
+    font-size: 11px;
+  }
+  .stats-data-source {
+    font-size: 11px;
+  }
+  .stat-tooltip {
+    max-width: min(280px, calc(100vw - 24px));
+  }
+
+  .map-section {
+    margin-top: 20px;
+  }
+  .map-instructions {
+    padding: 12px 16px;
+    font-size: 12px;
+  }
+  .map-instructions strong {
+    font-size: 12px;
+  }
+  .map-instructions-why {
+    font-size: 11px;
+  }
+  .map-instructions li {
+    margin-bottom: 8px;
   }
   .map-and-panel {
     flex-direction: column;
     min-height: 0;
   }
   .map-wrapper {
-    min-height: 400px;
+    min-height: 320px;
+    position: relative;
   }
   #map {
-    min-height: 400px;
-    height: 400px;
+    min-height: 320px;
+    height: 320px;
+  }
+  .legend {
+    top: 8px;
+    right: 8px;
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+  .legend-item {
+    font-size: 10px;
+    margin-bottom: 4px;
   }
   .conservancy-detail-panel.conservancy-detail-panel-visible {
     width: 100%;
     min-width: 0;
-    max-height: 70vh;
+    max-height: 65vh;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
-  /* Mobile: all pages – container and spacing */
-  .container {
+  .conservancy-detail-panel .panel-close {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .compare-filter-section {
+    margin-top: 20px;
+  }
+  .compare-filter-header {
+    padding: 14px 16px 12px;
+  }
+  .compare-filter-controls {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 16px 18px;
+    gap: 14px;
+  }
+  .compare-filter-group select {
+    min-height: 48px;
+    font-size: 16px;
+    width: 100%;
+  }
+  .compare-filter-vs {
+    align-self: center;
+    padding: 4px 0;
+  }
+  .compare-filter-result {
     padding: 16px;
   }
-  /* Mobile: home */
-  .home-hero-inner,
-  .hero-home {
-    padding: 32px 20px 40px;
+  .compare-filter-result-body.comparison-view {
+    grid-template-columns: 1fr;
   }
-  .home-tools-grid {
-    gap: 16px;
+  .compare-filter-result-body.comparison-view .comparison-col:first-child {
+    border-right: none;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-radius: 10px 10px 0 0;
   }
-  .home-tool-card {
-    padding: 20px;
+  .compare-filter-result-body.comparison-view .comparison-col:last-child {
+    border-radius: 0 0 10px 10px;
   }
-  /* Mobile: dashboard */
-  .dashboard-top-section {
-    padding: 16px 0 0;
+  .compare-filter-table-wrap {
+    margin: 0;
+    padding: 0;
+    overflow: visible;
   }
-  .dashboard-top-heading {
-    font-size: 1.25rem;
+  .compare-filter-table {
+    display: block;
+    border: none;
+    background: transparent;
   }
-  .dashboard-top-subheading {
-    font-size: 12px;
+  .compare-filter-table thead {
+    display: none;
   }
-  .stat-card {
-    padding: 16px;
+  .compare-filter-table tbody {
+    display: block;
   }
-  .stat-value {
-    font-size: 26px;
+  .compare-filter-table tbody tr {
+    display: block;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
   }
-  .map-section .map-header .map-title,
-  .project-summary-block .map-title {
-    font-size: 14px;
+  .compare-filter-table tbody tr:last-child {
+    margin-bottom: 0;
+  }
+  .compare-filter-table tbody th {
+    display: block;
+    width: 100%;
+    padding: 0 0 10px 0;
+    margin: 0 0 10px 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: #212529;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    white-space: normal;
+  }
+  .compare-filter-table tbody td {
+    display: block;
+    width: 100%;
+    padding: 6px 0;
+    font-size: 13px;
+    white-space: normal;
+    border: none;
+  }
+  .compare-filter-table tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #495057;
+    margin-right: 8px;
+  }
+  .compare-filter-table tbody td:first-of-type {
+    padding-top: 0;
+  }
+
+  .verification-cycles-block {
+    padding: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .verification-cycles-table {
-    font-size: 12px;
+    font-size: 11px;
+    min-width: 280px;
   }
   .verification-cycles-table th,
   .verification-cycles-table td {
     padding: 8px 10px;
   }
-  /* Mobile: sources */
+  .verification-cycles-block .map-header {
+    padding: 12px 16px;
+  }
+  .map-section .map-header .map-title,
+  .project-summary-block .map-title {
+    font-size: 14px;
+  }
+
+  .data-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .data-card {
+    padding: 16px;
+  }
+  .card-title {
+    font-size: 14px;
+  }
+  .card-source {
+    font-size: 11px;
+  }
+  .metric-box {
+    padding: 10px 0;
+  }
+  .metric-label {
+    font-size: 12px;
+  }
+  .metric-value {
+    font-size: 18px;
+  }
+  .project-overview-card {
+    padding: 14px;
+  }
+  .projects-section .card-header {
+    padding: 16px 0;
+  }
+  .project-card {
+    padding: 14px;
+  }
+
+  /* Social CoMMs pies (SCOUT page) */
+  .social-comms-charts-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .social-pie-card {
+    padding: 14px 16px;
+  }
+  .social-pie-svg {
+    width: 140px;
+    height: 140px;
+  }
+  .social-pie-title {
+    font-size: 12px;
+  }
+  .social-pie-legend-item {
+    font-size: 11px;
+  }
+  .layer-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats-grid,
+  .data-grid,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Sources page */
+  .sources-main {
+    padding: 20px 12px 36px;
+  }
+  .sources-hero-title {
+    font-size: 1.5rem;
+  }
+  .sources-hero-desc {
+    font-size: 14px;
+  }
+  .sources-nav {
+    gap: 8px 10px;
+  }
+  .sources-nav a {
+    font-size: 12px;
+    padding: 10px 14px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .sources-card {
+    padding: 18px 16px;
+  }
+  .sources-card-title {
+    font-size: 1rem;
+  }
+  .sources-link {
+    padding: 12px 14px 12px 36px;
+    min-height: 44px;
+  }
   .sources-block,
   .sources-list {
     padding-left: 0;
@@ -3794,32 +4151,126 @@ footer {
   .sources-block h4 {
     font-size: 13px;
   }
-  /* Mobile: SCOUT tool */
+
+  /* SCOUT tool */
+  .tool-card {
+    margin-bottom: 24px;
+  }
   .tool-card-scout .tool-header-with-start {
     flex-direction: column;
     align-items: flex-start;
+    gap: 12px;
+  }
+  .tool-start-btn {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
   }
   .tool-card-scout .scout-survey-form {
-    margin: 0 16px 20px;
-    padding: 20px 24px;
+    margin: 0 12px 20px;
+    padding: 18px 16px;
   }
   .tool-card-scout .scout-report {
-    margin: 0 16px 20px;
-    padding: 20px 24px;
+    margin: 0 12px 20px;
+    padding: 18px 16px;
+  }
+  .survey-section {
+    padding-top: 18px;
   }
   .survey-q {
     font-size: 15px;
+    margin-bottom: 14px;
   }
-  /* Mobile: community interface */
+  .survey-options label {
+    min-height: 48px;
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+  .survey-options input[type="radio"] {
+    width: 22px;
+    height: 22px;
+  }
+  .scout-submit-btn {
+    width: 100%;
+    min-height: 48px;
+    padding: 14px 20px;
+  }
+  .scout-survey-form .survey-actions {
+    padding-top: 20px;
+  }
+  .empowerment-dimensions {
+    margin-bottom: 24px;
+  }
+  .empowerment-dimensions h4 {
+    font-size: 12px;
+  }
+  .empowerment-dimensions p {
+    font-size: 12px;
+  }
+  .dimensions-list {
+    padding-left: 22px;
+    font-size: 12px;
+  }
+  .dimensions-list-heading {
+    font-size: 11px;
+    margin: 16px 0 6px 0;
+  }
+  .sdg-badges {
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .sdg-badge {
+    min-width: 90px;
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+  .sdg-badge-label {
+    font-size: 9px;
+  }
+  .scout-flow-mobile {
+    padding: 16px;
+  }
+
+  /* Community interface */
+  .layer-section {
+    padding: 20px 0;
+  }
+  .layer-section h3 {
+    font-size: 15px;
+  }
+  .tool-card-phone {
+    padding: 16px;
+  }
+  .phone-mockup {
+    max-width: 100%;
+  }
+  .phone-frame {
+    max-width: 100%;
+  }
+  .phone-input,
+  .feature-phone-input {
+    min-height: 48px;
+    font-size: 16px;
+  }
+  .phone-send,
+  .feature-phone-send {
+    min-height: 48px;
+    min-width: 60px;
+  }
   .loop-section {
     padding: 16px;
   }
+  .loop-section h3 {
+    font-size: 15px;
+  }
+
+  /* Footer */
   .footer-inner {
-    padding: 32px 16px 28px;
-    gap: 24px;
+    padding: 28px 16px 24px;
+    gap: 20px;
   }
   .footer-partners {
-    gap: 24px 32px;
+    gap: 20px 24px;
   }
   .footer-logo-partner {
     padding: 10px 12px;
@@ -3831,5 +4282,65 @@ footer {
   }
   .footer-text {
     font-size: 11px;
+    line-height: 1.5;
+  }
+}
+
+/* ========== Extra small screens (480px and below) ========== */
+@media (max-width: 480px) {
+  header {
+    padding: 10px 12px;
+  }
+  .container {
+    padding: 10px 12px;
+  }
+  h1 {
+    font-size: 15px;
+  }
+  .home-hero-inner {
+    padding: 20px 12px 28px;
+  }
+  .home-hero-title {
+    font-size: 1.35rem;
+  }
+  .home-tools-inner {
+    padding: 20px 12px 32px;
+  }
+  .dashboard-top-heading {
+    font-size: 1.15rem;
+  }
+  .stat-value {
+    font-size: 22px;
+  }
+  #map {
+    min-height: 280px;
+    height: 280px;
+  }
+  .map-wrapper {
+    min-height: 280px;
+  }
+  .sources-main {
+    padding: 16px 10px 28px;
+  }
+  .sources-hero-title {
+    font-size: 1.35rem;
+  }
+  .sources-card {
+    padding: 14px 12px;
+  }
+  .tool-card-scout .scout-survey-form {
+    margin: 0 8px 16px;
+    padding: 16px 12px;
+  }
+  .tool-card-scout .scout-report {
+    margin: 0 8px 16px;
+    padding: 16px 12px;
+  }
+  .survey-q {
+    font-size: 14px;
+  }
+  .layer-nav a {
+    font-size: 16px;
+    max-width: 100%;
   }
 }

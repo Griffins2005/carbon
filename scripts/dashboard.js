@@ -382,12 +382,15 @@
     rowsB.forEach(function(r) { if (!seen[r.label]) { seen[r.label] = true; allLabels.push(r.label); } });
     var nameA = dataA.name || dataA.short_name || dataA.project_id || 'A';
     var nameB = dataB.name || dataB.short_name || dataB.project_id || 'B';
+    var col1 = escapeHtml(nameA);
+    var col2 = escapeHtml(nameB);
+    var attr = function(s) { return (s || '').replace(/"/g, '&quot;'); };
     var html = '<table class="compare-filter-table" aria-label="Comparison">' +
-      '<thead><tr><th scope="col">Metric</th><th scope="col">' + escapeHtml(nameA) + '</th><th scope="col">' + escapeHtml(nameB) + '</th></tr></thead><tbody>';
+      '<thead><tr><th scope="col">Metric</th><th scope="col">' + col1 + '</th><th scope="col">' + col2 + '</th></tr></thead><tbody>';
     allLabels.forEach(function(label) {
       var vA = byLabelA[label] != null ? byLabelA[label] : '—';
       var vB = byLabelB[label] != null ? byLabelB[label] : '—';
-      html += '<tr><th scope="row">' + escapeHtml(label) + '</th><td>' + escapeHtml(vA) + '</td><td>' + escapeHtml(vB) + '</td></tr>';
+      html += '<tr><th scope="row">' + escapeHtml(label) + '</th><td data-label="' + attr(nameA) + '">' + escapeHtml(vA) + '</td><td data-label="' + attr(nameB) + '">' + escapeHtml(vB) + '</td></tr>';
     });
     html += '</tbody></table>';
     return html;
