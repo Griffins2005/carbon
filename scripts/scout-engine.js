@@ -10,20 +10,21 @@
     en: {
       intro: 'Survey for community members—aligned to empowerment dimensions (WELI-style). Answer each question; SCOUT will produce indices, warning signs, and action prompts. Use as in the field (phone or tablet) or to see how the tool works.',
       dim1: 'Production decisions', dim2: 'Nutrition', dim3: 'Resource control', dim4: 'Income control', dim5: 'Opportunities', dim6: 'Time & workload', dim7: 'Voice in meetings',
-      q1: 'When your household decides what to grow or which animals to keep, what is your role?',
-      q2: 'When your household decides how to spend money on food and nutrition, what is your role?',
-      q3: 'When it comes to access to and control over land, water, or grazing, what is your role in your household?',
-      q4: 'When it comes to income from livestock, crops, or conservancy work, who controls it and what is your role?',
-      q5: 'Regarding groups or meetings that affect the conservancy and carbon project, which best describes you?',
-      q6: 'How much say do you have over your own time and the work you are expected to do?',
-      q7: 'In conservancy or carbon-project meetings, which best describes your ability to speak and be heard?',
-      opt1_1: 'Someone else decides; I am not asked or informed', opt1_2: 'I am told what was decided but had no say', opt1_3: 'I am asked my view and it is sometimes considered', opt1_4: 'We decide together (equal say)', opt1_5: 'I make the decision alone or have final say',
-      opt2_1: 'Someone else decides; I am not asked or informed', opt2_2: 'I am told what was decided but had no say', opt2_3: 'I am asked my view and it is sometimes considered', opt2_4: 'We decide together (equal say)', opt2_5: 'I make the decision alone or have final say',
-      opt3_1: 'Someone else has control; I have no say or access', opt3_2: 'I can use resources but someone else decides access', opt3_3: 'I am consulted; we share access and some control', opt3_4: 'We decide together who uses land, water, or grazing', opt3_5: 'I control access and use (alone or final say)',
-      opt4_1: 'Someone else controls the income; I am not involved', opt4_2: 'I am told how income is used but had no say', opt4_3: 'I am asked my view on how to use income; sometimes considered', opt4_4: 'We decide together how to use the income', opt4_5: 'I control the income (alone or have final say)',
-      opt5_1: 'I am not invited / no such group or meeting for people like me', opt5_2: 'I can attend but I don\'t speak (or am not expected to)', opt5_3: 'I attend and can speak when I choose', opt5_4: 'I am encouraged to speak and my view is recorded', opt5_5: 'I am a formal member and help set the agenda',
-      opt6_1: 'I have no say; my tasks are decided by others', opt6_2: 'I can ask to change but it is rarely accepted', opt6_3: 'I can sometimes refuse or reschedule tasks', opt6_4: 'I have a lot of say in my daily tasks', opt6_5: 'I fully control my time and workload',
-      opt7_1: 'I don\'t attend (not allowed or no opportunity)', opt7_2: 'I attend but never speak, or am not heard when I do', opt7_3: 'I speak only when asked a direct question', opt7_4: 'I speak when I want and am usually heard', opt7_5: 'I speak freely and my view influences decisions',
+      groupA: 'A) Production Decisions (carbon-relevant)', groupB: 'B) Nutrition Decisions', groupC: 'C) Resource Control (Land/Water/Grazing)', groupD: 'D) Income Control (especially carbon funds)', groupE: 'E) Opportunities (meetings, groups, agenda-setting)', groupF: 'F) Time & Workload', groupG: 'G) Voice in Meetings (plus safety)',
+      q_pd1: 'When decisions are made about grazing zones/rotations or where animals move, what is your role?',
+      q_pd2: 'If the conservancy changes rules to support carbon goals (e.g., grazing restrictions), how much say do you have in whether your household follows them?',
+      q_n1: 'Who decides how money is spent on food most weeks?',
+      q_n2: 'If food is limited, how much influence do you have on who gets priority (children/elderly/sick)?',
+      q_rc1: 'For land/water/grazing access, do you need permission from someone to use it?',
+      q_rc2: 'If there is a grazing or water dispute, can you push for a fair resolution without fear of retaliation?',
+      q_ic1: 'When income comes in (livestock/crops/wages), who decides how it\'s used?',
+      q_ic2: 'Do you know how carbon-related money is allocated and can you question it if it seems unfair?',
+      q_op1: 'In the last 3 months, how often were you invited to a conservancy/carbon meeting that matters?',
+      q_op2: 'When you speak in those meetings, what usually happens?',
+      q_tw1: 'How much control do you have over your daily workload and schedule?',
+      q_tw2: 'Have you missed meetings/opportunities because of workload or caregiving?',
+      q_vm1: 'Do you feel safe speaking honestly about benefit-sharing or project issues?',
+      q_vm2: 'If you report a complaint, do you trust it will be handled fairly and confidentially?',
       submitBtn: 'Submit survey → Run SCOUT',
       reportTitle: 'SCOUT report',
       indicesLabel: 'Community-level indices',
@@ -38,14 +39,21 @@
     sw: {
       intro: 'Muhtasari wa jamii—unalingana na mwelekeo wa uwezeshaji (WELI). Jibu kila swali; SCOUT itatoa viashirio, ishara za tahadhari na maagizo ya hatua. Tumia shambani (simu au tablet) au angalia jinsi zana inavyofanya kazi.',
       dim1: 'Maamuzi ya uzalishaji', dim2: 'Lishe', dim3: 'Udhibiti wa rasilimali', dim4: 'Udhibiti wa kipato', dim5: 'Fursa', dim6: 'Muda na mzigo wa kazi', dim7: 'Sauti katika mikutano',
-      q1: 'Wakati kaya yako inapoamua nini kuotesha au mifugo gani kuwa na, wewe unacho jukumu gani?', q2: 'Wakati pesa za chakula na lishe zinapoamuliwa matumizi yake, wewe unacho jukumu gani?', q3: 'Kuhusu ufikiaji na udhibiti wa ardhi, maji au malisho katika kaya yako, unacho jukumu gani?', q4: 'Kuhusu kipato kutoka mifugo, mazao au kazi ya conservancy, nani anadhibiti na wewe unacho jukumu gani?', q5: 'Kuhusu vikundi au mikutano inayoathiri conservancy na mradi wa carbon, ni ipi inakufaa zaidi?', q6: 'Una neno gani juu ya muda wako na kazi unayotakiwa kufanya?', q7: 'Katika mikutano ya conservancy au mradi wa carbon, ni ipi inaeleza uwezo wako wa kusema na kusikilizwa?',
-      opt1_1: 'Mtu mwingine anaamua; sina ombi wala taarifa', opt1_2: 'Ninaambiwa niliamuliwacho lakini sikuwa na neno', opt1_3: 'Ninaulizwa maoni yangu na wakati mwingine yanazingatiwa', opt1_4: 'Tunaamua pamoja (neno sawa)', opt1_5: 'Mimi naamua peke yangu au nina neno la mwisho',
-      opt2_1: 'Mtu mwingine anaamua; sina ombi wala taarifa', opt2_2: 'Ninaambiwa niliamuliwacho lakini sikuwa na neno', opt2_3: 'Ninaulizwa maoni yangu na wakati mwingine yanazingatiwa', opt2_4: 'Tunaamua pamoja (neno sawa)', opt2_5: 'Mimi naamua peke yangu au nina neno la mwisho',
-      opt3_1: 'Mtu mwingine ana udhibiti; sina neno wala ufikiaji', opt3_2: 'Naweza kutumia rasilimali lakini mtu mwingine anaamua ufikiaji', opt3_3: 'Ninaombwa maoni; tunashiriki ufikiaji na udhibiti fulani', opt3_4: 'Tunaamua pamoja nani atumie ardhi, maji au malisho', opt3_5: 'Mimi nadhibiti ufikiaji na matumizi (peke yangu au neno la mwisho)',
-      opt4_1: 'Mtu mwingine anadhibiti kipato; sihusiki', opt4_2: 'Ninaambiwa kipato kinatumwaje lakini sikuwa na neno', opt4_3: 'Ninaulizwa maoni juu ya matumizi ya kipato; wakati mwingine yanazingatiwa', opt4_4: 'Tunaamua pamoja matumizi ya kipato', opt4_5: 'Mimi nadhibiti kipato (peke yangu au nina neno la mwisho)',
-      opt5_1: 'Sialikiwa / hakuna kikundi au mkutano kwa watu kama mimi', opt5_2: 'Naweza kuhudhuria lakini sisemi (au siatarajiwa kusema)', opt5_3: 'Nahudhuria na naweza kusema ninapotaka', opt5_4: 'Ninahimizwa kusema na maoni yangu yanaandikwa', opt5_5: 'Nina uanachama rasmi na nasaidia kuweka ajenda',
-      opt6_1: 'Sina neno; kazi zangu zinaamuliwa na wengine', opt6_2: 'Naweza kuomba mabadiliko lakini mara chache inakubalika', opt6_3: 'Wakati mwingine naweza kukataa au kuahirisha kazi', opt6_4: 'Nina neno kubwa katika kazi zangu za kila siku', opt6_5: 'Nadhibiti kabisa muda wangu na mzigo wa kazi',
-      opt7_1: 'Sihudhuria (siwaruhusiwa au hakuna nafasi)', opt7_2: 'Nahudhuria lakini sisemi kamwe, au hasikilizwi ninaposema', opt7_3: 'Ninasema tu ninapoulizwa swali moja kwa moja', opt7_4: 'Ninasema ninapotaka na kawaida nasikilizwa', opt7_5: 'Ninasema huru na maoni yangu yanaathiri maamuzi',
+      groupA: 'A) Maamuzi ya uzalishaji (carbon)', groupB: 'B) Maamuzi ya lishe', groupC: 'C) Udhibiti wa rasilimali (ardhi/maji/malisho)', groupD: 'D) Udhibiti wa kipato', groupE: 'E) Fursa (mikutano, vikundi)', groupF: 'F) Muda na mzigo wa kazi', groupG: 'G) Sauti katika mikutano',
+      q_pd1: 'Unacho jukumu gani unapoamua kuhusu maeneo ya malisho au mwendo wa mifugo?',
+      q_pd2: 'Unacho neno gani kuhusu kufuata sheria mpya za carbon (k.m. vikwazo vya malisho)?',
+      q_n1: 'Nani anaamua matumizi ya pesa za chakula?',
+      q_n2: 'Una ushawishi gani kuhusu kipaumbele (watoto/wazee/wagonjwa) chakula kinapokuwa kidogo?',
+      q_rc1: 'Unahitaji ruhusa ya mtu kutumia ardhi, maji au malisho?',
+      q_rc2: 'Unaweza kusukuma suluhu sahihi bila hofu ya kisasi?',
+      q_ic1: 'Kipato kinapoingia (mifugo/mazao/mishahara), nani anaamua matumizi?',
+      q_ic2: 'Unajua jinsi pesa za carbon zinavyotumika na unaweza kuuliza ikiwa si sawa?',
+      q_op1: 'Miezi 3 iliyopita, ulialikwa mara ngapi kwenye mkutano muhimu wa conservancy/carbon?',
+      q_op2: 'Unaposema katika mikutano, kwa kawaida kinachotokea ni nini?',
+      q_tw1: 'Una udhibiti gani juu ya mzigo wa kazi na ratiba yako?',
+      q_tw2: 'Umekosa mikutano au fursa kwa sababu ya kazi au utunzaji?',
+      q_vm1: 'Unajisikia salama kusema ukweli kuhusu kushiriki faida au mambo ya mradi?',
+      q_vm2: 'Unapotoa malalamiko, una imani yatashughulikiwa kwa haki na siri?',
       submitBtn: 'Wasilisha muhtasari',
       reportTitle: 'Ripoti ya SCOUT',
       indicesLabel: 'Viashirio vya kiwango cha jamii',
@@ -125,12 +133,24 @@
         e.preventDefault();
         var lang = currentLang();
         var t = LANG[lang] || LANG.en;
-        var vals = {};
-        dims.forEach(function(_, i) {
-          var name = dims[i];
-          var r = form.querySelector('input[name="q' + (i + 1) + '"]:checked');
-          vals[name] = r ? parseInt(r.value, 10) : 3;
-        });
+        function getVal(name) {
+          var r = form.querySelector('input[name="' + name + '"]:checked');
+          return r ? parseInt(r.value, 10) : 3;
+        }
+        var pd1 = getVal('pd1'), pd2 = getVal('pd2'), n1 = getVal('n1'), n2 = getVal('n2');
+        var rc1 = getVal('rc1'), rc2 = getVal('rc2'), ic1 = getVal('ic1'), ic2 = getVal('ic2');
+        var op1 = getVal('op1'), op2 = getVal('op2'), tw1 = getVal('tw1'), tw2 = getVal('tw2');
+        var vm1 = getVal('vm1'), vm2 = getVal('vm2');
+        var tw2Reversed = 6 - tw2;
+        var vals = {
+          production: Math.round((pd1 + pd2) / 2),
+          nutrition: Math.round((n1 + n2) / 2),
+          resources: Math.round((rc1 + rc2) / 2),
+          income: Math.round((ic1 + ic2) / 2),
+          opportunities: Math.round((op1 + op2) / 2),
+          time: Math.round((tw1 + tw2Reversed) / 2),
+          voice: Math.round((vm1 + vm2) / 2)
+        };
         var sum = 0, n = dims.length;
         dims.forEach(function(k) { sum += vals[k]; });
         var avg = (sum / n).toFixed(1);

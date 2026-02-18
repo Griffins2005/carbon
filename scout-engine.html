@@ -49,7 +49,7 @@
                 <div class="tool-header tool-header-with-start">
                     <div>
                         <h2 class="tool-title">SCOUT survey</h2>
-                        <p class="tool-title-desc">Answer 7 short questions; get empowerment indices, red flags, and action prompts.</p>
+                        <p class="tool-title-desc">Answer 14 short questions; get empowerment indices, red flags, and action prompts.</p>
                     </div>
                     <a href="#scout-first-question" id="scout-start-survey-btn" class="tool-start-btn">Start Survey</a>
                 </div>
@@ -62,81 +62,165 @@
                 </div>
                 <p class="tool-intro" id="scout-intro">Survey for community members—aligned to empowerment dimensions (WELI-style). Answer each question; SCOUT will produce indices, warning signs, and action prompts. Use as in the field (phone or tablet) or to see how the tool works.</p>
                 <form id="scout-survey-form" class="scout-survey-form">
-                    <div class="survey-section" id="scout-first-question">
-                        <span class="survey-dimension" data-i18n="dim1">Production decisions</span>
-                        <p class="survey-q" data-i18n="q1">When your household decides what to grow or which animals to keep, what is your role?</p>
-                        <div class="survey-options" role="radiogroup" aria-label="Production decisions">
-                            <label><input type="radio" name="q1" value="1" /><span data-i18n="opt1_1">Someone else decides; I am not asked or informed</span></label>
-                            <label><input type="radio" name="q1" value="2" /><span data-i18n="opt1_2">I am told what was decided but had no say</span></label>
-                            <label><input type="radio" name="q1" value="3" checked /><span data-i18n="opt1_3">I am asked my view and it is sometimes considered</span></label>
-                            <label><input type="radio" name="q1" value="4" /><span data-i18n="opt1_4">We decide together (equal say)</span></label>
-                            <label><input type="radio" name="q1" value="5" /><span data-i18n="opt1_5">I make the decision alone or have final say</span></label>
+                    <div class="survey-group">
+                        <h3 class="survey-group-title" data-i18n="groupA">A) Production Decisions (carbon-relevant)</h3>
+                        <div class="survey-section" id="scout-first-question">
+                            <p class="survey-q" data-i18n="q_pd1">When decisions are made about grazing zones/rotations or where animals move, what is your role?</p>
+                            <div class="survey-options" role="radiogroup" aria-label="Livestock/grazing decisions">
+                                <label><input type="radio" name="pd1" value="1" /><span>1 Not informed</span></label>
+                                <label><input type="radio" name="pd1" value="2" /><span>2 Informed only</span></label>
+                                <label><input type="radio" name="pd1" value="3" checked /><span>3 Asked sometimes</span></label>
+                                <label><input type="radio" name="pd1" value="4" /><span>4 Decide together</span></label>
+                                <label><input type="radio" name="pd1" value="5" /><span>5 Final say</span></label>
+                            </div>
+                        </div>
+                        <div class="survey-section">
+                            <p class="survey-q" data-i18n="q_pd2">If the conservancy changes rules to support carbon goals (e.g., grazing restrictions), how much say do you have in whether your household follows them?</p>
+                            <div class="survey-options" role="radiogroup" aria-label="Climate/carbon practice adoption">
+                                <label><input type="radio" name="pd2" value="1" /><span>1 None</span></label>
+                                <label><input type="radio" name="pd2" value="2" /><span>2 Very little</span></label>
+                                <label><input type="radio" name="pd2" value="3" checked /><span>3 Some</span></label>
+                                <label><input type="radio" name="pd2" value="4" /><span>4 A lot</span></label>
+                                <label><input type="radio" name="pd2" value="5" /><span>5 Final say</span></label>
+                            </div>
                         </div>
                     </div>
-                    <div class="survey-section">
-                        <span class="survey-dimension" data-i18n="dim2">Nutrition</span>
-                        <p class="survey-q" data-i18n="q2">When your household decides how to spend money on food and nutrition, what is your role?</p>
-                        <div class="survey-options" role="radiogroup">
-                            <label><input type="radio" name="q2" value="1" /><span data-i18n="opt2_1">Someone else decides; I am not asked or informed</span></label>
-                            <label><input type="radio" name="q2" value="2" /><span data-i18n="opt2_2">I am told what was decided but had no say</span></label>
-                            <label><input type="radio" name="q2" value="3" checked /><span data-i18n="opt2_3">I am asked my view and it is sometimes considered</span></label>
-                            <label><input type="radio" name="q2" value="4" /><span data-i18n="opt2_4">We decide together (equal say)</span></label>
-                            <label><input type="radio" name="q2" value="5" /><span data-i18n="opt2_5">I make the decision alone or have final say</span></label>
+                    <div class="survey-group">
+                        <h3 class="survey-group-title" data-i18n="groupB">B) Nutrition Decisions</h3>
+                        <div class="survey-section">
+                            <p class="survey-q" data-i18n="q_n1">Who decides how money is spent on food most weeks?</p>
+                            <div class="survey-options" role="radiogroup" aria-label="Food spending control">
+                                <label><input type="radio" name="n1" value="1" /><span>1 Someone else</span></label>
+                                <label><input type="radio" name="n1" value="2" /><span>2 Mostly someone else</span></label>
+                                <label><input type="radio" name="n1" value="3" checked /><span>3 Shared</span></label>
+                                <label><input type="radio" name="n1" value="4" /><span>4 Mostly me</span></label>
+                                <label><input type="radio" name="n1" value="5" /><span>5 Me</span></label>
+                            </div>
+                        </div>
+                        <div class="survey-section">
+                            <p class="survey-q" data-i18n="q_n2">If food is limited, how much influence do you have on who gets priority (children/elderly/sick)?</p>
+                            <div class="survey-options" role="radiogroup" aria-label="Children/elder nutrition prioritization">
+                                <label><input type="radio" name="n2" value="1" /><span>1 None</span></label>
+                                <label><input type="radio" name="n2" value="2" /><span>2 Little</span></label>
+                                <label><input type="radio" name="n2" value="3" checked /><span>3 Some</span></label>
+                                <label><input type="radio" name="n2" value="4" /><span>4 A lot</span></label>
+                                <label><input type="radio" name="n2" value="5" /><span>5 Final say</span></label>
+                            </div>
                         </div>
                     </div>
-                    <div class="survey-section">
-                        <span class="survey-dimension" data-i18n="dim3">Resource control</span>
-                        <p class="survey-q" data-i18n="q3">When it comes to access to and control over land, water, or grazing, what is your role in your household?</p>
-                        <div class="survey-options" role="radiogroup">
-                            <label><input type="radio" name="q3" value="1" /><span data-i18n="opt3_1">Someone else has control; I have no say or access</span></label>
-                            <label><input type="radio" name="q3" value="2" /><span data-i18n="opt3_2">I can use resources but someone else decides access</span></label>
-                            <label><input type="radio" name="q3" value="3" checked /><span data-i18n="opt3_3">I am consulted; we share access and some control</span></label>
-                            <label><input type="radio" name="q3" value="4" /><span data-i18n="opt3_4">We decide together who uses land, water, or grazing</span></label>
-                            <label><input type="radio" name="q3" value="5" /><span data-i18n="opt3_5">I control access and use (alone or final say)</span></label>
+                    <div class="survey-group">
+                        <h3 class="survey-group-title" data-i18n="groupC">C) Resource Control (Land/Water/Grazing)</h3>
+                        <div class="survey-section">
+                            <p class="survey-q" data-i18n="q_rc1">For land/water/grazing access, do you need permission from someone to use it?</p>
+                            <div class="survey-options" role="radiogroup" aria-label="Access permission">
+                                <label><input type="radio" name="rc1" value="1" /><span>1 Always</span></label>
+                                <label><input type="radio" name="rc1" value="2" /><span>2 Often</span></label>
+                                <label><input type="radio" name="rc1" value="3" checked /><span>3 Sometimes</span></label>
+                                <label><input type="radio" name="rc1" value="4" /><span>4 Rarely</span></label>
+                                <label><input type="radio" name="rc1" value="5" /><span>5 Never</span></label>
+                            </div>
+                        </div>
+                        <div class="survey-section">
+                            <p class="survey-q" data-i18n="q_rc2">If there is a grazing or water dispute, can you push for a fair resolution without fear of retaliation?</p>
+                            <div class="survey-options" role="radiogroup" aria-label="Conflict leverage">
+                                <label><input type="radio" name="rc2" value="1" /><span>1 No</span></label>
+                                <label><input type="radio" name="rc2" value="2" /><span>2 Rarely</span></label>
+                                <label><input type="radio" name="rc2" value="3" checked /><span>3 Sometimes</span></label>
+                                <label><input type="radio" name="rc2" value="4" /><span>4 Usually</span></label>
+                                <label><input type="radio" name="rc2" value="5" /><span>5 Yes</span></label>
+                            </div>
                         </div>
                     </div>
-                    <div class="survey-section">
-                        <span class="survey-dimension" data-i18n="dim4">Income control</span>
-                        <p class="survey-q" data-i18n="q4">When it comes to income from livestock, crops, or conservancy work, who controls it and what is your role?</p>
-                        <div class="survey-options" role="radiogroup">
-                            <label><input type="radio" name="q4" value="1" /><span data-i18n="opt4_1">Someone else controls the income; I am not involved</span></label>
-                            <label><input type="radio" name="q4" value="2" /><span data-i18n="opt4_2">I am told how income is used but had no say</span></label>
-                            <label><input type="radio" name="q4" value="3" checked /><span data-i18n="opt4_3">I am asked my view on how to use income; sometimes considered</span></label>
-                            <label><input type="radio" name="q4" value="4" /><span data-i18n="opt4_4">We decide together how to use the income</span></label>
-                            <label><input type="radio" name="q4" value="5" /><span data-i18n="opt4_5">I control the income (alone or have final say)</span></label>
+                    <div class="survey-group">
+                        <h3 class="survey-group-title" data-i18n="groupD">D) Income Control (especially carbon funds)</h3>
+                        <div class="survey-section">
+                            <p class="survey-q" data-i18n="q_ic1">When income comes in (livestock/crops/wages), who decides how it's used?</p>
+                            <div class="survey-options" role="radiogroup" aria-label="Control over household income">
+                                <label><input type="radio" name="ic1" value="1" /><span>1 Someone else</span></label>
+                                <label><input type="radio" name="ic1" value="2" /><span>2 Mostly someone else</span></label>
+                                <label><input type="radio" name="ic1" value="3" checked /><span>3 Shared</span></label>
+                                <label><input type="radio" name="ic1" value="4" /><span>4 Mostly me</span></label>
+                                <label><input type="radio" name="ic1" value="5" /><span>5 Me</span></label>
+                            </div>
+                        </div>
+                        <div class="survey-section">
+                            <p class="survey-q" data-i18n="q_ic2">Do you know how carbon-related money is allocated and can you question it if it seems unfair?</p>
+                            <div class="survey-options" role="radiogroup" aria-label="Carbon benefit visibility">
+                                <label><input type="radio" name="ic2" value="1" /><span>1 Don't know + can't question</span></label>
+                                <label><input type="radio" name="ic2" value="2" /><span>2 Know a little/can't question</span></label>
+                                <label><input type="radio" name="ic2" value="3" checked /><span>3 Know some/sometimes can question</span></label>
+                                <label><input type="radio" name="ic2" value="4" /><span>4 Know well/can question</span></label>
+                                <label><input type="radio" name="ic2" value="5" /><span>5 Know well + questions lead to action</span></label>
+                            </div>
                         </div>
                     </div>
-                    <div class="survey-section">
-                        <span class="survey-dimension" data-i18n="dim5">Opportunities</span>
-                        <p class="survey-q" data-i18n="q5">Regarding groups or meetings that affect the conservancy and carbon project, which best describes you?</p>
-                        <div class="survey-options" role="radiogroup">
-                            <label><input type="radio" name="q5" value="1" /><span data-i18n="opt5_1">I am not invited / no such group or meeting for people like me</span></label>
-                            <label><input type="radio" name="q5" value="2" /><span data-i18n="opt5_2">I can attend but I do not speak (or am not expected to)</span></label>
-                            <label><input type="radio" name="q5" value="3" checked /><span data-i18n="opt5_3">I attend and can speak when I choose</span></label>
-                            <label><input type="radio" name="q5" value="4" /><span data-i18n="opt5_4">I am encouraged to speak and my view is recorded</span></label>
-                            <label><input type="radio" name="q5" value="5" /><span data-i18n="opt5_5">I am a formal member and help set the agenda</span></label>
+                    <div class="survey-group">
+                        <h3 class="survey-group-title" data-i18n="groupE">E) Opportunities (meetings, groups, agenda-setting)</h3>
+                        <div class="survey-section">
+                            <p class="survey-q" data-i18n="q_op1">In the last 3 months, how often were you invited to a conservancy/carbon meeting that matters?</p>
+                            <div class="survey-options" role="radiogroup" aria-label="Being invited">
+                                <label><input type="radio" name="op1" value="1" /><span>1 Never</span></label>
+                                <label><input type="radio" name="op1" value="2" /><span>2 Once</span></label>
+                                <label><input type="radio" name="op1" value="3" checked /><span>3 Sometimes</span></label>
+                                <label><input type="radio" name="op1" value="4" /><span>4 Often</span></label>
+                                <label><input type="radio" name="op1" value="5" /><span>5 Always</span></label>
+                            </div>
+                        </div>
+                        <div class="survey-section">
+                            <p class="survey-q" data-i18n="q_op2">When you speak in those meetings, what usually happens?</p>
+                            <div class="survey-options" role="radiogroup" aria-label="Real influence">
+                                <label><input type="radio" name="op2" value="1" /><span>1 Ignored</span></label>
+                                <label><input type="radio" name="op2" value="2" /><span>2 Not recorded</span></label>
+                                <label><input type="radio" name="op2" value="3" checked /><span>3 Recorded but no follow-up</span></label>
+                                <label><input type="radio" name="op2" value="4" /><span>4 Sometimes changes decisions</span></label>
+                                <label><input type="radio" name="op2" value="5" /><span>5 Often influences decisions</span></label>
+                            </div>
                         </div>
                     </div>
-                    <div class="survey-section">
-                        <span class="survey-dimension" data-i18n="dim6">Time &amp; workload</span>
-                        <p class="survey-q" data-i18n="q6">How much say do you have over your own time and the work you are expected to do?</p>
-                        <div class="survey-options" role="radiogroup">
-                            <label><input type="radio" name="q6" value="1" /><span data-i18n="opt6_1">I have no say; my tasks are decided by others</span></label>
-                            <label><input type="radio" name="q6" value="2" /><span data-i18n="opt6_2">I can ask to change but it is rarely accepted</span></label>
-                            <label><input type="radio" name="q6" value="3" checked /><span data-i18n="opt6_3">I can sometimes refuse or reschedule tasks</span></label>
-                            <label><input type="radio" name="q6" value="4" /><span data-i18n="opt6_4">I have a lot of say in my daily tasks</span></label>
-                            <label><input type="radio" name="q6" value="5" /><span data-i18n="opt6_5">I fully control my time and workload</span></label>
+                    <div class="survey-group">
+                        <h3 class="survey-group-title" data-i18n="groupF">F) Time &amp; Workload</h3>
+                        <div class="survey-section">
+                            <p class="survey-q" data-i18n="q_tw1">How much control do you have over your daily workload and schedule?</p>
+                            <div class="survey-options" role="radiogroup" aria-label="Control over time">
+                                <label><input type="radio" name="tw1" value="1" /><span>1 None</span></label>
+                                <label><input type="radio" name="tw1" value="2" /><span>2 Little</span></label>
+                                <label><input type="radio" name="tw1" value="3" checked /><span>3 Some</span></label>
+                                <label><input type="radio" name="tw1" value="4" /><span>4 A lot</span></label>
+                                <label><input type="radio" name="tw1" value="5" /><span>5 Full</span></label>
+                            </div>
+                        </div>
+                        <div class="survey-section">
+                            <p class="survey-q" data-i18n="q_tw2">Have you missed meetings/opportunities because of workload or caregiving?</p>
+                            <div class="survey-options" role="radiogroup" aria-label="Ability to participate">
+                                <label><input type="radio" name="tw2" value="1" /><span>1 Always</span></label>
+                                <label><input type="radio" name="tw2" value="2" /><span>2 Often</span></label>
+                                <label><input type="radio" name="tw2" value="3" checked /><span>3 Sometimes</span></label>
+                                <label><input type="radio" name="tw2" value="4" /><span>4 Rarely</span></label>
+                                <label><input type="radio" name="tw2" value="5" /><span>5 Never</span></label>
+                            </div>
                         </div>
                     </div>
-                    <div class="survey-section">
-                        <span class="survey-dimension" data-i18n="dim7">Voice in meetings</span>
-                        <p class="survey-q" data-i18n="q7">In conservancy or carbon-project meetings, which best describes your ability to speak and be heard?</p>
-                        <div class="survey-options" role="radiogroup">
-                            <label><input type="radio" name="q7" value="1" /><span data-i18n="opt7_1">I do not attend (not allowed or no opportunity)</span></label>
-                            <label><input type="radio" name="q7" value="2" /><span data-i18n="opt7_2">I attend but never speak, or am not heard when I do</span></label>
-                            <label><input type="radio" name="q7" value="3" checked /><span data-i18n="opt7_3">I speak only when asked a direct question</span></label>
-                            <label><input type="radio" name="q7" value="4" /><span data-i18n="opt7_4">I speak when I want and am usually heard</span></label>
-                            <label><input type="radio" name="q7" value="5" /><span data-i18n="opt7_5">I speak freely and my view influences decisions</span></label>
+                    <div class="survey-group">
+                        <h3 class="survey-group-title" data-i18n="groupG">G) Voice in Meetings (plus safety)</h3>
+                        <div class="survey-section">
+                            <p class="survey-q" data-i18n="q_vm1">Do you feel safe speaking honestly about benefit-sharing or project issues?</p>
+                            <div class="survey-options" role="radiogroup" aria-label="Safe to speak">
+                                <label><input type="radio" name="vm1" value="1" /><span>1 Never</span></label>
+                                <label><input type="radio" name="vm1" value="2" /><span>2 Rarely</span></label>
+                                <label><input type="radio" name="vm1" value="3" checked /><span>3 Sometimes</span></label>
+                                <label><input type="radio" name="vm1" value="4" /><span>4 Usually</span></label>
+                                <label><input type="radio" name="vm1" value="5" /><span>5 Always</span></label>
+                            </div>
+                        </div>
+                        <div class="survey-section">
+                            <p class="survey-q" data-i18n="q_vm2">If you report a complaint, do you trust it will be handled fairly and confidentially?</p>
+                            <div class="survey-options" role="radiogroup" aria-label="Can raise complaints">
+                                <label><input type="radio" name="vm2" value="1" /><span>1 No trust</span></label>
+                                <label><input type="radio" name="vm2" value="2" /><span>2 Low</span></label>
+                                <label><input type="radio" name="vm2" value="3" checked /><span>3 Medium</span></label>
+                                <label><input type="radio" name="vm2" value="4" /><span>4 High</span></label>
+                                <label><input type="radio" name="vm2" value="5" /><span>5 Full trust</span></label>
+                            </div>
                         </div>
                     </div>
                     <div class="survey-actions">

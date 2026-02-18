@@ -3545,6 +3545,18 @@ footer {
   border: 2px solid #ccc;
   border-radius: 12px;
 }
+.survey-group {
+  margin-bottom: 36px;
+}
+.survey-group:last-of-type { margin-bottom: 0; }
+.survey-group-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 16px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
 .survey-section {
   margin-bottom: 32px;
   padding: 24px 0 0;
@@ -3567,27 +3579,34 @@ footer {
   margin: 0 0 18px 0;
   line-height: 1.5;
 }
+/* Wide: choices in a horizontal row (wrap if needed) */
 .survey-options {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px 16px;
 }
 .survey-options label {
   display: flex;
-  align-items: flex-start;
-  gap: 12px;
+  align-items: center;
+  gap: 10px;
   font-size: 14px;
   color: #374151;
   cursor: pointer;
-  padding: 12px 14px;
-  background: transparent;
+  padding: 10px 14px;
+  background: var(--milk-white);
   border-radius: 8px;
   transition: background 0.2s;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.survey-options label:hover {
+  background: var(--milk-white);
 }
 .survey-options input[type="radio"] {
   width: 20px;
   height: 20px;
-  margin-top: 2px;
+  margin: 0;
   flex-shrink: 0;
   accent-color: #2d5016;
 }
@@ -4174,12 +4193,19 @@ footer {
     margin: 0 12px 20px;
     padding: 18px 16px;
   }
+  .survey-group-title {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
   .survey-section {
     padding-top: 18px;
   }
   .survey-q {
     font-size: 15px;
     margin-bottom: 14px;
+  }
+  .survey-options {
+    flex-direction: column;
   }
   .survey-options label {
     min-height: 48px;
