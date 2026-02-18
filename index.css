@@ -3579,12 +3579,11 @@ footer {
   margin: 0 0 18px 0;
   line-height: 1.5;
 }
-/* Wide: choices in a horizontal row (wrap if needed) */
+/* Survey options: default vertical (narrow-first); overridden below for wide */
 .survey-options {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px 16px;
+  flex-direction: column;
+  gap: 12px;
 }
 .survey-options label {
   display: flex;
@@ -3597,8 +3596,6 @@ footer {
   background: var(--milk-white);
   border-radius: 8px;
   transition: background 0.2s;
-  min-width: 0;
-  flex: 1 1 auto;
 }
 .survey-options label:hover {
   background: var(--milk-white);
@@ -3609,6 +3606,19 @@ footer {
   margin: 0;
   flex-shrink: 0;
   accent-color: #2d5016;
+}
+
+/* Wide screens: choices in a single horizontal row */
+@media (min-width: 769px) {
+  .scout-survey-form .survey-options {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px 16px;
+  }
+  .scout-survey-form .survey-options label {
+    flex: 1 1 0;
+    min-width: 0;
+  }
 }
 .survey-actions { margin-top: 32px; padding-top: 24px; border-top: 2px solid #ccc; }
 .scout-submit-btn {
