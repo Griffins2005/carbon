@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community Interface | CarbonWatch Kenya</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle fill='%232d5016' cx='50' cy='50' r='50'/><path fill='%23ffffff' d='M50 25l10 15h-20z M40 45h20v20h-20z'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./index.css">
 </head>
 <body>
@@ -44,6 +47,32 @@
     <div class="container">
         <section class="layer-section layer-1">
             <h3>Bidirectional Communication Channels</h3>
+            <p class="layer-intro">Part of the national framework for <strong>KWCA</strong> (Kenya Wildlife Conservancies Association): community voice and data flow across Kenya’s conservancies.</p>
+
+            <div class="flowchart-block" role="img" aria-label="SMS and data workflow: SMS/IVR and Manual entry into Central repository, then Public Dashboard.">
+                <h4 class="flowchart-title">SMS &amp; data workflow</h4>
+                <p class="flowchart-desc">SMS/IVR and manual entries feed a single central repository; the Public Dashboard is the front-end for viewing and analysis.</p>
+                <div class="flowchart flowchart-sketch">
+                    <div class="flowchart-combine">
+                        <svg class="flowchart-rugged-circle" viewBox="0 0 200 100" aria-hidden="true">
+                            <path class="rugged-circle-path" d="M100 6 Q165 2 195 28 Q205 55 188 82 Q165 98 100 96 Q38 98 14 75 Q0 48 18 22 Q45 4 100 6 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        <div class="flowchart-row flowchart-combine-row">
+                            <div class="flowchart-box flowchart-box-sketch">SMS / IVR</div>
+                            <span class="flowchart-plus" aria-hidden="true">+</span>
+                            <div class="flowchart-box flowchart-box-sketch">Manual entry</div>
+                        </div>
+                    </div>
+                    <div class="flowchart-arrow flowchart-arrow-sketch">↓</div>
+                    <div class="flowchart-row">
+                        <div class="flowchart-box flowchart-box-center flowchart-box-sketch">Central repository</div>
+                    </div>
+                    <div class="flowchart-arrow flowchart-arrow-sketch">↓</div>
+                    <div class="flowchart-row">
+                        <div class="flowchart-box flowchart-box-sketch">Public Dashboard</div>
+                    </div>
+                </div>
+            </div>
 
             <div class="tool-card tool-card-phone">
                 <div class="tool-header">
@@ -172,7 +201,7 @@
                     <div class="flow-step">
                         <span class="flow-step-num">2</span>
                         <h5>Logging and routing</h5>
-                        <p>Implementing agency (e.g. NRT, partners) logs each input and routes to the right team. Response time and outcome are tracked for transparency.</p>
+                        <p>Implementing agencies (e.g. KWCA members, project partners) log each input and route to the right team. Data feeds the central repository. Response time and outcome are tracked for transparency.</p>
                     </div>
                     <div class="flow-step">
                         <span class="flow-step-num">3</span>
@@ -182,7 +211,7 @@
                     <div class="flow-step">
                         <span class="flow-step-num">4</span>
                         <h5>Education and dashboard</h5>
-                        <p>Carbon modules and updates can be sent via SMS/IVR. The public dashboard shows issue counts, response times, and education reach where disclosed.</p>
+                        <p>Carbon modules and updates can be sent via SMS/IVR. The Public Dashboard (front-end interface for data description and analysis) shows issue counts, response times, and education reach where disclosed.</p>
                     </div>
                 </div>
             </div>

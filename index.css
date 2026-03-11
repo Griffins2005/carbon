@@ -818,6 +818,149 @@ body.nav-open .hamburger span:nth-child(3) {
   margin-bottom: 0;
 }
 
+/* Community interface: intro + simple flowchart */
+.layer-intro {
+  font-size: 14px;
+  color: #495057;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.flowchart-block {
+  margin-bottom: 32px;
+}
+.flowchart-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2d5016;
+  margin: 0 0 6px 0;
+}
+.flowchart-desc {
+  font-size: 13px;
+  color: #495057;
+  margin: 0 0 20px 0;
+  line-height: 1.5;
+}
+.flowchart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 20px;
+  background: #f8f9f8;
+  border: 1px solid #dee2de;
+  border-radius: 8px;
+}
+.flowchart-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.flowchart-box {
+  padding: 10px 20px;
+  background: #fff;
+  border: 1px solid #2d5016;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2d5016;
+}
+.flowchart-box-center {
+  background: #2d5016;
+  color: #fff;
+}
+.flowchart-arrow {
+  color: #2d5016;
+  font-size: 18px;
+  line-height: 1;
+  margin: 8px 0;
+}
+
+/* Hand-drawn sketch theme */
+.flowchart-sketch {
+  background: #faf8f5;
+  border: 2px dashed #b8a99a;
+  border-radius: 4px;
+  padding: 28px 24px;
+  font-family: "Caveat", cursive;
+}
+.flowchart-sketch .flowchart-title {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+.flowchart-sketch .flowchart-desc {
+  font-family: inherit;
+  font-size: 1.05rem;
+  color: #5c5348;
+}
+
+.flowchart-combine {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 4px 16px;
+}
+.flowchart-rugged-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  min-width: 280px;
+  min-height: 72px;
+  color: #6b5b4f;
+  pointer-events: none;
+}
+.rugged-circle-path {
+  stroke-dasharray: 4 3;
+  stroke-linecap: round;
+}
+.flowchart-combine-row {
+  position: relative;
+  z-index: 1;
+  align-items: center;
+  gap: 12px;
+}
+.flowchart-plus {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #6b5b4f;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.flowchart-box-sketch {
+  border: 2px dashed #5c5348;
+  border-radius: 3px;
+  background: #fffefb;
+  font-family: "Caveat", cursive;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #3d352a;
+  padding: 8px 18px;
+  transform: rotate(-0.3deg);
+}
+.flowchart-box-sketch:nth-child(3) {
+  transform: rotate(0.2deg);
+}
+.flowchart-box-center.flowchart-box-sketch {
+  border-style: solid;
+  border-color: #3d352a;
+  color: #fff;
+  background: #4a5c3d;
+  transform: rotate(0.4deg);
+}
+.flowchart-arrow-sketch {
+  font-family: "Caveat", cursive;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #5c5348;
+  margin: 4px 0 8px;
+}
+
 .scout-flow,
 .empowerment-dimensions {
   margin-bottom: 28px;
@@ -1226,6 +1369,12 @@ body.nav-open .hamburger span:nth-child(3) {
   font-size: 1.5rem;
   font-weight: 700;
   color: #2d5016;
+}
+.dashboard-interface-label {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  color: #5a6c5a;
+  font-style: italic;
 }
 .dashboard-top-subheading {
   margin: 0 0 20px 0;
