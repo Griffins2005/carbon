@@ -199,7 +199,7 @@
       if (part && (el = document.getElementById('data-participation'))) el.textContent = part.participation_rate_percent != null ? part.participation_rate_percent + '%' : '—';
       if ((el = document.getElementById('data-population'))) el.textContent = sc.total_population_covered != null ? naNum(sc.total_population_covered) : '—';
     } else {
-      /* Dummy SCOUT / SocialCoMMs when no survey data (illustrative) */
+      /* Dummy SCOUT when no survey data (illustrative) */
       if ((el = document.getElementById('data-weli'))) el.textContent = '—';
       if ((el = document.getElementById('data-weli-target'))) el.textContent = 'Target: 50%';
       if ((el = document.getElementById('data-weli-fill'))) el.style.width = '0%';

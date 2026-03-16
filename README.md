@@ -18,7 +18,7 @@ A **national framework for KWCA** (Kenya Wildlife Conservancies Association): pu
 
 - **Public Dashboard** (`dashboard.html`) — **Front-end interface for data description and analysis.** Kenya Verra projects: project selector (Kenya total, NRT, Komaza, Boomitra, KCSA), big-number stats (credits issued/retired, community share, project count), interactive map (NRT boundary, conservancies, other projects), compare & filter table, verification cycles, data grid (carbon tracker, SCOUT metrics, grievance mechanism), and community benefits.
 
-- **Sources** (`sources.html`) — Citations and methodology: Verra Registry, NRT, WELI/Pro-WEAI, Social CoMMs, VCS 1468 details, dashboard data. Card layout with in-page nav.
+- **Sources** (`sources.html`) — Citations and methodology: Verra Registry, NRT, WELI/Pro-WEAI, SCOUT, VCS 1468 details, dashboard data. Card layout with in-page nav.
 
 ## Data workflow
 
