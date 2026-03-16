@@ -182,6 +182,37 @@
         }
       });
     });
+    initChannelSwitch();
+  }
+
+  function initChannelSwitch() {
+    var wrap = document.querySelector('.channel-switch-wrap');
+    if (!wrap) return;
+    var btns = wrap.querySelectorAll('.channel-switch-btn');
+    var panelSms = document.getElementById('channel-panel-sms');
+    var panelUssd = document.getElementById('channel-panel-ussd');
+    if (!panelSms || !panelUssd || btns.length < 2) return;
+
+    function showChannel(channel) {
+      var isSms = channel === 'sms';
+      btns[0].classList.toggle('active', isSms);
+      btns[1].classList.toggle('active', !isSms);
+      btns[0].setAttribute('aria-selected', isSms ? 'true' : 'false');
+      btns[1].setAttribute('aria-selected', !isSms ? 'true' : 'false');
+      panelSms.hidden = !isSms;
+      panelUssd.hidden = isSms;
+      var url = window.location.pathname + window.location.search + (isSms ? '' : '#ussd');
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', url);
+      } else {
+        if (isSms) window.location.hash = ''; else window.location.hash = 'ussd';
+      }
+    }
+
+    btns[0].addEventListener('click', function() { showChannel('sms'); });
+    btns[1].addEventListener('click', function() { showChannel('ussd'); });
+
+    if (window.location.hash === '#ussd') showChannel('ussd');
   }
 
   if (document.readyState === 'loading') {

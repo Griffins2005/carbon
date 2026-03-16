@@ -29,7 +29,6 @@
                 <nav class="layer-nav">
                     <a href="index.html">Home</a>
                     <a href="community-interface.html">Community Interface</a>
-                    <a href="ussd-interface.html">USSD Interface</a>
                     <a href="scout-engine.html">SCOUT Tool</a>
                     <a href="dashboard.html">Public Dashboard</a>
                     <a href="sources.html">Sources</a>
@@ -50,9 +49,11 @@
             <h3>Bidirectional Communication Channels</h3>
             <p class="layer-intro">Part of the national framework for <strong>KWCA</strong> (Kenya Wildlife Conservancies Association): community voice and data flow across Kenya’s conservancies.</p>
 
-            <div class="flowchart-block" role="img" aria-label="SMS and data workflow: SMS/IVR and Manual entry into Central repository, then Public Dashboard.">
-                <h4 class="flowchart-title">SMS &amp; data workflow</h4>
-                <p class="flowchart-desc">SMS/IVR and manual entries feed a single central repository; the Public Dashboard is the front-end for viewing and analysis.</p>
+            <div class="flowchart-block" role="img" aria-label="Bidirectional data workflow: SMS/IVR and USSD two-way with KWCA central repository, which feeds Public Dashboard.">
+                <div class="flowchart-header">
+                    <h4 class="flowchart-title">SMS &amp; USSD data workflow</h4>
+                    <p class="flowchart-desc">Community members use <strong>SMS/IVR</strong> or <strong>USSD</strong> to send and request data. Both channels connect to the same central repository; the Public Dashboard is the front-end for viewing and analysis.</p>
+                </div>
                 <div class="flowchart flowchart-sketch">
                     <div class="flowchart-combine">
                         <svg class="flowchart-rugged-circle" viewBox="0 0 200 100" aria-hidden="true">
@@ -61,20 +62,39 @@
                         <div class="flowchart-row flowchart-combine-row">
                             <div class="flowchart-box flowchart-box-sketch">SMS / IVR</div>
                             <span class="flowchart-plus" aria-hidden="true">+</span>
-                            <div class="flowchart-box flowchart-box-sketch">Manual entry</div>
+                            <div class="flowchart-box flowchart-box-sketch">USSD</div>
                         </div>
                     </div>
-                    <div class="flowchart-arrow flowchart-arrow-sketch">↓</div>
+                    <div class="flowchart-arrow flowchart-arrow-bidi" aria-label="Bidirectional flow">
+                        <span class="flowchart-arrow-down">↓</span>
+                        <span class="flowchart-arrow-up">↑</span>
+                    </div>
                     <div class="flowchart-row">
-                        <div class="flowchart-box flowchart-box-center flowchart-box-sketch">Central repository</div>
+                        <div class="flowchart-box flowchart-box-center flowchart-box-sketch">Central repository <span class="flowchart-kwca">(managed by KWCA)</span></div>
                     </div>
                     <div class="flowchart-arrow flowchart-arrow-sketch">↓</div>
                     <div class="flowchart-row">
                         <div class="flowchart-box flowchart-box-sketch">Public Dashboard</div>
                     </div>
                 </div>
+                <div class="flowchart-explanation">
+                    <p class="flowchart-elab-lead">Aim: transparency and bidirectional communication</p>
+                    <p class="flowchart-elab-p">CarbonWatch gives conservancy members <strong>easier ways to access data</strong> about their conservancies—including carbon activities, payments, and grievance status—and to <strong>send</strong> reports and feedback. <strong>KWCA</strong> manages the central repository so that communication with conservancy members stays <strong>bidirectional</strong>: members can request information and submit data through the same channels.</p>
+                    <p class="flowchart-elab-lead">How each channel works</p>
+                    <ul class="flowchart-elab-list">
+                        <li><strong>SMS / IVR</strong> — Send messages (complaints, queries, feedback) and receive replies. Alerts and two-way conversation.</li>
+                        <li><strong>USSD</strong> — Dial a short code to request specific data (e.g. last carbon payment, complaint status) and get an instant text response. No internet required.</li>
+                    </ul>
+                    <p class="flowchart-elab-note">The <strong>Public Dashboard</strong> is the front-end of the repository: it displays the data stored in the central repo so that transparency is visible to all. All inputs and responses from SMS, IVR, and USSD are stored in the same KWCA-managed central repository.</p>
+                </div>
             </div>
 
+            <div class="channel-switch-wrap" role="tablist" aria-label="Choose channel to display">
+                <button type="button" class="channel-switch-btn active" data-channel="sms" role="tab" aria-selected="true" aria-controls="channel-panel-sms" id="channel-tab-sms">SMS / IVR</button>
+                <button type="button" class="channel-switch-btn" data-channel="ussd" role="tab" aria-selected="false" aria-controls="channel-panel-ussd" id="channel-tab-ussd">USSD</button>
+            </div>
+
+            <div id="channel-panel-sms" class="channel-panel channel-panel-sms" role="tabpanel" aria-labelledby="channel-tab-sms">
             <div class="tool-card tool-card-phone">
                 <div class="tool-header">
                     <h2 class="tool-title">SMS tool</h2>
@@ -197,7 +217,7 @@
                     <div class="flow-step">
                         <span class="flow-step-num">1</span>
                         <h5>Community input</h5>
-                        <p>Members send SMS or use IVR to report issues, ask about carbon payments, or voice perspectives. Inputs are timestamped and linked to conservancy where possible.</p>
+                        <p>Members send SMS, use IVR, or use USSD to report issues, request data (e.g. payment status), or voice perspectives. Inputs are timestamped and linked to conservancy where possible.</p>
                     </div>
                     <div class="flow-step">
                         <span class="flow-step-num">2</span>
@@ -212,7 +232,7 @@
                     <div class="flow-step">
                         <span class="flow-step-num">4</span>
                         <h5>Education and dashboard</h5>
-                        <p>Carbon modules and updates can be sent via SMS/IVR. The Public Dashboard (front-end interface for data description and analysis) shows issue counts, response times, and education reach where disclosed.</p>
+                        <p>Carbon modules and updates can be sent via SMS/IVR or requested via USSD. The Public Dashboard (front-end interface for data description and analysis) shows issue counts, response times, and education reach where disclosed.</p>
                     </div>
                 </div>
             </div>
@@ -252,12 +272,229 @@
                 <div class="layer-card">
                     <h4>Community Interface outputs</h4>
                     <ul>
-                        <li><strong>Logged inputs:</strong> SMS and IVR messages with conservancy, date, and topic where available.</li>
+                        <li><strong>Logged inputs:</strong> SMS, IVR, and USSD sessions with conservancy, date, and topic where available.</li>
                         <li><strong>Response metrics:</strong> Time to first response, resolution status (where disclosed).</li>
                         <li><strong>Warning signs:</strong> Sudden spikes, recurring themes, low response rates—surfaced on the Public Dashboard.</li>
                         <li><strong>Education reach:</strong> Carbon modules sent via SMS/IVR; summarized on dashboard where disclosed.</li>
                     </ul>
                     <p>Community Interface should feed governance action, not just data.</p>
+                </div>
+            </div>
+            </div>
+
+            <div id="channel-panel-ussd" class="channel-panel channel-panel-ussd" role="tabpanel" aria-labelledby="channel-tab-ussd" hidden>
+                <p class="layer-intro">Part of the national framework for <strong>KWCA</strong>: a USSD channel that connects feature phones directly to the same central repository that powers the Public Dashboard.</p>
+                <h4>How it works</h4>
+                <p class="layer-lead">Community members dial a short code (for example <strong>*123*44#</strong>) on any feature phone. The request is routed through the USSD gateway to the CarbonWatch application server, which queries the central repository and returns a short text response.</p>
+                <div class="layer-grid">
+                    <div class="layer-card">
+                        <h4>Why USSD?</h4>
+                        <p>USSD works on basic feature phones and does <strong>not require mobile data</strong>. This makes it ideal for conservancies where connectivity is limited but GSM coverage exists.</p>
+                        <ul>
+                            <li>Accessible on any phone with a SIM card.</li>
+                            <li>Works anywhere with network signal (no internet).</li>
+                            <li>Short sessions focused on key questions.</li>
+                        </ul>
+                    </div>
+                    <div class="layer-card">
+                        <h4>Connected to the dashboard</h4>
+                        <p>The USSD service talks to the <strong>same central repository</strong> used by the Public Dashboard:</p>
+                        <ul>
+                            <li>USSD request → application API → central repository.</li>
+                            <li>Central repository → formatted response → USSD reply.</li>
+                            <li>All requests can be logged as usage and transparency metrics.</li>
+                        </ul>
+                    </div>
+                </div>
+                <h4 id="ussd-step1">1. Options you can access</h4>
+                <p class="layer-lead">After dialling the short code (e.g. <strong>*123*44#</strong>), the user sees this main menu on their phone. No internet is required—only network signal.</p>
+                <div class="ussd-mockup-section ussd-mockup-menu">
+                    <div class="ussd-phone-mockup" aria-label="USSD main menu on feature phone">
+                        <div class="ussd-phone-frame">
+                            <div class="ussd-phone-earpiece"></div>
+                            <div class="ussd-phone-screen">
+                                <div class="ussd-screen-content">
+                                    <div class="ussd-line ussd-line-title">CarbonWatch Kenya</div>
+                                    <div class="ussd-line">1. Last carbon payment</div>
+                                    <div class="ussd-line">2. Total carbon revenue</div>
+                                    <div class="ussd-line">3. Complaints status</div>
+                                    <div class="ussd-line">4. Education modules</div>
+                                    <div class="ussd-line ussd-line-prompt">Reply with option (1-4)</div>
+                                </div>
+                            </div>
+                            <div class="ussd-phone-nav" aria-hidden="true">
+                                <button type="button" class="ussd-nav-btn" disabled>⋯</button>
+                                <div class="ussd-nav-dpad"><span class="ussd-dpad-center">●</span></div>
+                                <button type="button" class="ussd-nav-btn" disabled>⋯</button>
+                            </div>
+                            <div class="ussd-phone-keypad" aria-hidden="true">
+                                <div class="ussd-keypad-row"><span class="ussd-key">1</span><span class="ussd-key">2</span><span class="ussd-key">3</span></div>
+                                <div class="ussd-keypad-row"><span class="ussd-key">4</span><span class="ussd-key">5</span><span class="ussd-key">6</span></div>
+                                <div class="ussd-keypad-row"><span class="ussd-key">7</span><span class="ussd-key">8</span><span class="ussd-key">9</span></div>
+                                <div class="ussd-keypad-row"><span class="ussd-key">*</span><span class="ussd-key">0</span><span class="ussd-key">#</span></div>
+                            </div>
+                            <div class="ussd-phone-nav-bottom" aria-hidden="true">
+                                <span class="ussd-call-btn">&#x260e;</span>
+                                <span class="ussd-end-btn">&#x260f;</span>
+                            </div>
+                            <span class="ussd-phone-brand">Safaricom</span>
+                        </div>
+                    </div>
+                </div>
+                <h4 id="ussd-step2" class="ussd-step-two">2. Traversing each option</h4>
+                <p class="layer-lead">Below are mockups of the screens the user sees when they choose each option. Each path leads to a request from the central repository.</p>
+                <div class="ussd-flows-grid">
+                    <div class="ussd-flow-card">
+                        <h5>Option 1: Last carbon payment</h5>
+                        <div class="ussd-flow-phones">
+                            <div class="ussd-phone-mockup ussd-phone-small">
+                                <div class="ussd-phone-frame">
+                                    <div class="ussd-phone-earpiece"></div>
+                                    <div class="ussd-phone-screen">
+                                        <div class="ussd-screen-content">
+                                            <div class="ussd-line ussd-line-title">CarbonWatch Kenya</div>
+                                            <div class="ussd-line">1. Last carbon payment</div>
+                                            <div class="ussd-line">2. Total carbon revenue</div>
+                                            <div class="ussd-line">3. Complaints status</div>
+                                            <div class="ussd-line ussd-line-prompt">Reply (1-3)</div>
+                                        </div>
+                                    </div>
+                                    <div class="ussd-phone-nav ussd-phone-nav-small" aria-hidden="true"><button type="button" class="ussd-nav-btn" disabled>⋯</button><div class="ussd-nav-dpad"><span class="ussd-dpad-center">●</span></div><button type="button" class="ussd-nav-btn" disabled>⋯</button></div>
+                                    <div class="ussd-phone-keypad ussd-keypad-small" aria-hidden="true"><div class="ussd-keypad-row"><span class="ussd-key">1</span><span class="ussd-key">2</span><span class="ussd-key">3</span></div><div class="ussd-keypad-row"><span class="ussd-key">4</span><span class="ussd-key">5</span><span class="ussd-key">6</span></div><div class="ussd-keypad-row"><span class="ussd-key">7</span><span class="ussd-key">8</span><span class="ussd-key">9</span></div><div class="ussd-keypad-row"><span class="ussd-key">*</span><span class="ussd-key">0</span><span class="ussd-key">#</span></div></div>
+                                    <div class="ussd-phone-nav-bottom ussd-nav-bottom-small" aria-hidden="true"><span class="ussd-call-btn">&#x260e;</span><span class="ussd-end-btn">&#x260f;</span></div>
+                                </div>
+                            </div>
+                            <span class="ussd-flow-arrow" aria-hidden="true">→</span>
+                            <div class="ussd-phone-mockup ussd-phone-small">
+                                <div class="ussd-phone-frame">
+                                    <div class="ussd-phone-earpiece"></div>
+                                    <div class="ussd-phone-screen">
+                                        <div class="ussd-screen-content">
+                                            <div class="ussd-line ussd-line-title">Last payment</div>
+                                            <div class="ussd-line">Enter conservancy code:</div>
+                                            <div class="ussd-line ussd-line-input">e.g. SERA</div>
+                                            <div class="ussd-line ussd-line-prompt">Send code</div>
+                                        </div>
+                                    </div>
+                                    <div class="ussd-phone-nav ussd-phone-nav-small" aria-hidden="true"><button type="button" class="ussd-nav-btn" disabled>⋯</button><div class="ussd-nav-dpad"><span class="ussd-dpad-center">●</span></div><button type="button" class="ussd-nav-btn" disabled>⋯</button></div>
+                                    <div class="ussd-phone-keypad ussd-keypad-small" aria-hidden="true"><div class="ussd-keypad-row"><span class="ussd-key">1</span><span class="ussd-key">2</span><span class="ussd-key">3</span></div><div class="ussd-keypad-row"><span class="ussd-key">4</span><span class="ussd-key">5</span><span class="ussd-key">6</span></div><div class="ussd-keypad-row"><span class="ussd-key">7</span><span class="ussd-key">8</span><span class="ussd-key">9</span></div><div class="ussd-keypad-row"><span class="ussd-key">*</span><span class="ussd-key">0</span><span class="ussd-key">#</span></div></div>
+                                    <div class="ussd-phone-nav-bottom ussd-nav-bottom-small" aria-hidden="true"><span class="ussd-call-btn">&#x260e;</span><span class="ussd-end-btn">&#x260f;</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ussd-flow-card">
+                        <h5>Option 2: Total carbon revenue</h5>
+                        <div class="ussd-flow-phones">
+                            <div class="ussd-phone-mockup ussd-phone-small">
+                                <div class="ussd-phone-frame">
+                                    <div class="ussd-phone-earpiece"></div>
+                                    <div class="ussd-phone-screen">
+                                        <div class="ussd-screen-content">
+                                            <div class="ussd-line ussd-line-title">CarbonWatch Kenya</div>
+                                            <div class="ussd-line">1. Last carbon payment</div>
+                                            <div class="ussd-line">2. Total carbon revenue</div>
+                                            <div class="ussd-line">3. Complaints status</div>
+                                            <div class="ussd-line ussd-line-prompt">Reply (1-3)</div>
+                                        </div>
+                                    </div>
+                                    <div class="ussd-phone-nav ussd-phone-nav-small" aria-hidden="true"><button type="button" class="ussd-nav-btn" disabled>⋯</button><div class="ussd-nav-dpad"><span class="ussd-dpad-center">●</span></div><button type="button" class="ussd-nav-btn" disabled>⋯</button></div>
+                                    <div class="ussd-phone-keypad ussd-keypad-small" aria-hidden="true"><div class="ussd-keypad-row"><span class="ussd-key">1</span><span class="ussd-key">2</span><span class="ussd-key">3</span></div><div class="ussd-keypad-row"><span class="ussd-key">4</span><span class="ussd-key">5</span><span class="ussd-key">6</span></div><div class="ussd-keypad-row"><span class="ussd-key">7</span><span class="ussd-key">8</span><span class="ussd-key">9</span></div><div class="ussd-keypad-row"><span class="ussd-key">*</span><span class="ussd-key">0</span><span class="ussd-key">#</span></div></div>
+                                    <div class="ussd-phone-nav-bottom ussd-nav-bottom-small" aria-hidden="true"><span class="ussd-call-btn">&#x260e;</span><span class="ussd-end-btn">&#x260f;</span></div>
+                                </div>
+                            </div>
+                            <span class="ussd-flow-arrow" aria-hidden="true">→</span>
+                            <div class="ussd-phone-mockup ussd-phone-small">
+                                <div class="ussd-phone-frame">
+                                    <div class="ussd-phone-earpiece"></div>
+                                    <div class="ussd-phone-screen">
+                                        <div class="ussd-screen-content">
+                                            <div class="ussd-line ussd-line-title">Total revenue</div>
+                                            <div class="ussd-line">Select: 1. Kenya 2. My conservancy</div>
+                                            <div class="ussd-line ussd-line-prompt">Reply 1 or 2</div>
+                                        </div>
+                                    </div>
+                                    <div class="ussd-phone-nav ussd-phone-nav-small" aria-hidden="true"><button type="button" class="ussd-nav-btn" disabled>⋯</button><div class="ussd-nav-dpad"><span class="ussd-dpad-center">●</span></div><button type="button" class="ussd-nav-btn" disabled>⋯</button></div>
+                                    <div class="ussd-phone-keypad ussd-keypad-small" aria-hidden="true"><div class="ussd-keypad-row"><span class="ussd-key">1</span><span class="ussd-key">2</span><span class="ussd-key">3</span></div><div class="ussd-keypad-row"><span class="ussd-key">4</span><span class="ussd-key">5</span><span class="ussd-key">6</span></div><div class="ussd-keypad-row"><span class="ussd-key">7</span><span class="ussd-key">8</span><span class="ussd-key">9</span></div><div class="ussd-keypad-row"><span class="ussd-key">*</span><span class="ussd-key">0</span><span class="ussd-key">#</span></div></div>
+                                    <div class="ussd-phone-nav-bottom ussd-nav-bottom-small" aria-hidden="true"><span class="ussd-call-btn">&#x260e;</span><span class="ussd-end-btn">&#x260f;</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ussd-flow-card">
+                        <h5>Option 3: Complaints status</h5>
+                        <div class="ussd-flow-phones">
+                            <div class="ussd-phone-mockup ussd-phone-small">
+                                <div class="ussd-phone-frame">
+                                    <div class="ussd-phone-earpiece"></div>
+                                    <div class="ussd-phone-screen">
+                                        <div class="ussd-screen-content">
+                                            <div class="ussd-line ussd-line-title">CarbonWatch Kenya</div>
+                                            <div class="ussd-line">1. Last carbon payment</div>
+                                            <div class="ussd-line">2. Total carbon revenue</div>
+                                            <div class="ussd-line">3. Complaints status</div>
+                                            <div class="ussd-line ussd-line-prompt">Reply (1-3)</div>
+                                        </div>
+                                    </div>
+                                    <div class="ussd-phone-nav ussd-phone-nav-small" aria-hidden="true"><button type="button" class="ussd-nav-btn" disabled>⋯</button><div class="ussd-nav-dpad"><span class="ussd-dpad-center">●</span></div><button type="button" class="ussd-nav-btn" disabled>⋯</button></div>
+                                    <div class="ussd-phone-keypad ussd-keypad-small" aria-hidden="true"><div class="ussd-keypad-row"><span class="ussd-key">1</span><span class="ussd-key">2</span><span class="ussd-key">3</span></div><div class="ussd-keypad-row"><span class="ussd-key">4</span><span class="ussd-key">5</span><span class="ussd-key">6</span></div><div class="ussd-keypad-row"><span class="ussd-key">7</span><span class="ussd-key">8</span><span class="ussd-key">9</span></div><div class="ussd-keypad-row"><span class="ussd-key">*</span><span class="ussd-key">0</span><span class="ussd-key">#</span></div></div>
+                                    <div class="ussd-phone-nav-bottom ussd-nav-bottom-small" aria-hidden="true"><span class="ussd-call-btn">&#x260e;</span><span class="ussd-end-btn">&#x260f;</span></div>
+                                </div>
+                            </div>
+                            <span class="ussd-flow-arrow" aria-hidden="true">→</span>
+                            <div class="ussd-phone-mockup ussd-phone-small">
+                                <div class="ussd-phone-frame">
+                                    <div class="ussd-phone-earpiece"></div>
+                                    <div class="ussd-phone-screen">
+                                        <div class="ussd-screen-content">
+                                            <div class="ussd-line ussd-line-title">Complaints</div>
+                                            <div class="ussd-line">Enter complaint ID (e.g. G-2024-001)</div>
+                                            <div class="ussd-line ussd-line-prompt">Send ID</div>
+                                        </div>
+                                    </div>
+                                    <div class="ussd-phone-nav ussd-phone-nav-small" aria-hidden="true"><button type="button" class="ussd-nav-btn" disabled>⋯</button><div class="ussd-nav-dpad"><span class="ussd-dpad-center">●</span></div><button type="button" class="ussd-nav-btn" disabled>⋯</button></div>
+                                    <div class="ussd-phone-keypad ussd-keypad-small" aria-hidden="true"><div class="ussd-keypad-row"><span class="ussd-key">1</span><span class="ussd-key">2</span><span class="ussd-key">3</span></div><div class="ussd-keypad-row"><span class="ussd-key">4</span><span class="ussd-key">5</span><span class="ussd-key">6</span></div><div class="ussd-keypad-row"><span class="ussd-key">7</span><span class="ussd-key">8</span><span class="ussd-key">9</span></div><div class="ussd-keypad-row"><span class="ussd-key">*</span><span class="ussd-key">0</span><span class="ussd-key">#</span></div></div>
+                                    <div class="ussd-phone-nav-bottom ussd-nav-bottom-small" aria-hidden="true"><span class="ussd-call-btn">&#x260e;</span><span class="ussd-end-btn">&#x260f;</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4 id="ussd-step3">3. Message with requested data</h4>
+                <p class="layer-lead">After the user selects an option and any required code or ID, the system fetches data from the central repository and sends a short text reply to the phone.</p>
+                <div class="ussd-mockup-section ussd-response-section">
+                    <div class="ussd-phone-mockup" aria-label="USSD response message on feature phone">
+                        <div class="ussd-phone-frame">
+                            <div class="ussd-phone-earpiece"></div>
+                            <div class="ussd-phone-screen ussd-screen-response">
+                                <div class="ussd-screen-content">
+                                    <div class="ussd-line ussd-line-title">CarbonWatch – Your data</div>
+                                    <div class="ussd-line ussd-line-data">Last payment: Feb 2022</div>
+                                    <div class="ussd-line ussd-line-data">Amount: USD 324,000</div>
+                                    <div class="ussd-line ussd-line-data">Conservancy: Sera</div>
+                                    <div class="ussd-line ussd-line-meta">Source: CarbonWatch dashboard.</div>
+                                    <div class="ussd-line ussd-line-prompt">Thank you.</div>
+                                </div>
+                            </div>
+                            <div class="ussd-phone-nav" aria-hidden="true">
+                                <button type="button" class="ussd-nav-btn" disabled>⋯</button>
+                                <div class="ussd-nav-dpad"><span class="ussd-dpad-center">●</span></div>
+                                <button type="button" class="ussd-nav-btn" disabled>⋯</button>
+                            </div>
+                            <div class="ussd-phone-keypad" aria-hidden="true">
+                                <div class="ussd-keypad-row"><span class="ussd-key">1</span><span class="ussd-key">2</span><span class="ussd-key">3</span></div>
+                                <div class="ussd-keypad-row"><span class="ussd-key">4</span><span class="ussd-key">5</span><span class="ussd-key">6</span></div>
+                                <div class="ussd-keypad-row"><span class="ussd-key">7</span><span class="ussd-key">8</span><span class="ussd-key">9</span></div>
+                                <div class="ussd-keypad-row"><span class="ussd-key">*</span><span class="ussd-key">0</span><span class="ussd-key">#</span></div>
+                            </div>
+                            <div class="ussd-phone-nav-bottom" aria-hidden="true">
+                                <span class="ussd-call-btn">&#x260e;</span>
+                                <span class="ussd-end-btn">&#x260f;</span>
+                            </div>
+                            <span class="ussd-phone-brand">Safaricom</span>
+                        </div>
+                    </div>
+                    <p class="ussd-response-caption">Example reply for "Last carbon payment" after the user entered their conservancy code. Data source: CarbonWatch dashboard.</p>
                 </div>
             </div>
         </section>

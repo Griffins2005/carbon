@@ -12,7 +12,7 @@ A **national framework for KWCA** (Kenya Wildlife Conservancies Association): pu
 
 - **Home** (`index.html`) — Overview, hero, and links to Community Interface, SCOUT Tool, Public Dashboard, and Sources.
 
-- **Community Interface** (`community-interface.html`) — SMS and IVR mockup. Users can type a message and send; the mockup shows an **acknowledgement reply** (with reference ID) in English or Kiswahili. Language toggle and smartphone/feature-phone views.
+- **Community Interface** (`community-interface.html`) — **SMS/IVR and USSD** on one page (same bidirectional channels). A workflow diagram shows SMS/IVR and USSD feeding the central repository; a switch toggles between **SMS** (mockup, channels, process) and **USSD** (menu, request/response). Users can send or request data via either channel.
 
 - **SCOUT Tool** (`scout-engine.html`) — Survey aligned to WELI-style empowerment dimensions (production, nutrition, resources, income, opportunities, time & workload). Donut chart and dimension strip; 7 questions; indices, red flags, and action prompts. English/Kiswahili.
 
@@ -22,13 +22,13 @@ A **national framework for KWCA** (Kenya Wildlife Conservancies Association): pu
 
 ## Data workflow
 
-SMS data and manual entries feed into a **single central repository**; the dashboard is the front-end for viewing and analyzing that data.
+**SMS/IVR** and **USSD** are the same bidirectional channels: users can **send** data (reports, feedback) and **request** data (carbon payment status, grievance tracking) via either channel. Both feed a **single central repository**; the dashboard is the front-end for viewing and analyzing that data.
 
 ```
 ┌─────────────────────┐     ┌─────────────────────┐     ┌──────────────────────────┐
-│  SMS / IVR inputs   │     │  Manual data entry   │     │  Central data repository  │
-│  (Community         │────▶│  (field surveys,     │────▶│  (harmonized datasets,   │
-│   Interface)        │     │   admin, imports)    │     │   kenya-carbon-*.json)   │
+│  SMS / IVR          │     │  USSD               │     │  Central data repository  │
+│  (send & request    │────▶│  (short code;       │────▶│  (harmonized datasets,   │
+│   messages)         │     │   send & request)   │     │   kenya-carbon-*.json)   │
 └─────────────────────┘     └─────────────────────┘     └────────────┬─────────────┘
                                                                       │
                                                                       ▼
@@ -40,7 +40,7 @@ SMS data and manual entries feed into a **single central repository**; the dashb
                                                           └──────────────────────────┘
 ```
 
-- **Inputs:** Community messages (SMS/IVR) and manual entries (SCOUT, field surveys, admin) are ingested and stored.
+- **Inputs:** Community messages (SMS/IVR) and USSD sessions (send and request) are ingested and stored; SCOUT and other manual entries also feed the repository.
 - **Repository:** A single central repository holds harmonized project and conservancy data (e.g. `kenya-carbon-harmonized.json`, `kenya-carbon-projects.json`).
 - **Front-end:** The **Public Dashboard** is the **front-end interface for data description and analysis**—maps, stats, tables, and exports.
 

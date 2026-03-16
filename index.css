@@ -362,7 +362,14 @@ body.nav-open .hamburger span:nth-child(3) {
   color: #2d5016;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  margin: 0 0 28px 0;
+  margin: 0 0 10px 0;
+}
+.home-tools-intro {
+  font-size: 0.9375rem;
+  color: #495057;
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+  max-width: 56ch;
 }
 .home-tools-grid {
   display: grid;
@@ -827,19 +834,24 @@ body.nav-open .hamburger span:nth-child(3) {
 }
 
 .flowchart-block {
-  margin-bottom: 32px;
+  margin-bottom: 40px;
+}
+.flowchart-header {
+  margin-bottom: 24px;
 }
 .flowchart-title {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: #2d5016;
-  margin: 0 0 6px 0;
+  margin: 0 0 10px 0;
+  letter-spacing: 0.02em;
 }
 .flowchart-desc {
-  font-size: 13px;
+  font-size: 15px;
   color: #495057;
-  margin: 0 0 20px 0;
-  line-height: 1.5;
+  margin: 0;
+  line-height: 1.6;
+  max-width: 56ch;
 }
 .flowchart {
   display: flex;
@@ -876,6 +888,24 @@ body.nav-open .hamburger span:nth-child(3) {
   line-height: 1;
   margin: 8px 0;
 }
+.flowchart-arrow-bidi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin: 8px 0;
+  color: #2d5016;
+  font-size: 16px;
+  font-weight: 700;
+}
+.flowchart-arrow-down { opacity: 0.9; }
+.flowchart-arrow-up { opacity: 0.7; }
+.flowchart-kwca {
+  display: block;
+  font-size: 0.85em;
+  font-weight: 500;
+  opacity: 0.95;
+}
 
 /* Hand-drawn sketch theme */
 .flowchart-sketch {
@@ -895,6 +925,103 @@ body.nav-open .hamburger span:nth-child(3) {
   font-size: 1.05rem;
   color: #5c5348;
 }
+.flowchart-explanation {
+  margin-top: 24px;
+  padding: 20px 24px;
+  background: rgba(45, 80, 22, 0.06);
+  border-left: 4px solid #2d5016;
+  border-radius: 0 8px 8px 0;
+  max-width: 56ch;
+}
+.flowchart-elab-lead {
+  font-size: 13px;
+  font-weight: 700;
+  color: #2d5016;
+  margin: 16px 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.flowchart-elab-lead:first-child {
+  margin-top: 0;
+}
+.flowchart-elab-p {
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.6;
+  margin: 0 0 12px 0;
+}
+.flowchart-elab-p strong {
+  color: #2d5016;
+}
+.flowchart-elab-list {
+  margin: 0 0 14px 0;
+  padding-left: 20px;
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.6;
+}
+.flowchart-elab-list li {
+  margin-bottom: 8px;
+}
+.flowchart-elab-list li:last-child {
+  margin-bottom: 0;
+}
+.flowchart-elab-list strong {
+  color: #2d5016;
+}
+.flowchart-elab-note {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.channel-switch-wrap {
+  display: flex;
+  gap: 0;
+  margin-bottom: 28px;
+  border-bottom: 2px solid #e0e6de;
+  width: fit-content;
+}
+.channel-switch-btn {
+  padding: 12px 20px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b7c63;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.channel-switch-btn:hover {
+  color: #2d5016;
+}
+.channel-switch-btn.active {
+  color: #2d5016;
+  border-bottom-color: #2d5016;
+}
+.channel-panel {
+  display: block;
+}
+.channel-panel[hidden] {
+  display: none;
+}
+.ussd-response-example {
+  padding: 16px 20px;
+  background: #0a0e0a;
+  color: #9ccc65;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  border-radius: 8px;
+  margin-top: 12px;
+  max-width: 420px;
+}
+.ussd-response-example p { margin: 0; }
+.ussd-response-example strong { color: #c5e1a5; }
 
 .flowchart-combine {
   position: relative;
@@ -960,6 +1087,12 @@ body.nav-open .hamburger span:nth-child(3) {
   color: #5c5348;
   margin: 4px 0 8px;
 }
+.flowchart-sketch .flowchart-arrow-bidi {
+  font-family: "Caveat", cursive;
+  font-size: 1.6rem;
+  color: #5c5348;
+  margin: 4px 0 8px;
+}
 
 /* USSD phone mockups (ussd-interface.html) */
 .ussd-mockup-section {
@@ -973,6 +1106,20 @@ body.nav-open .hamburger span:nth-child(3) {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+}
+/* Smaller main menu phone under "1. Options you can access" + no gap before "2" */
+#channel-panel-ussd .ussd-mockup-menu {
+  margin-bottom: 0;
+  /* Pull section 2 up: scale(0.58) leaves empty layout space; negative margin collapses it */
+  margin-bottom: -165px;
+}
+#channel-panel-ussd .ussd-mockup-menu .ussd-phone-mockup {
+  transform: scale(0.58);
+  transform-origin: top center;
+}
+#channel-panel-ussd .ussd-step-two {
+  margin-top: 0 !important;
+  margin-bottom: 12px;
 }
 .ussd-phone-frame {
   display: flex;
@@ -1470,6 +1617,12 @@ body.nav-open .hamburger span:nth-child(3) {
 .dimensions-list li::marker {
   font-weight: 700;
   color: #2d5016;
+}
+.dimensions-intro {
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.6;
+  margin: 8px 0 12px 0;
 }
 .dimensions-list-heading {
   font-size: 12px;
