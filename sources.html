@@ -52,6 +52,7 @@
                 <a href="#community">Community &amp; monitoring</a>
                 <a href="#vcs1468-detail">VCS 1468 details</a>
                 <a href="#dashboard-data">Dashboard data</a>
+                <a href="#buyers-credits">Buyer retirements</a>
             </nav>
         </section>
 
@@ -129,7 +130,7 @@
                     <span class="sources-card-badge">Methodology</span>
                     <h3 class="sources-card-title">SCOUT Tool &amp; empowerment dimensions</h3>
                 </div>
-                <p class="sources-card-lead">SCOUT is CarbonWatch’s original survey tool for empowerment and governance in conservancy communities; methodology is aligned to WELI and Pro-WEAI dimensions. Below: key methodology links.</p>
+                <p class="sources-card-lead">SCOUT is CarbonWatch’s survey tool for empowerment and governance in conservancy communities; methodology is aligned to WELI and Pro-WEAI dimensions. Below: key methodology links.</p>
                 <ul class="sources-link-list" role="list">
                     <li>
                         <a href="https://www.ilri.org/knowledge/publications/womens-empowerment-livestock-index" target="_blank" rel="noopener" class="sources-link">
@@ -171,7 +172,7 @@
                     </li>
                     <li class="sources-note">
                         <span class="sources-link-text">SCOUT</span>
-                        <span class="sources-link-desc">CarbonWatch’s original survey tool for empowerment and governance in conservancy communities. Same purpose as existing socio-economic monitoring; methodology aligned to WELI/Pro-WEAI. Related: Social CoMMs guide (Gohil, Musengezi, NRT).</span>
+                        <span class="sources-link-desc">CarbonWatch’s survey tool for empowerment and governance in conservancy communities. Socio-economic monitoring; methodology aligned to WELI/Pro-WEAI.</span>
                     </li>
                 </ul>
             </article>
@@ -206,6 +207,21 @@
                     <li><strong>First payment (Feb 2022):</strong> USD 324,000 to each of the 14 conservancies (NRT Carbon Project Impact). Per-cycle carbon sold, amount received and spending per conservancy not publicly disclosed → N/A.</li>
                     <li>Northern Kenya Rangeland (VCS 1468): 14 conservancies; ~2M ha; USD 14.6M+ carbon revenue to date; 5% to county governments (e.g. Nov 2022: Ksh 23.8M to Isiolo, Samburu, Laikipia). <a href="https://www.nrt-kenya.org/carbon-project-impact" target="_blank" rel="noopener">NRT Carbon Project Impact</a>.</li>
                     <li>State of Conservancies Report (NRT) — Conservancy-level data; <a href="https://www.nrt-kenya.org/document-library" target="_blank" rel="noopener">NRT document library</a> for latest reports.</li>
+                    <li><strong>Carbon credit buyers:</strong> Named buyers and retirement transactions — see <a href="#buyers-credits">Buyer retirements</a> (authoritative data: <strong>Verra Registry</strong>; JSON compiled for the dashboard).</li>
+                </ul>
+            </article>
+
+            <article id="buyers-credits" class="sources-card">
+                <div class="sources-card-head">
+                    <span class="sources-card-badge">Verra</span>
+                    <h3 class="sources-card-title">Carbon credit buyers (Public Dashboard)</h3>
+                </div>
+                <p class="sources-card-lead">The <strong>Carbon credit buyers</strong> section reports <strong>credit retirements and VCS project linkage from the <a href="https://registry.verra.org" target="_blank" rel="noopener">Verra Registry</a></strong> — the authoritative public source for VCS projects, retirement transactions, VCU quantities, retirement dates, and official project names. CarbonWatch does not originate this data; it compiles Registry-aligned records for presentation.</p>
+                <ul class="sources-fact-list" role="list">
+                    <li><strong>Official source of record:</strong> <a href="https://registry.verra.org" target="_blank" rel="noopener">Verra Registry</a> (public project pages, retirement and transaction information).</li>
+                    <li><strong>Dashboard files (derived):</strong> <code>data/buyers-transactions.json</code>, <code>data/buyers-summary.json</code>, and <code>data/buyers-coverage.json</code> — JSON exports used by the site; metadata in each file cites the Registry.</li>
+                    <li><strong>Workbook:</strong> <code>data/MASTER BUYERS CLEAN.xlsx</code> — internal compilation used to generate the JSON; underlying retirement facts remain attributable to the Verra Registry.</li>
+                    <li><strong>Project names &amp; IDs:</strong> VCS IDs and titles match <a href="https://registry.verra.org" target="_blank" rel="noopener">registry.verra.org</a> project listings.</li>
                 </ul>
             </article>
         </div>

@@ -1,0 +1,464 @@
+{
+  "meta": {
+    "source_file": "MASTER BUYERS CLEAN.xlsx",
+    "source_authority": "Verra Registry",
+    "source_authority_url": "https://registry.verra.org",
+    "attribution": "Credit retirements, VCS project IDs, VCU quantities, retirement dates, and official project names derive from public Verra Registry records. This JSON is a compiled export for CarbonWatch; the Registry is the source of record.",
+    "generated_at": "2026-03-23T21:28:39Z",
+    "counts": {
+      "buyer_summary_rows": 1075,
+      "transaction_rows": 1927,
+      "coverage_rows": 64
+    }
+  },
+  "coverage": [
+    {
+      "project_id": 562,
+      "has_issuance_data": "YES",
+      "buyer_count": 135,
+      "total_vcus_retired_to_named_buyer": 544335,
+      "notes": "Kasigau Phase I — 4.0M VCUs. Shares Verra review with 612."
+    },
+    {
+      "project_id": 594,
+      "has_issuance_data": "YES",
+      "buyer_count": 2,
+      "total_vcus_retired_to_named_buyer": 5646,
+      "notes": null
+    },
+    {
+      "project_id": 595,
+      "has_issuance_data": "YES",
+      "buyer_count": 3,
+      "total_vcus_retired_to_named_buyer": 6111,
+      "notes": null
+    },
+    {
+      "project_id": 596,
+      "has_issuance_data": "YES",
+      "buyer_count": 3,
+      "total_vcus_retired_to_named_buyer": 23639,
+      "notes": null
+    },
+    {
+      "project_id": 597,
+      "has_issuance_data": "YES",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 612,
+      "has_issuance_data": "YES",
+      "buyer_count": 202,
+      "total_vcus_retired_to_named_buyer": 3455362,
+      "notes": "Kasigau Phase II — 18.1M VCUs. Shell 2M. Verra formal review."
+    },
+    {
+      "project_id": 737,
+      "has_issuance_data": "YES",
+      "buyer_count": 100,
+      "total_vcus_retired_to_named_buyer": 350816,
+      "notes": null
+    },
+    {
+      "project_id": 881,
+      "has_issuance_data": "YES",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 899,
+      "has_issuance_data": "YES",
+      "buyer_count": 70,
+      "total_vcus_retired_to_named_buyer": 336478,
+      "notes": null
+    },
+    {
+      "project_id": 941,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 996,
+      "has_issuance_data": "YES",
+      "buyer_count": 10,
+      "total_vcus_retired_to_named_buyer": 196453,
+      "notes": null
+    },
+    {
+      "project_id": 1082,
+      "has_issuance_data": "YES",
+      "buyer_count": 45,
+      "total_vcus_retired_to_named_buyer": 33116,
+      "notes": null
+    },
+    {
+      "project_id": 1225,
+      "has_issuance_data": "YES",
+      "buyer_count": 396,
+      "total_vcus_retired_to_named_buyer": 177122,
+      "notes": null
+    },
+    {
+      "project_id": 1347,
+      "has_issuance_data": "YES",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 1408,
+      "has_issuance_data": "YES",
+      "buyer_count": 52,
+      "total_vcus_retired_to_named_buyer": 3168118,
+      "notes": "Chyulu Hills — 111 verifier flags. Gucci, Apple, Netflix, Paris Olympics."
+    },
+    {
+      "project_id": 1468,
+      "has_issuance_data": "YES",
+      "buyer_count": 24,
+      "total_vcus_retired_to_named_buyer": 1510906,
+      "notes": "NKRCP — Full dated buyer timeline. No CDA."
+    },
+    {
+      "project_id": 1662,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 1918,
+      "has_issuance_data": "YES",
+      "buyer_count": 67,
+      "total_vcus_retired_to_named_buyer": 181439,
+      "notes": null
+    },
+    {
+      "project_id": 1944,
+      "has_issuance_data": "YES",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 2338,
+      "has_issuance_data": "YES",
+      "buyer_count": 3,
+      "total_vcus_retired_to_named_buyer": 969,
+      "notes": null
+    },
+    {
+      "project_id": 2349,
+      "has_issuance_data": "YES",
+      "buyer_count": 6,
+      "total_vcus_retired_to_named_buyer": 7108,
+      "notes": null
+    },
+    {
+      "project_id": 2363,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 2623,
+      "has_issuance_data": "YES",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 2835,
+      "has_issuance_data": "YES",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 2836,
+      "has_issuance_data": "YES",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 2837,
+      "has_issuance_data": "YES",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 2989,
+      "has_issuance_data": "YES",
+      "buyer_count": 23,
+      "total_vcus_retired_to_named_buyer": 41351,
+      "notes": null
+    },
+    {
+      "project_id": 3197,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 3206,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 3290,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 3321,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 3340,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 3660,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": "ONLY project with signed CDA. 50% to communities."
+    },
+    {
+      "project_id": 3669,
+      "has_issuance_data": "YES",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 3767,
+      "has_issuance_data": "YES",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 3774,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 3884,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 4015,
+      "has_issuance_data": "YES",
+      "buyer_count": 3,
+      "total_vcus_retired_to_named_buyer": 3256,
+      "notes": null
+    },
+    {
+      "project_id": 4053,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 4059,
+      "has_issuance_data": "YES",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 4060,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 4223,
+      "has_issuance_data": "YES",
+      "buyer_count": 1,
+      "total_vcus_retired_to_named_buyer": 121380,
+      "notes": null
+    },
+    {
+      "project_id": 4252,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 4325,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 4408,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 4464,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 4481,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 4524,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 4646,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 4659,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 4714,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 4829,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 4898,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 4994,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 5113,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 5142,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 5373,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 5451,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 5508,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 5660,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 5676,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 5727,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 5749,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    },
+    {
+      "project_id": 5929,
+      "has_issuance_data": "NO",
+      "buyer_count": 0,
+      "total_vcus_retired_to_named_buyer": 0,
+      "notes": null
+    }
+  ]
+}

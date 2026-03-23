@@ -210,6 +210,70 @@
                     <p class="verification-cycles-totals">VCS 1468 totals to date (both cycles): <strong>30.8M tCO2e</strong> credits issued (Verra); <strong>13.2M tCO2e</strong> retired/sold; <strong>USD 14.6M+</strong> carbon revenue. First community payment Feb 2022 (e.g. USD 324,000 per conservancy). <a href="https://registry.verra.org/app/projectDetail/VCS/1468" target="_blank" rel="noopener">Verra 1468</a> · <a href="https://www.nrt-kenya.org/carbon-project-impact" target="_blank" rel="noopener">NRT Carbon Impact</a>.</p>
                     <p class="data-source-inline">Figures in this block: VCS 1468 (Northern Kenya Rangeland) only. Source: Verra Registry, NRT Carbon Impact.</p>
                 </div>
+                <div class="compare-filter-section buyers-compare-section" id="buyers-compare-section" aria-describedby="buyers-section-intro buyers-verra-credit">
+                    <div class="compare-filter-header">
+                        <h4 class="compare-filter-title">Carbon credit buyers</h4>
+                        <p class="compare-filter-desc" id="buyers-section-intro">Who is retiring credits, where, and how recently. <strong>Source:</strong> Verra’s public <a href="https://registry.verra.org" target="_blank" rel="noopener">Verra Registry</a> — credit retirements, VCS project IDs, VCU quantities, and retirement dates. Project names shown here match official Verra project titles.</p>
+                    </div>
+                    <div class="compare-filter-controls">
+                        <div class="compare-filter-group">
+                            <label for="buyers-project-select">Project view</label>
+                            <select id="buyers-project-select" class="compare-select" aria-label="Filter buyers by project">
+                                <option value="all">All projects in buyer dataset</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="compare-filter-result buyers-compare-result">
+                        <div class="buyers-metrics">
+                            <div class="buyers-stat-card">
+                                <div class="metric-label">Unique buyers</div>
+                                <div class="metric-value" id="buyers-unique-count">—</div>
+                            </div>
+                            <div class="buyers-stat-card">
+                                <div class="metric-label">VCUs retired to named buyers</div>
+                                <div class="metric-value" id="buyers-total-vcus">—</div>
+                            </div>
+                            <div class="buyers-stat-card">
+                                <div class="metric-label">Transactions</div>
+                                <div class="metric-value" id="buyers-total-transactions">—</div>
+                            </div>
+                        </div>
+                        <div class="buyers-compare-grid">
+                            <div class="buyers-compare-col">
+                                <h5 class="compare-filter-result-title">Top buyers by retired VCUs</h5>
+                                <div class="compare-filter-table-wrap">
+                                    <table class="compare-filter-table" aria-label="Top buyers by VCUs">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Buyer</th>
+                                                <th scope="col">VCUs</th>
+                                                <th scope="col">Txns</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="buyers-top-list"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="buyers-compare-col">
+                                <h5 class="compare-filter-result-title">Most recent retirement transactions</h5>
+                                <div class="compare-filter-table-wrap">
+                                    <table class="compare-filter-table" aria-label="Recent buyer transactions">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Buyer</th>
+                                                <th scope="col">Project</th>
+                                                <th scope="col">VCUs</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="buyers-transactions-list"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="data-source-inline" id="buyers-verra-credit" role="note">These tables summarize <strong>Verra Registry</strong> public records: named buyers, retirement transactions, VCUs, and VCS project linkage. CarbonWatch compiles them into <code>buyers-*.json</code> for display; the <a href="https://registry.verra.org" target="_blank" rel="noopener">Registry</a> remains the source of record. <a href="sources.html#buyers-credits">Citation &amp; methodology</a>.</p>
+                    </div>
+                </div>
             </div>
 
             <div class="data-grid">
@@ -272,7 +336,7 @@
                     <div class="card-header">
                         <div>
                             <div class="card-title">Grievance mechanism (2025)</div>
-                            <div class="card-source">Source: Kenya project data – SocialCoMMs grievance (e.g. NRT conservancies); kenya-carbon-projects.json.</div>
+                            <div class="card-source">Source: Kenya project data – SCOUT / community grievance (e.g. NRT conservancies); kenya-carbon-projects.json.</div>
                         </div>
                     </div>
                     <div class="metric-box">

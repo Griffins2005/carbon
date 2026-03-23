@@ -8,6 +8,8 @@
 
   var KENYA_DATA = null;
   var KENYA_COMPREHENSIVE = null;
+  var BUYERS_SUMMARY = null;
+  var BUYERS_TRANSACTIONS = null;
 
   var MAP_STYLES = {
     nrtProject:    { color: '#14532d', weight: 4, fillColor: '#166534', fillOpacity: 0.12 },
@@ -42,6 +44,16 @@
   function formatAreaKm2(km2) {
     if (km2 == null) return 'N/A';
     return Number(km2).toLocaleString(undefined, { maximumFractionDigits: 0 }) + ' km²';
+  }
+  function formatDateISO(s) {
+    if (!s) return '—';
+    try {
+      var d = new Date(s);
+      if (isNaN(d.getTime())) return String(s);
+      return d.toISOString().slice(0, 10);
+    } catch (e) {
+      return String(s);
+    }
   }
 
   function toLatLng(coord) {
@@ -775,6 +787,220 @@
     }
   }
 
+  function normalizeBuyerProjectId(v) {
+    if (v == null) return '';
+    var s = String(v).trim();
+    if (!s) return '';
+    return s.replace(/^VCS/i, '');
+  }
+  function dashboardToBuyerProjectIds(projectId) {
+    if (!projectId || projectId === 'all') return null;
+    return [normalizeBuyerProjectId(projectId)];
+  }
+  /** Unique Verra project IDs present in buyers transactions, sorted ascending. */
+  function getBuyersDatasetProjectIds() {
+    var tx = BUYERS_TRANSACTIONS && (BUYERS_TRANSACTIONS.transactions || BUYERS_TRANSACTIONS);
+    if (!Array.isArray(tx)) return [];
+    var set = {};
+    tx.forEach(function(row) {
+      var id = normalizeBuyerProjectId(row.project_id);
+      if (id) set[id] = true;
+    });
+    return Object.keys(set).sort(function(a, b) { return Number(a) - Number(b); });
+  }
+  function buyersProjectOptionValue(numericId) {
+    return 'VCS' + String(numericId);
+  }
+  /** Verra Registry project titles (breadcrumb-style names), keyed by numeric VCS ID. */
+  var VERRA_REGISTRY_PROJECT_NAMES = {
+    '562': 'The Kasigau Corridor REDD Project – Phase I Rukinga Sanctuary',
+    '594': 'TIST Program in Kenya, VCS 001',
+    '595': 'TIST Program in Kenya, VCS 002',
+    '596': 'TIST Program in Kenya, VCS 003',
+    '612': 'The Kasigau Corridor REDD Project - Phase II The Community Ranches',
+    '737': 'TIST Program in Kenya, VCS 005',
+    '899': 'TIST Program in Kenya, VCS 006',
+    '996': 'TIST Program in Kenya, VCS 009',
+    '1082': 'Efficient Cook Stove Programme: Kenya CPA No. 2 Mathira East District co2balance UK Ltd',
+    '1225': 'Kenya Agricultural Carbon Project',
+    '1408': 'Chyulu Hills REDD+ Project',
+    '1468': 'Northern Kenya Grassland Carbon Project',
+    '1918': 'Paradigm Kenya Clean Cookstoves Project',
+    '2338': 'TIST Program in Kenya, VCS-CCB 010',
+    '2349': 'Installation of high efficiency wood burning cookstoves in Kenya',
+    '2989': 'Solar Water Pump Project in Kenya',
+    '4015': 'Sanergy Composting Group Project',
+    '4223': "D.Light's Improved Cooking Project In Kenya"
+  };
+  function getProjectNameFromRegistryMatchedData(numericId) {
+    var id = String(numericId || '');
+    if (!id) return null;
+    if (VERRA_REGISTRY_PROJECT_NAMES[id]) return VERRA_REGISTRY_PROJECT_NAMES[id];
+    if (!KENYA_DATA || !Array.isArray(KENYA_DATA.projects)) return null;
+    var pid = 'VCS' + id;
+    var match = KENYA_DATA.projects.filter(function(p) { return (p.project_id || '') === pid; })[0];
+    if (!match) return null;
+    return match.short_name || match.name || null;
+  }
+  function getProjectDisplayLabel(numericId) {
+    var id = String(numericId || '');
+    var name = getProjectNameFromRegistryMatchedData(id);
+    return name ? ('VCS ' + id + ' — ' + name) : ('VCS ' + id);
+  }
+  function populateBuyersProjectSelect() {
+    var sel = document.getElementById('buyers-project-select');
+    if (!sel) return;
+    var tx = BUYERS_TRANSACTIONS && (BUYERS_TRANSACTIONS.transactions || BUYERS_TRANSACTIONS);
+    var counts = {};
+    if (Array.isArray(tx)) {
+      tx.forEach(function(row) {
+        var id = normalizeBuyerProjectId(row.project_id);
+        if (!id) return;
+        counts[id] = (counts[id] || 0) + 1;
+      });
+    }
+    var ids = getBuyersDatasetProjectIds();
+    while (sel.options.length > 1) sel.remove(1);
+    ids.forEach(function(id) {
+      var opt = document.createElement('option');
+      opt.value = buyersProjectOptionValue(id);
+      var n = counts[id] != null ? counts[id] : 0;
+      opt.textContent = getProjectDisplayLabel(id) + (n ? ' (' + n.toLocaleString() + ' txns)' : '');
+      sel.appendChild(opt);
+    });
+  }
+  function mainSelectHasValue(mainSelect, value) {
+    if (!mainSelect || !value) return false;
+    for (var i = 0; i < mainSelect.options.length; i++) {
+      if (mainSelect.options[i].value === value) return true;
+    }
+    return false;
+  }
+  function buyersSelectHasValue(buyersSelect, value) {
+    if (!buyersSelect || !value) return false;
+    for (var i = 0; i < buyersSelect.options.length; i++) {
+      if (buyersSelect.options[i].value === value) return true;
+    }
+    return false;
+  }
+  function getBuyerTransactionsFiltered(projectId) {
+    var tx = BUYERS_TRANSACTIONS && (BUYERS_TRANSACTIONS.transactions || BUYERS_TRANSACTIONS);
+    if (!Array.isArray(tx)) return [];
+    var allowed = dashboardToBuyerProjectIds(projectId);
+    if (!allowed) return tx.slice();
+    var set = {};
+    allowed.forEach(function(id) { set[id] = true; });
+    return tx.filter(function(row) { return set[normalizeBuyerProjectId(row.project_id)]; });
+  }
+  function aggregateBuyers(rows) {
+    var byBuyer = {};
+    rows.forEach(function(r) {
+      var name = (r.buyer_normalized || r.buyer_raw || 'Unknown Buyer').trim();
+      if (!byBuyer[name]) byBuyer[name] = { buyer: name, vcus: 0, txns: 0 };
+      var v = Number(r.vcus);
+      byBuyer[name].vcus += isNaN(v) ? 0 : v;
+      byBuyer[name].txns += 1;
+    });
+    return Object.keys(byBuyer).map(function(k) { return byBuyer[k]; }).sort(function(a, b) {
+      return (b.vcus - a.vcus) || (b.txns - a.txns);
+    });
+  }
+  function renderBuyersSection(projectId) {
+    var countEl = document.getElementById('buyers-unique-count');
+    var vcusEl = document.getElementById('buyers-total-vcus');
+    var txnsEl = document.getElementById('buyers-total-transactions');
+    var topEl = document.getElementById('buyers-top-list');
+    var txListEl = document.getElementById('buyers-transactions-list');
+    if (!countEl || !vcusEl || !txnsEl || !topEl || !txListEl) return;
+
+    var rows = getBuyerTransactionsFiltered(projectId);
+    var buyers = aggregateBuyers(rows);
+    var totalVcus = rows.reduce(function(sum, r) {
+      var n = Number(r.vcus);
+      return sum + (isNaN(n) ? 0 : n);
+    }, 0);
+    countEl.textContent = buyers.length.toLocaleString();
+    vcusEl.textContent = totalVcus.toLocaleString();
+    txnsEl.textContent = rows.length.toLocaleString();
+
+    if (!buyers.length) {
+      topEl.innerHTML = '<tr><td colspan="3">No buyer data for this project filter.</td></tr>';
+      txListEl.innerHTML = '<tr><td colspan="4">No transactions for this project filter.</td></tr>';
+      return;
+    }
+
+    topEl.innerHTML = buyers.slice(0, 12).map(function(b) {
+      return '<tr>' +
+        '<th scope="row">' + escapeHtml(b.buyer) + '</th>' +
+        '<td>' + b.vcus.toLocaleString() + '</td>' +
+        '<td>' + b.txns.toLocaleString() + '</td>' +
+      '</tr>';
+    }).join('');
+
+    var sortedTx = rows.slice().sort(function(a, b) {
+      var da = new Date(a.retirement_date || 0).getTime();
+      var db = new Date(b.retirement_date || 0).getTime();
+      return db - da;
+    });
+    txListEl.innerHTML = sortedTx.slice(0, 12).map(function(r) {
+      var pid = normalizeBuyerProjectId(r.project_id);
+      return '<tr>' +
+        '<td>' + escapeHtml(formatDateISO(r.retirement_date)) + '</td>' +
+        '<td>' + escapeHtml(r.buyer_normalized || r.buyer_raw || 'Unknown Buyer') + '</td>' +
+        '<td>' + escapeHtml(getProjectDisplayLabel(pid)) + '</td>' +
+        '<td>' + (Number(r.vcus) || 0).toLocaleString() + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+  function initBuyersSection() {
+    var hasFetch = typeof fetch !== 'undefined';
+    if (!hasFetch) return;
+    var buyersSelect = document.getElementById('buyers-project-select');
+    var mainSelect = document.getElementById('dashboard-project-select');
+    /** Align buyers filter with main dashboard project when that VCS ID exists in buyer data; else "all". */
+    function syncBuyersSelectToMain() {
+      if (!buyersSelect || !mainSelect) return;
+      var mainVal = mainSelect.value || 'all';
+      if (mainVal === 'all') {
+        buyersSelect.value = 'all';
+        return;
+      }
+      if (buyersSelectHasValue(buyersSelect, mainVal)) buyersSelect.value = mainVal;
+      else buyersSelect.value = 'all';
+    }
+    function syncMainSelectToBuyers() {
+      if (!mainSelect || !buyersSelect) return;
+      var bVal = buyersSelect.value || 'all';
+      if (bVal === 'all') return;
+      if (mainSelectHasValue(mainSelect, bVal)) mainSelect.value = bVal;
+    }
+    function renderFromCurrentBuyersSelect() {
+      renderBuyersSection(buyersSelect ? buyersSelect.value : 'all');
+    }
+    function syncAndRenderFromMain() {
+      syncBuyersSelectToMain();
+      renderFromCurrentBuyersSelect();
+    }
+    Promise.all([
+      fetch('data/buyers-summary.json').then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; }),
+      fetch('data/buyers-transactions.json').then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
+    ]).then(function(results) {
+      BUYERS_SUMMARY = results[0];
+      BUYERS_TRANSACTIONS = results[1];
+      populateBuyersProjectSelect();
+      syncAndRenderFromMain();
+    });
+    if (buyersSelect) {
+      buyersSelect.addEventListener('change', function() {
+        syncMainSelectToBuyers();
+        renderFromCurrentBuyersSelect();
+      });
+    }
+    if (mainSelect) {
+      mainSelect.addEventListener('change', function() { syncAndRenderFromMain(); });
+    }
+  }
+
   function run() {
     var hasFetch = typeof fetch !== 'undefined';
     var harmonized = hasFetch
@@ -810,6 +1036,7 @@
         });
         initMap();
         initProjectSelector();
+        initBuyersSection();
         initExportButtons();
         initStatTooltips();
         return;
@@ -820,6 +1047,7 @@
         if (KENYA_DATA) updateDashboardFromData(KENYA_DATA);
         initMap();
         initProjectSelector();
+        initBuyersSection();
         initExportButtons();
         initStatTooltips();
       });

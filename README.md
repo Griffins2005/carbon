@@ -16,9 +16,9 @@ A **national framework for KWCA** (Kenya Wildlife Conservancies Association): pu
 
 - **SCOUT Tool** (`scout-engine.html`) — Survey aligned to WELI-style empowerment dimensions (production, nutrition, resources, income, opportunities, time & workload). Donut chart and dimension strip; 7 questions; indices, red flags, and action prompts. English/Kiswahili.
 
-- **Public Dashboard** (`dashboard.html`) — **Front-end interface for data description and analysis.** Kenya Verra projects: project selector (Kenya total, NRT, Komaza, Boomitra, KCSA), big-number stats (credits issued/retired, community share, project count), interactive map (NRT boundary, conservancies, other projects), compare & filter table, verification cycles, data grid (carbon tracker, SCOUT metrics, grievance mechanism), and community benefits.
+- **Public Dashboard** (`dashboard.html`) — **Front-end interface for data description and analysis.** Kenya Verra projects: project selector (Kenya total, NRT, Komaza, Boomitra, KCSA), big-number stats (credits issued/retired, community share, project count), interactive map (NRT boundary, conservancies, other projects), compare & filter (conservancies/projects), verification cycles, **carbon credit buyers** (Verra-linked project names; data from `buyers-*.json`), data grid (carbon tracker, SCOUT metrics, grievance mechanism), and community benefits.
 
-- **Sources** (`sources.html`) — Citations and methodology: Verra Registry, NRT, WELI/Pro-WEAI, SCOUT, VCS 1468 details, dashboard data. Card layout with in-page nav.
+- **Sources** (`sources.html`) — Citations and methodology: Verra Registry, NRT, SCOUT/WELI/Pro-WEAI, VCS 1468 detail, dashboard data, and **buyer retirement** data files. Card layout with in-page nav.
 
 ## Data workflow
 
@@ -47,6 +47,7 @@ A **national framework for KWCA** (Kenya Wildlife Conservancies Association): pu
 ## Data
 
 - **Map and stats** use `data/kenya-carbon-harmonized.json` (with fallback to `kenya-carbon-projects.json` and comprehensive JSON). Carbon and community summary data are merged from the primary JSON when available.
+- **Buyer retirements (dashboard)** — **Authoritative source: [Verra Registry](https://registry.verra.org)** (public credit retirements, VCS IDs, VCUs, dates, project names). The site loads `data/buyers-transactions.json`, `data/buyers-summary.json`, and `data/buyers-coverage.json` (generated from `data/MASTER BUYERS CLEAN.xlsx`); JSON `meta` fields credit the Registry.
 - **Scripts** live in `scripts/` (e.g. `dashboard.js`, `community-interface.js`, `scout-engine.js`, `script.js`).
 
 ## Run locally
