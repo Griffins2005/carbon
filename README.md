@@ -1,10 +1,10 @@
 # CarbonWatch Kenya — Community Tracker
 
-A **national framework for KWCA** (Kenya Wildlife Conservancies Association): public-good technical infrastructure for carbon credit transparency and community voice across Kenya’s conservancies.
+An independent, community-facing transparency platform: public-good technical infrastructure for carbon credit transparency and community voice across Kenya’s conservancies.
 
 ## Project scope
 
-- **Scope:** National framework for KWCA. The platform is built as **public-good infrastructure** for the entire country.
+- **Scope:** Independent community-facing platform for carbon project reporting in Kenya, built as **public-good infrastructure** for the entire country.
 - **Scale (one field site):** Our work is piloted in a context of **230+ conservancies and 110 million hectares of land** under KWCA—this is **one of our field sites**, and one of many potential applications of the system.
 - **Long-term vision:** The system is designed for **long-term incubation and scaling** beyond carbon projects: governance, livelihoods, and conservancy monitoring at national scale.
 
@@ -16,7 +16,7 @@ A **national framework for KWCA** (Kenya Wildlife Conservancies Association): pu
 
 - **SCOUT Tool** (`scout-engine.html`) — Survey aligned to WELI-style empowerment dimensions (production, nutrition, resources, income, opportunities, time & workload). Donut chart and dimension strip; 7 questions; indices, red flags, and action prompts. English/Kiswahili.
 
-- **Public Dashboard** (`dashboard.html`) — **Front-end interface for data description and analysis.** Kenya Verra projects: project selector (Kenya total, NRT, Komaza, Boomitra, KCSA), big-number stats (credits issued/retired, community share, project count), interactive map (NRT boundary, conservancies, other projects), compare & filter (conservancies/projects), verification cycles, **carbon credit buyers** (Verra-linked project names; data from `buyers-*.json`), data grid (carbon tracker, SCOUT metrics, grievance mechanism), and community benefits.
+- **Public Dashboard** (`dashboard.html`) — **Front-end interface for data description and analysis.** Kenya Verra projects: project selector (Kenya total and example projects such as NRT, Komaza, Boomitra, KCSA), big-number stats (credits issued/retired, community share, project count), interactive map (NRT boundary, conservancies, other projects), single project selector (key metrics for one project at a time), verification cycles, **carbon credit buyers** (Verra-linked project names; data from `buyers-*.json`), data grid (carbon tracker, SCOUT metrics, grievance mechanism), and community benefits.
 
 - **Sources** (`sources.html`) — Citations and methodology: Verra Registry, NRT, SCOUT/WELI/Pro-WEAI, VCS 1468 detail, dashboard data, and **buyer retirement** data files. Card layout with in-page nav.
 

@@ -381,28 +381,12 @@
     return rows;
   }
 
-  function buildComparisonTableHTML(dataA, dataB) {
-    var rowsA = getDetailRows(dataA);
-    var rowsB = getDetailRows(dataB);
-    var byLabelA = {};
-    var byLabelB = {};
-    rowsA.forEach(function(r) { byLabelA[r.label] = r.value; });
-    rowsB.forEach(function(r) { byLabelB[r.label] = r.value; });
-    var allLabels = [];
-    var seen = {};
-    rowsA.forEach(function(r) { if (!seen[r.label]) { seen[r.label] = true; allLabels.push(r.label); } });
-    rowsB.forEach(function(r) { if (!seen[r.label]) { seen[r.label] = true; allLabels.push(r.label); } });
-    var nameA = dataA.name || dataA.short_name || dataA.project_id || 'A';
-    var nameB = dataB.name || dataB.short_name || dataB.project_id || 'B';
-    var col1 = escapeHtml(nameA);
-    var col2 = escapeHtml(nameB);
-    var attr = function(s) { return (s || '').replace(/"/g, '&quot;'); };
-    var html = '<table class="compare-filter-table" aria-label="Comparison">' +
-      '<thead><tr><th scope="col">Metric</th><th scope="col">' + col1 + '</th><th scope="col">' + col2 + '</th></tr></thead><tbody>';
-    allLabels.forEach(function(label) {
-      var vA = byLabelA[label] != null ? byLabelA[label] : '—';
-      var vB = byLabelB[label] != null ? byLabelB[label] : '—';
-      html += '<tr><th scope="row">' + escapeHtml(label) + '</th><td data-label="' + attr(nameA) + '">' + escapeHtml(vA) + '</td><td data-label="' + attr(nameB) + '">' + escapeHtml(vB) + '</td></tr>';
+  function buildProjectDetailTableHTML(data) {
+    var rows = getDetailRows(data);
+    var html = '<table class="compare-filter-table" aria-label="Selected project details">' +
+      '<thead><tr><th scope="col">Metric</th><th scope="col">Value</th></tr></thead><tbody>';
+    rows.forEach(function(row) {
+      html += '<tr><th scope="row">' + escapeHtml(row.label) + '</th><td>' + escapeHtml(row.value != null ? row.value : '—') + '</td></tr>';
     });
     html += '</tbody></table>';
     return html;
@@ -707,40 +691,24 @@
       'Markers': markersLayer
     }, { collapsed: true }).addTo(map);
 
-    function buildComparisonHTML(dataA, dataB) {
-      var nameA = dataA.name || dataA.short_name || dataA.project_id || 'A';
-      var nameB = dataB.name || dataB.short_name || dataB.project_id || 'B';
-      return '<div class="comparison-col"><h5>' + nameA + '</h5>' + renderDetailForPanel(dataA) + '</div><div class="comparison-col"><h5>' + nameB + '</h5>' + renderDetailForPanel(dataB) + '</div>';
-    }
-    function showComparison(dataA, dataB) {
-      if (!panel || !panelName || !panelBody) return;
-      var nameA = dataA.name || dataA.short_name || dataA.project_id || 'A';
-      var nameB = dataB.name || dataB.short_name || dataB.project_id || 'B';
-      panelName.textContent = 'Compare: ' + nameA + ' vs ' + nameB;
-      panelBody.className = 'conservancy-detail-body comparison-view';
-      panelBody.innerHTML = buildComparisonHTML(dataA, dataB);
-      panel.classList.add('conservancy-detail-panel-visible');
-      panel.setAttribute('aria-hidden', 'false');
-    }
     var filterResultEl = document.getElementById('compare-filter-result');
     var filterResultTitle = document.getElementById('compare-filter-result-title');
     var filterResultBody = document.getElementById('compare-filter-result-body');
-    function updateCompareFilterResult(dataA, dataB) {
+    function updateCompareFilterResult(dataA) {
       if (!filterResultEl || !filterResultTitle || !filterResultBody) return;
-      if (!dataA || !dataB) {
+      if (!dataA) {
         filterResultEl.setAttribute('hidden', '');
         filterResultEl.setAttribute('aria-hidden', 'true');
         return;
       }
       var nameA = dataA.name || dataA.short_name || dataA.project_id || 'A';
-      var nameB = dataB.name || dataB.short_name || dataB.project_id || 'B';
-      filterResultTitle.textContent = 'Compare: ' + nameA + ' vs ' + nameB;
-      filterResultBody.innerHTML = buildComparisonTableHTML(dataA, dataB);
+      filterResultTitle.textContent = 'Project details: ' + nameA;
+      filterResultBody.innerHTML = buildProjectDetailTableHTML(dataA);
       filterResultEl.removeAttribute('hidden');
       filterResultEl.setAttribute('aria-hidden', 'false');
     }
     function clearCompareFilterResult() {
-      updateCompareFilterResult(null, null);
+      updateCompareFilterResult(null);
     }
     var comparables = [];
     conservanciesPrimary.forEach(function(c, i) {
@@ -751,39 +719,24 @@
       comparables.push({ value: 'p:' + i, label: (p.short_name || p.name || p.project_id) + ' (Project)', data: p });
     });
     var selectA = document.getElementById('compare-select-a');
-    var selectB = document.getElementById('compare-select-b');
-    var clearCompareBtn2 = document.getElementById('compare-clear-btn');
-    if (selectA && selectB) {
+    if (selectA) {
       comparables.forEach(function(o) {
         var optA = document.createElement('option');
         optA.value = o.value;
         optA.textContent = o.label;
         selectA.appendChild(optA);
-        var optB = document.createElement('option');
-        optB.value = o.value;
-        optB.textContent = o.label;
-        selectB.appendChild(optB);
       });
       var dataByValue = {};
       comparables.forEach(function(o) { dataByValue[o.value] = o.data; });
-      function updateComparison() {
+      function updateSelection() {
         var vA = selectA.value;
-        var vB = selectB.value;
-        if (vA && vB && dataByValue[vA] && dataByValue[vB]) {
-          updateCompareFilterResult(dataByValue[vA], dataByValue[vB]);
+        if (vA && dataByValue[vA]) {
+          updateCompareFilterResult(dataByValue[vA]);
         } else {
           clearCompareFilterResult();
         }
       }
-      selectA.addEventListener('change', updateComparison);
-      selectB.addEventListener('change', updateComparison);
-      if (clearCompareBtn2) {
-        clearCompareBtn2.addEventListener('click', function() {
-          selectA.value = '';
-          selectB.value = '';
-          clearCompareFilterResult();
-        });
-      }
+      selectA.addEventListener('change', updateSelection);
     }
   }
 
@@ -1087,7 +1040,7 @@
   function applyProjectSelection(projectId) {
     var subheading = document.getElementById('dashboard-subheading');
     if (subheading) {
-      if (projectId === 'all') subheading.textContent = 'Totals across all 4 Verra projects in Kenya';
+      if (projectId === 'all') subheading.textContent = 'Totals across 4 pilot projects (65 total Verra VCS projects in Kenya)';
       else if (projectId === 'VCS1468') subheading.textContent = 'Northern Kenya Rangeland / NRT (VCS 1468)';
       else if (projectId === 'VCS2623') subheading.textContent = 'Komaza (VCS 2623)';
       else if (projectId === 'VCS3340') subheading.textContent = 'Boomitra Kenya (VCS 3340)';

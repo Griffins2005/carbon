@@ -62,11 +62,11 @@
                     <option value="VCS5451">KCSA (VCS 5451)</option>
                 </select>
             </div>
-            <p class="dashboard-top-subheading" id="dashboard-subheading">Totals across all 4 Verra projects in Kenya</p>
+            <p class="dashboard-top-subheading" id="dashboard-subheading">Totals across 4 pilot projects (65 total Verra VCS projects in Kenya)</p>
             <div class="stats-grid" id="stats-grid">
                 <div class="stat-card primary">
                     <div class="stat-header">
-                        <div class="stat-label">Credits Issued <button type="button" class="stat-info" aria-label="Source and calculation" data-tooltip="Total tCO2e credits issued across all 4 Verra projects in Kenya. Source: Verra Registry, project proponents.">ⓘ</button></div>
+                        <div class="stat-label">Credits Issued <button type="button" class="stat-info" aria-label="Source and calculation" data-tooltip="Total tCO2e credits issued across the 4 pilot projects currently displayed (out of 65 total Verra VCS projects in Kenya). Source: Verra Registry, project proponents.">ⓘ</button></div>
                         <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
                     </div>
                     <div class="stat-value" id="stat-credits-issued">30.8M</div>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-header">
-                        <div class="stat-label">Credits Retired <button type="button" class="stat-info" aria-label="Source and calculation" data-tooltip="Total tCO2e credits retired/sold across all 4 Verra projects in Kenya. Source: Verra Registry, project proponents.">ⓘ</button></div>
+                        <div class="stat-label">Credits Retired <button type="button" class="stat-info" aria-label="Source and calculation" data-tooltip="Total tCO2e credits retired/sold across the 4 pilot projects currently displayed (out of 65 total Verra VCS projects in Kenya). Source: Verra Registry, project proponents.">ⓘ</button></div>
                         <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                     </div>
                     <div class="stat-value" id="stat-credits-retired">13.2M</div>
@@ -90,11 +90,11 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-header">
-                        <div class="stat-label">Verra Projects (Kenya) <button type="button" class="stat-info" aria-label="Source and calculation" data-tooltip="Number of Verra VCS projects in Kenya we track: NRT (1468), Komaza (2623), Boomitra (3340), KCSA (5451).">ⓘ</button></div>
+                        <div class="stat-label">Verra Projects (Kenya) <button type="button" class="stat-info" aria-label="Source and calculation" data-tooltip="CarbonWatch currently displays 4 pilot projects (NRT 1468, Komaza 2623, Boomitra 3340, KCSA 5451) out of 65 total Verra VCS projects in Kenya.">ⓘ</button></div>
                         <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
                     </div>
                     <div class="stat-value" id="stat-total-projects">4</div>
-                    <div class="stat-unit">4 Verra projects in Kenya</div>
+                    <div class="stat-unit">4 pilot projects (65 total Verra VCS projects in Kenya)</div>
                 </div>
             </div>
             <p class="stats-data-source" id="stats-data-source">All figures above are platform totals (all 4 projects). Community share shown where disclosed. <a href="sources.html">Sources</a>.</p>
@@ -117,7 +117,7 @@
                 </div>
                 <div class="map-disclaimer" role="note" aria-label="Data source disclaimer">
                     <strong>Where we get our data</strong>
-                    <p>CarbonWatch is the national framework for <strong>KWCA</strong> (Kenya Wildlife Conservancies Association). We track Verra VCS projects across Kenya. Project-level data comes from the <a href="https://registry.verra.org" target="_blank" rel="noopener">Verra Registry</a>, project proponents (e.g. <a href="https://www.nrt-kenya.org/carbon-project-impact" target="_blank" rel="noopener">NRT Carbon Impact</a>), and project documents. <strong>SMS/IVR</strong>, <strong>USSD</strong>, and manual entries feed the central repository; this dashboard is the front-end for description and analysis. Per-conservancy figures are shown where officially disclosed; otherwise <strong>N/A</strong>. <a href="sources.html">Full sources</a>.</p>
+                    <p>CarbonWatch is a community-facing transparency platform for carbon project reporting in Kenya. We track Verra VCS projects across Kenya. Project-level data comes from the <a href="https://registry.verra.org" target="_blank" rel="noopener">Verra Registry</a>, project proponents (e.g. <a href="https://www.nrt-kenya.org/carbon-project-impact" target="_blank" rel="noopener">NRT Carbon Impact</a>), and project documents. <strong>SMS/IVR</strong>, <strong>USSD</strong>, and manual entries feed the central repository; this dashboard is the front-end for description and analysis. Per-conservancy figures are shown where officially disclosed; otherwise <strong>N/A</strong>. <a href="sources.html">Full sources</a>.</p>
                 </div>
                 <div class="map-header">
                     <div class="map-title">Kenya carbon projects – Verra-registered projects and conservancies</div>
@@ -146,27 +146,19 @@
                 </div>
                 <div class="compare-filter-section" id="compare-filter-section">
                     <div class="compare-filter-header">
-                        <h4 class="compare-filter-title">Compare & filter</h4>
-                        <p class="compare-filter-desc">Select two conservancies or projects to view key metrics side by side (area, credits, revenue where disclosed). Useful for comparing benefit-sharing or project scale.</p>
+                        <h4 class="compare-filter-title">Select a project or conservancy</h4>
+                        <p class="compare-filter-desc">Select a project or conservancy to view key metrics.</p>
                     </div>
                     <div class="compare-filter-controls">
                         <div class="compare-filter-group">
-                            <label for="compare-select-a">First</label>
-                            <select id="compare-select-a" class="compare-select" aria-label="First conservancy or project">
+                            <label for="compare-select-a">Project or conservancy</label>
+                            <select id="compare-select-a" class="compare-select" aria-label="Select a project or conservancy">
                                 <option value="">— Select —</option>
                             </select>
                         </div>
-                        <span class="compare-filter-vs" aria-hidden="true">vs</span>
-                        <div class="compare-filter-group">
-                            <label for="compare-select-b">Second</label>
-                            <select id="compare-select-b" class="compare-select" aria-label="Second conservancy or project">
-                                <option value="">— Select —</option>
-                            </select>
-                        </div>
-                        <button type="button" id="compare-clear-btn" class="btn-compare-clear">Clear</button>
                     </div>
                     <div id="compare-filter-result" class="compare-filter-result" aria-hidden="true" hidden>
-                        <h5 class="compare-filter-result-title" id="compare-filter-result-title">Compare: A vs B</h5>
+                        <h5 class="compare-filter-result-title" id="compare-filter-result-title">Selection details</h5>
                         <div class="compare-filter-result-body compare-filter-table-wrap" id="compare-filter-result-body"></div>
                     </div>
                 </div>
@@ -175,13 +167,13 @@
                     <div class="map-header">
                         <div class="map-title">Project summary</div>
                     </div>
-                    <p class="project-summary-text" id="project-summary-text">As part of the national framework for KWCA, we track Kenya’s Verra-registered carbon projects: the <strong>Northern Kenya Grassland Carbon Project</strong> (VCS 1468, proponent NRT; 1,993,075 ha, 14 conservancies), <strong>Komaza</strong> (VCS 2623), <strong>Boomitra Kenya</strong> (VCS 3340), and <strong>KCSA</strong> (VCS 5451). For official details and issuance records, see the <a href="https://registry.verra.org" target="_blank" rel="noopener">Verra Registry</a>.</p>
+                    <p class="project-summary-text" id="project-summary-text">CarbonWatch tracks Verra-registered carbon projects across Kenya. Current pilot examples shown here include <strong>Northern Kenya Grassland Carbon Project</strong> (VCS 1468, proponent NRT; 1,993,075 ha, 14 conservancies), <strong>Komaza</strong> (VCS 2623), <strong>Boomitra Kenya</strong> (VCS 3340), and <strong>KCSA</strong> (VCS 5451). For official details and issuance records, see the <a href="https://registry.verra.org" target="_blank" rel="noopener">Verra Registry</a>.</p>
                     <p class="data-source-inline">Hectare and conservancy count: VCS 1468 from Verra Registry and project documents.</p>
                 </div>
                 <div class="verification-cycles-block">
                     <div class="map-header">
                         <div class="map-title">Verification cycles (all completed to date)</div>
-                        <div class="map-subtitle">Verification is independent third-party audit of carbon claims; each cycle covers a crediting period. Shown below: every cycle verified to date, with credits issued and sold.</div>
+                        <div class="map-subtitle">Verification is independent third-party review of carbon claims; each cycle covers a crediting period. Shown below: every cycle verified to date, with credits issued and sold.</div>
                     </div>
                     <table class="verification-cycles-table" aria-label="All verification cycles">
                         <thead>
@@ -378,7 +370,7 @@
                 <img src="./images/cornell-dyson-logo.png" alt="Charles H. Dyson School of Applied Economics and Management" width="140" height="52">
             </a>
         </div>
-        <div class="footer-text">© 2026 CarbonWatch Community Tracker Dashboard · Student Multidisciplinary Applied Research Team at Cornell and Dyson School</div>
+        <div class="footer-text">© 2026 CarbonWatch Kenya · AIID-Africa · Cornell Dyson School</div>
         </div>
     </footer>
 
