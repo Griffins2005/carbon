@@ -5,18 +5,20 @@ An independent, community-facing transparency platform: public-good technical in
 ## Project scope
 
 - **Scope:** Independent community-facing platform for carbon project reporting in Kenya, built as **public-good infrastructure** for the entire country.
-- **Scale (one field site):** Our work is piloted in a context of **230+ conservancies and 110 million hectares of land** under KWCA—this is **one of our field sites**, and one of many potential applications of the system.
+- **Research & partnership (home page):** CarbonWatch Kenya is being built from research by **SMART** in partnership with **Agency for Inclusive Innovation Development (AIID-Africa)**—stated on `index.html` with partner logos (Cornell, Dyson, **AIID-Africa logo**) in the footer site-wide. Other pages use page-specific intros only.
 - **Long-term vision:** The system is designed for **long-term incubation and scaling** beyond carbon projects: governance, livelihoods, and conservancy monitoring at national scale.
 
 ## What’s in the platform
 
-- **Home** (`index.html`) — Overview, hero, and links to Community Interface, SCOUT Tool, Public Dashboard, and Sources.
+(Site navigation order: **Home** → **Public Dashboard** → **Community Interface** → **SCOUT Tool** → **Sources**.)
+
+- **Home** (`index.html`) — Overview, hero, research context, and platform tool cards in that order.
+
+- **Public Dashboard** (`dashboard.html`) — **Front-end interface for data description and analysis.** Kenya Verra projects: project selector (Kenya total and example projects such as NRT, Komaza, Boomitra, KCSA), big-number stats (credits issued/retired, community share, project count), interactive map (NRT boundary, conservancies, other projects), single project selector (key metrics for one project at a time), verification cycles, **carbon credit buyers** (Verra-linked project names; data from `buyers-*.json`), data grid (carbon tracker, SCOUT metrics, grievance mechanism), and community benefits.
 
 - **Community Interface** (`community-interface.html`) — **SMS/IVR and USSD** on one page (same bidirectional channels). A workflow diagram shows SMS/IVR and USSD feeding the central repository; a switch toggles between **SMS** (mockup, channels, process) and **USSD** (menu, request/response). Users can send or request data via either channel.
 
 - **SCOUT Tool** (`scout-engine.html`) — Survey aligned to WELI-style empowerment dimensions (production, nutrition, resources, income, opportunities, time & workload). Donut chart and dimension strip; 7 questions; indices, red flags, and action prompts. English/Kiswahili.
-
-- **Public Dashboard** (`dashboard.html`) — **Front-end interface for data description and analysis.** Kenya Verra projects: project selector (Kenya total and example projects such as NRT, Komaza, Boomitra, KCSA), big-number stats (credits issued/retired, community share, project count), interactive map (NRT boundary, conservancies, other projects), single project selector (key metrics for one project at a time), verification cycles, **carbon credit buyers** (Verra-linked project names; data from `buyers-*.json`), data grid (carbon tracker, SCOUT metrics, grievance mechanism), and community benefits.
 
 - **Sources** (`sources.html`) — Citations and methodology: Verra Registry, NRT, SCOUT/WELI/Pro-WEAI, VCS 1468 detail, dashboard data, and **buyer retirement** data files. Card layout with in-page nav.
 

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="./index.css">
 </head>
-<body>
+<body class="page-dashboard">
     <header>
         <div class="header-content">
             <div class="logo-section">
@@ -26,9 +26,9 @@
                 </button>
                 <nav class="layer-nav">
                     <a href="index.html">Home</a>
+                    <a href="dashboard.html">Public Dashboard</a>
                     <a href="community-interface.html">Community Interface</a>
                     <a href="scout-engine.html">SCOUT Tool</a>
-                    <a href="dashboard.html">Public Dashboard</a>
                     <a href="sources.html">Sources</a>
                 </nav>
             </div>
@@ -62,6 +62,7 @@
                     <option value="VCS5451">KCSA (VCS 5451)</option>
                 </select>
             </div>
+            <p class="dashboard-top-lead">Explore Kenya <strong>Verra VCS</strong> projects: credits issued and retired, community-benefit indicators where disclosed, conservancy map, <strong>Registry-sourced</strong> buyer retirements, and export—switch the project dropdown to drill into one pilot or aggregated totals.</p>
             <p class="dashboard-top-subheading" id="dashboard-subheading">Totals across 4 pilot projects (65 total Verra VCS projects in Kenya)</p>
             <div class="stats-grid" id="stats-grid">
                 <div class="stat-card primary">
@@ -149,7 +150,7 @@
                         <h4 class="compare-filter-title">Select a project or conservancy</h4>
                         <p class="compare-filter-desc">Select a project or conservancy to view key metrics.</p>
                     </div>
-                    <div class="compare-filter-controls">
+                    <div class="compare-filter-controls compare-filter-controls--single">
                         <div class="compare-filter-group">
                             <label for="compare-select-a">Project or conservancy</label>
                             <select id="compare-select-a" class="compare-select" aria-label="Select a project or conservancy">
@@ -207,7 +208,7 @@
                         <h4 class="compare-filter-title">Carbon credit buyers</h4>
                         <p class="compare-filter-desc" id="buyers-section-intro">Who is retiring credits, where, and how recently. <strong>Source:</strong> Verra’s public <a href="https://registry.verra.org" target="_blank" rel="noopener">Verra Registry</a> — credit retirements, VCS project IDs, VCU quantities, and retirement dates. Project names shown here match official Verra project titles.</p>
                     </div>
-                    <div class="compare-filter-controls">
+                    <div class="compare-filter-controls compare-filter-controls--single">
                         <div class="compare-filter-group">
                             <label for="buyers-project-select">Project view</label>
                             <select id="buyers-project-select" class="compare-select" aria-label="Filter buyers by project">
@@ -366,11 +367,14 @@
             <a href="https://www.cornell.edu" target="_blank" rel="noopener" class="footer-logo-partner" aria-label="Cornell University">
                 <img src="./images/cornell-logo.png" alt="Cornell University" width="140" height="52">
             </a>
-            <a href="https://dyson.cornell.edu" target="_blank" rel="noopener" class="footer-logo-partner" aria-label="Dyson School">
+            <a href="https://dyson.cornell.edu" target="_blank" rel="noopener" class="footer-logo-partner" aria-label="Cornell Dyson and Johnson">
                 <img src="./images/cornell-dyson-logo.png" alt="Charles H. Dyson School of Applied Economics and Management" width="140" height="52">
             </a>
+            <a href="https://aiidafrica.com" target="_blank" rel="noopener" class="footer-logo-partner footer-logo-partner-aiid" aria-label="Agency for Inclusive Innovation Development (AIID-Africa), partner with CarbonWatch Kenya">
+                <img src="./images/AIID-FINAL-LOGO.png" alt="Agency for Inclusive Innovation Development (AIID-Africa), partner with CarbonWatch Kenya">
+            </a>
         </div>
-        <div class="footer-text">© 2026 CarbonWatch Kenya · AIID-Africa · Cornell Dyson School</div>
+        <div class="footer-text">© 2026 CarbonWatch Kenya</div>
         </div>
     </footer>
 
