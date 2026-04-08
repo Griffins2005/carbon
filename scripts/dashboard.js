@@ -488,8 +488,43 @@
       panel.setAttribute('aria-hidden', 'true');
       if (panelName) panelName.textContent = 'Select a conservancy or project';
       if (panelBody) { panelBody.className = 'conservancy-detail-body'; panelBody.innerHTML = '<p class="conservancy-detail-placeholder">Click a conservancy or project area on the map to view details.</p>'; }
+      if (typeof window.carbonwatchMapFocus === 'function') {
+        window.carbonwatchMapFocus('all');
+      }
     }
     if (panelClose) panelClose.addEventListener('click', hidePanel);
+
+    function isMobileMapViewport() {
+      return typeof window.matchMedia === 'function' && window.matchMedia('(max-width: 768px)').matches;
+    }
+
+    /** After a tap/click on the map, pan or zoom so the feature sits in the map pane (extra top padding on narrow screens for the legend). */
+    function focusClickedFeature(layer) {
+      if (!map || !layer) return;
+      try {
+        if (layer.getBounds && typeof layer.getBounds === 'function') {
+          var b = layer.getBounds();
+          if (b && b.isValid && b.isValid()) {
+            var opts = { animate: true, maxZoom: 12 };
+            if (isMobileMapViewport()) {
+              opts.paddingTopLeft = L.point(4, 42);
+              opts.paddingBottomRight = L.point(4, 10);
+            } else {
+              opts.padding = [22, 22];
+            }
+            map.fitBounds(b, opts);
+            return;
+          }
+        }
+        if (layer.getLatLng && typeof layer.getLatLng === 'function') {
+          var ll = layer.getLatLng();
+          var cur = map.getZoom();
+          var targetZoom = Math.max(cur, isMobileMapViewport() ? 10 : 9);
+          targetZoom = Math.min(targetZoom, 11);
+          map.setView(ll, targetZoom, { animate: true });
+        }
+      } catch (err) {}
+    }
 
     function normalizeName(s) {
       return (s || '').toLowerCase().replace(/\s+/g, '').replace(/'/g, '');
@@ -533,7 +568,10 @@
     nrtPoly.bindTooltip('NRT project boundary (VCS 1468)', { permanent: false, direction: 'center', className: 'nrt-boundary-tooltip' });
     if (nrtProject) {
       var nrtTitle = nrtProject.short_name || nrtProject.name || 'Northern Kenya Rangeland Project (NRT / VCS 1468)';
-      nrtPoly.on('click', function() { showPanel(nrtTitle, renderProjectDetail(nrtProject)); });
+      nrtPoly.on('click', function(e) {
+        showPanel(nrtTitle, renderProjectDetail(nrtProject));
+        focusClickedFeature(e.target);
+      });
     }
     nrtMain.forEach(function(c) { allBounds.push(c); });
     nrtPoly.bringToFront();
@@ -551,7 +589,10 @@
       var name = compC.name || compC.short_name || 'Conservancy';
       var style = ((proj && (proj.project_id || '') === 'VCS1468') ? s.nrtConservancy : s.nrtConservancy);
       var poly = L.polygon(latlngs, style).addTo(nrtConservanciesLayer);
-      poly.on('click', function() { showPanel(name, renderConservancyDetail(merged)); });
+      poly.on('click', function(e) {
+        showPanel(name, renderConservancyDetail(merged));
+        focusClickedFeature(e.target);
+      });
       poly.on('mouseover', function() { this.setStyle({ fillOpacity: 0.75, weight: 2.5, color: style.color, fillColor: style.fillColor }); this.bringToFront(); });
       poly.on('mouseout', function() { this.setStyle(style); });
       poly.bindTooltip(name + ((proj && (proj.project_id || '') !== 'VCS1468') ? ' (' + (proj.short_name || proj.name || '') + ')' : ''), { permanent: false, direction: 'center' });
@@ -569,7 +610,10 @@
       allBounds.push([lat, lng]);
       var name = c.name || c.short_name || 'Conservancy';
       var marker = L.marker([lat, lng], { icon: greenIcon }).addTo(markersLayer);
-      marker.on('click', function() { showPanel(name, renderConservancyDetail(c)); });
+      marker.on('click', function(e) {
+        showPanel(name, renderConservancyDetail(c));
+        focusClickedFeature(e.target);
+      });
       marker.on('mouseover', function() { marker.getTooltip() && marker.openTooltip(); });
       marker.bindTooltip(name, { permanent: false, direction: 'top', offset: [0, -10] });
       marker._data = c;
@@ -587,7 +631,10 @@
       allBounds.push(center);
       var name = compC.name || compC.short_name || 'Conservancy';
       var marker = L.marker(center, { icon: greenIcon }).addTo(markersLayer);
-      marker.on('click', function() { showPanel(name, renderConservancyDetail(poly._data)); });
+      marker.on('click', function(e) {
+        showPanel(name, renderConservancyDetail(poly._data));
+        focusClickedFeature(e.target);
+      });
       marker.on('mouseover', function() { marker.getTooltip() && marker.openTooltip(); });
       marker.bindTooltip(name, { permanent: false, direction: 'top', offset: [0, -10] });
       marker._data = poly._data;
@@ -615,7 +662,10 @@
           var poly = L.polygon(latlngs, style).addTo(layer);
           latlngs.forEach(function(c) { allBounds.push(c); });
           var projName = p.short_name || p.name || p.project_id;
-          poly.on('click', function() { showPanel(projName, renderProjectDetail(p)); });
+          poly.on('click', function(e) {
+            showPanel(projName, renderProjectDetail(p));
+            focusClickedFeature(e.target);
+          });
           poly.on('mouseover', function() { this.setStyle({ fillOpacity: style.fillOpacity + 0.15, weight: 2.5, color: style.color, fillColor: style.fillColor }); this.bringToFront(); });
           poly.on('mouseout', function() { this.setStyle(style); });
           poly.bindTooltip(projName + ' (' + (p.project_id || '') + ')', { permanent: false, direction: 'center' });
@@ -632,7 +682,10 @@
             latlngs.forEach(function(c) { allBounds.push(c); });
             var regionName = rb.region || rb.landowner || '';
             var projName = (p.short_name || p.name || '') + (regionName ? ' – ' + regionName : '');
-            poly.on('click', function() { showPanel(p.short_name || p.name || p.project_id, renderProjectDetail(p)); });
+            poly.on('click', function(e) {
+              showPanel(p.short_name || p.name || p.project_id, renderProjectDetail(p));
+              focusClickedFeature(e.target);
+            });
             poly.on('mouseover', function() { this.setStyle({ fillOpacity: style.fillOpacity + 0.12, color: style.color, fillColor: style.fillColor }); this.bringToFront(); });
             poly.on('mouseout', function() { this.setStyle(style); });
             poly.bindTooltip(projName, { permanent: false, direction: 'center' });
@@ -659,7 +712,10 @@
         var otherIcon = L.divIcon({ className: 'other-project-marker', html: '<span class="other-project-marker-dot ' + dotClass + '"></span>', iconSize: [18, 18], iconAnchor: [9, 9] });
         var m = L.marker(pos, { icon: otherIcon }).addTo(markersLayer);
         var projName = (p.short_name || p.name || p.project_id) + (county ? ' – ' + county : '');
-        m.on('click', function() { showPanel(p.short_name || p.name || p.project_id, renderProjectDetail(p)); });
+        m.on('click', function(e) {
+          showPanel(p.short_name || p.name || p.project_id, renderProjectDetail(p));
+          focusClickedFeature(e.target);
+        });
         m.bindTooltip(projName + ' (' + (p.project_id || '') + ')', { permanent: false, direction: 'top', offset: [0, -8] });
       });
       if (counties.length === 0 && centerLat != null && centerLng != null) {
@@ -668,7 +724,10 @@
         var otherIcon = L.divIcon({ className: 'other-project-marker', html: '<span class="other-project-marker-dot ' + dotClass + '"></span>', iconSize: [18, 18], iconAnchor: [9, 9] });
         var m = L.marker([centerLat, centerLng], { icon: otherIcon }).addTo(markersLayer);
         var projName = p.short_name || p.name || p.project_id;
-        m.on('click', function() { showPanel(projName, renderProjectDetail(p)); });
+        m.on('click', function(e) {
+          showPanel(projName, renderProjectDetail(p));
+          focusClickedFeature(e.target);
+        });
         m.bindTooltip(projName + ' (' + (p.project_id || '') + ')', { permanent: false, direction: 'top', offset: [0, -8] });
       }
     });
@@ -681,6 +740,99 @@
     if (allBounds.length > 0) {
       try { map.fitBounds(allBounds, { padding: [50, 50], maxZoom: 7 }); } catch (e) {}
     }
+
+    function boundsFromLayerGroup(lg) {
+      var b = null;
+      if (!lg || !lg.eachLayer) return null;
+      lg.eachLayer(function(layer) {
+        if (layer.getBounds) {
+          var lb = layer.getBounds();
+          if (lb && lb.isValid && lb.isValid()) {
+            b = b ? b.extend(lb) : lb;
+          }
+        }
+      });
+      return b;
+    }
+
+    var projectBounds = {};
+    try {
+      if (allBounds.length) projectBounds.all = L.latLngBounds(allBounds);
+    } catch (e) {}
+    try {
+      if (nrtPoly && nrtPoly.getBounds) projectBounds.VCS1468 = nrtPoly.getBounds();
+    } catch (e) {}
+    var bKom = boundsFromLayerGroup(komazaLayer);
+    if (bKom && bKom.isValid()) projectBounds.VCS2623 = bKom;
+    var bBoo = boundsFromLayerGroup(boomitraLayer);
+    if (bBoo && bBoo.isValid()) projectBounds.VCS3340 = bBoo;
+    var bKcs = boundsFromLayerGroup(kcsaLayer);
+    if (bKcs && bKcs.isValid()) projectBounds.VCS5451 = bKcs;
+
+    var conservancySelectBounds = {};
+    conservanciesPrimary.forEach(function(c, i) {
+      var key = 'c:' + i;
+      var found = conservancyPolygonsDrawn.filter(function(poly) {
+        var compC = poly._compC;
+        if (!compC) return false;
+        var cn = normalizeName(compC.name || compC.short_name);
+        var pn = normalizeName(c.name || c.short_name);
+        return cn && pn && (cn === pn || cn.indexOf(pn) >= 0 || pn.indexOf(cn) >= 0);
+      })[0];
+      if (found && found.getBounds) {
+        try { conservancySelectBounds[key] = found.getBounds(); } catch (e) {}
+      } else {
+        var plat = (c.coordinates && c.coordinates.lat != null) ? c.coordinates.lat : c.lat;
+        var plng = (c.coordinates && c.coordinates.lng != null) ? c.coordinates.lng : c.lng;
+        if (plat != null && plng != null) {
+          conservancySelectBounds[key] = L.latLngBounds(L.latLng(plat - 0.12, plng - 0.12), L.latLng(plat + 0.12, plng + 0.12));
+        }
+      }
+    });
+
+    window.carbonwatchMapFocus = function(projectId) {
+      if (!map) return;
+      var b = projectBounds[projectId];
+      if (b && b.isValid && b.isValid()) {
+        var padAll = projectId === 'all' ? [50, 50] : [22, 22];
+        map.fitBounds(b, { padding: padAll, maxZoom: projectId === 'all' ? 7 : 10, animate: true });
+        return;
+      }
+      if (projectId === 'all' && projectBounds.all && projectBounds.all.isValid && projectBounds.all.isValid()) {
+        map.fitBounds(projectBounds.all, { padding: [50, 50], maxZoom: 7, animate: true });
+        return;
+      }
+      var proj = allProjects.filter(function(p) { return (p.project_id || '') === projectId; })[0];
+      if (proj && proj.coordinates && proj.coordinates.center_lat != null && proj.coordinates.center_lng != null) {
+        map.setView([proj.coordinates.center_lat, proj.coordinates.center_lng], 8, { animate: true });
+      }
+    };
+
+    window.carbonwatchMapFocusCompare = function(selectValue) {
+      if (!map) return;
+      if (!selectValue) {
+        if (typeof window.carbonwatchMapFocus === 'function') {
+          window.carbonwatchMapFocus('all');
+        }
+        return;
+      }
+      if (selectValue.indexOf('p:') === 0) {
+        var pi = parseInt(selectValue.slice(2), 10);
+        if (!isNaN(pi) && allProjects[pi]) {
+          var pid = allProjects[pi].project_id || '';
+          if (pid && projectBounds[pid] && projectBounds[pid].isValid && projectBounds[pid].isValid()) {
+            map.fitBounds(projectBounds[pid], { padding: [22, 22], maxZoom: 10, animate: true });
+          } else if (typeof window.carbonwatchMapFocus === 'function') {
+            window.carbonwatchMapFocus(pid);
+          }
+        }
+      } else if (selectValue.indexOf('c:') === 0) {
+        var cb = conservancySelectBounds[selectValue];
+        if (cb && cb.isValid && cb.isValid()) {
+          map.fitBounds(cb, { padding: [22, 22], maxZoom: 11, animate: true });
+        }
+      }
+    };
 
     L.control.layers(null, {
       'NRT project boundary': nrtBoundaryLayer,
@@ -736,7 +888,12 @@
           clearCompareFilterResult();
         }
       }
-      selectA.addEventListener('change', updateSelection);
+      selectA.addEventListener('change', function() {
+        updateSelection();
+        if (typeof window.carbonwatchMapFocusCompare === 'function') {
+          window.carbonwatchMapFocusCompare(selectA.value);
+        }
+      });
     }
   }
 
@@ -1064,6 +1221,9 @@
       var id = card.getAttribute('data-project-id');
       card.classList.toggle('project-selected', projectId === 'all' || id === projectId);
     });
+    if (typeof window.carbonwatchMapFocus === 'function') {
+      window.carbonwatchMapFocus(projectId);
+    }
   }
 
   function initProjectSelector() {
@@ -1129,6 +1289,11 @@
         dropdown.setAttribute('hidden', '');
         headerBtn.setAttribute('aria-expanded', 'false');
       });
+      if (dropdown) {
+        dropdown.addEventListener('click', function(e) {
+          e.stopPropagation();
+        });
+      }
     }
   }
 

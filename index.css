@@ -5473,14 +5473,48 @@ a.footer-logo-partner.footer-partner-text:hover {
     margin: 0;
   }
   .legend {
-    top: 8px;
-    right: 8px;
-    padding: 8px 10px;
-    font-size: 10px;
+    top: 4px;
+    right: 4px;
+    left: auto;
+    max-width: min(168px, calc(100% - 10px));
+    padding: 4px 6px;
+    border-radius: 5px;
+    font-size: 8px;
+  }
+  .legend-title {
+    font-size: 7px;
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
   }
   .legend-item {
-    font-size: 10px;
-    margin-bottom: 4px;
+    font-size: 8px;
+    margin-bottom: 2px;
+    gap: 4px;
+    line-height: 1.2;
+  }
+  .legend-color {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 480px) {
+    .legend {
+      max-width: min(148px, calc(100% - 8px));
+      padding: 3px 5px;
+    }
+    .legend-title {
+      font-size: 6.5px;
+      margin-bottom: 3px;
+    }
+    .legend-item {
+      font-size: 7px;
+      margin-bottom: 2px;
+      gap: 3px;
+    }
+    .legend-color {
+      width: 7px;
+      height: 7px;
+    }
   }
   .conservancy-detail-panel.conservancy-detail-panel-visible {
     width: 100%;
