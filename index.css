@@ -4063,6 +4063,10 @@ footer {
   max-height: 48px;
   max-width: 200px;
 }
+.footer-logo-partner-cals img {
+  max-height: 40px;
+  max-width: 200px;
+}
 .footer-logo-partner.footer-partner-text {
   font-family: inherit;
   font-size: 14px;
@@ -4107,6 +4111,10 @@ a.footer-logo-partner.footer-partner-text:hover {
   }
   .footer-logo-partner-aiid img {
     max-height: 52px;
+    max-width: 220px;
+  }
+  .footer-logo-partner-cals img {
+    max-height: 44px;
     max-width: 220px;
   }
 }
@@ -6205,6 +6213,10 @@ a.footer-logo-partner.footer-partner-text:hover {
   .footer-logo-partner-aiid img {
     max-height: 40px;
     max-width: 150px;
+  }
+  .footer-logo-partner-cals img {
+    max-height: 36px;
+    max-width: 160px;
   }
   .footer-text {
     font-size: 11px;
